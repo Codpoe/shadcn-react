@@ -1,0 +1,56 @@
+.sdn-alert {
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border-0);
+  padding: 16px;
+  color: var(--color-text-0);
+}
+
+.sdn-alert-icon {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 16px;
+  font-size: 16px;
+
+  & svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.sdn-alert-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  letter-spacing: -0.025em;
+}
+
+.sdn-alert-content {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.sdn-alert--has-icon {
+  padding-left: 44px;
+}
+
+/*
+variant
+*/
+.sdn-alert--success {
+  border-color: var(--color-success-0);
+  color: var(--color-success-0);
+}
+
+.sdn-alert--warning {
+  border-color: var(--color-warning-0);
+  color: var(--color-warning-0);
+}
+
+.sdn-alert--error {
+  border-color: var(--color-error-0);
+  color: var(--color-error-0);
+}

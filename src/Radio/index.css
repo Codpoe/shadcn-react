@@ -1,0 +1,80 @@
+.sdn-radio {
+  appearance: none;
+  outline: none;
+  border: none;
+  padding: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &:hover .sdn-radio-indicator:not([data-disabled]) {
+    border-color: var(--color-border-1);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sdn-radio-indicator {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-border-0);
+  border-radius: 9999px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.2s;
+
+  &::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    transition: all 0.2s;
+  }
+
+  &[data-state=checked]::after {
+    background-color: var(--color-primary-0);
+  }
+}
+
+.sdn-radio-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: 24px;
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  color: var(--color-text-0);
+  cursor: inherit;
+}
+
+/* ----------------- */
+/* Group */
+
+.sdn-radio-group--horizontal {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -24px;
+  margin-bottom: -10px;
+}
+
+.sdn-radio-group--horizontal .sdn-radio {
+  margin-right: 24px;
+  margin-bottom: 10px;
+}
+
+.sdn-radio-group--vertical {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: -10px;
+}
+
+.sdn-radio-group--vertical .sdn-radio {
+  margin-bottom: 10px;
+}

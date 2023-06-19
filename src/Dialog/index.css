@@ -1,0 +1,136 @@
+.sdn-dialog {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.sdn-dialog-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: transparent;
+  transition: background-color 0.2s;
+
+  &[data-state=open] {
+    background-color: rgba(0,0,0,.3);
+  }
+}
+
+.sdn-dialog-content {
+  position: fixed;
+  top: var(--from-top);
+  left: var(--from-left);
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  width: 425px;
+  padding: 24px;
+  background-color: hsl(var(--background));
+  border-radius: var(--radius);
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
+}
+
+.sdn-dialog-header {
+  margin-bottom: 24px;
+}
+
+.sdn-dialog-title {
+  margin: 0;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.sdn-dialog-description {
+  margin: 8px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: hsl(var(--muted-foreground));
+}
+
+.sdn-dialog-body {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.sdn-dialog-footer {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.sdn-dialog-footer .sdn-button {
+  margin-left: 12px;
+}
+
+.sdn-dialog-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.sdn-dialog-enter .sdn-dialog-overlay {
+  opacity: 0;
+}
+
+.sdn-dialog-enter-active .sdn-dialog-overlay {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.sdn-dialog-exit .sdn-dialog-overlay {
+  opacity: 1;
+}
+
+.sdn-dialog-exit-active .sdn-dialog-overlay {
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.sdn-dialog-enter .sdn-dialog-content {
+  top: var(--from-top);
+  left: var(--from-left);
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+}
+
+.sdn-dialog-enter-active .sdn-dialog-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.sdn-dialog-enter-done .sdn-dialog-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition: all 0.2s;
+}
+
+.sdn-dialog-exit .sdn-dialog-content {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+}
+
+.sdn-dialog-exit-active .sdn-dialog-content {
+  top: var(--from-top);
+  left: var(--from-left);
+  transform: translate(-50%, -50%) scale(0.3);
+  opacity: 0;
+  transition: all 0.2s;
+}

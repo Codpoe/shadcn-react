@@ -1,0 +1,18 @@
+{
+  "extends": ["@codpoe", "plugin:storybook/recommended"],
+  "rules": {
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ]
+      }
+    ]
+  }
+}
