@@ -32,10 +32,10 @@
   opacity: 0;
   width: 425px;
   padding: 24px;
-  background-color: hsl(var(--background));
+  background-color: var(--color-bg-0);
   border-radius: var(--radius);
-  border: 1px solid hsl(var(--border));
-  color: hsl(var(--foreground));
+  border: 1px solid var(--color-border-0);
+  color: var(--color-text-0);
   box-shadow: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -4px rgba(0,0,0,.1);
 }
 
@@ -54,7 +54,7 @@
   margin: 8px 0 0;
   font-size: 14px;
   line-height: 20px;
-  color: hsl(var(--muted-foreground));
+  color: var(--color-text-2);
 }
 
 .sdn-dialog-body {

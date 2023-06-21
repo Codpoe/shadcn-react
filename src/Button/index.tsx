@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ForwardedRef, forwardRef, useState } from 'react';
 import cx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 import { Loader2Icon } from '../icons';
@@ -31,7 +31,10 @@ export interface ButtonProps
   style?: React.CSSProperties;
 }
 
-export function Button(props: ButtonProps) {
+export const Button = forwardRef(function Button(
+  props: ButtonProps,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
   const {
     variant = 'primary',
     size = 'm',
@@ -70,6 +73,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <button
+      ref={ref}
       className={cx(
         'sdn-button',
         `sdn-button--${variant}`,
@@ -99,4 +103,4 @@ export function Button(props: ButtonProps) {
       </CSSTransition>
     </button>
   );
-}
+});
