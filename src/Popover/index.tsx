@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import cx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 import * as RadixPopover from '../primitives/Popover';
 import './index.css';
 
 export type PopoverSide = 'top' | 'right' | 'bottom' | 'left';
+export type PopoverTriggerType = 'click' | 'hover';
 
 export interface PopoverProps {
   open?: boolean;
   defaultOpen?: boolean;
+  trigger?: PopoverTriggerType;
   portalContainer?: HTMLElement;
   /**
    * The preferred side of the anchor to render against when open.
@@ -69,6 +71,7 @@ export function Popover(props: PopoverProps) {
   const {
     defaultOpen,
     open,
+    trigger = 'click',
     children,
     content,
     portalContainer,
@@ -89,6 +92,9 @@ export function Popover(props: PopoverProps) {
   const [innerOpen, setInnerOpen] = useState(defaultOpen);
   const finalOpen = typeof open === 'undefined' ? innerOpen : open;
 
+  const mouseEnterTimeoutRef = useRef<any>();
+  const mouseLeaveTimeoutRef = useRef<any>();
+
   const handleChange = (newOpen: boolean) => {
     if (typeof open === 'undefined') {
       setInnerOpen(newOpen);
@@ -96,9 +102,47 @@ export function Popover(props: PopoverProps) {
     onChange?.(newOpen);
   };
 
+  const handleMouseEnter = () => {
+    if (trigger === 'hover') {
+      clearTimeout(mouseLeaveTimeoutRef.current);
+
+      mouseEnterTimeoutRef.current = setTimeout(() => {
+        if (!finalOpen) {
+          handleChange(true);
+        }
+      }, 200);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (trigger === 'hover') {
+      clearTimeout(mouseEnterTimeoutRef.current);
+
+      mouseLeaveTimeoutRef.current = setTimeout(() => {
+        if (finalOpen) {
+          handleChange(false);
+        }
+      }, 200);
+    }
+  };
+
+  const handleClick = async (ev: React.MouseEvent<HTMLButtonElement>) => {
+    // If triggerType is 'hover', prevent default click behavior
+    if (trigger === 'hover') {
+      ev.preventDefault();
+    }
+  };
+
   return (
     <RadixPopover.Root open={finalOpen} onOpenChange={handleChange}>
-      <RadixPopover.Trigger asChild>{children}</RadixPopover.Trigger>
+      <RadixPopover.Trigger
+        asChild
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleClick}
+      >
+        {children}
+      </RadixPopover.Trigger>
       <RadixPopover.Portal container={portalContainer} forceMount>
         <div className="sdn-popover-portal">
           <CSSTransition
@@ -122,6 +166,8 @@ export function Popover(props: PopoverProps) {
                 collisionPadding={collisionPadding}
                 sticky={sticky}
                 hideWhenDetached={hideWhenDetached}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               >
                 {content}
               </RadixPopover.Content>

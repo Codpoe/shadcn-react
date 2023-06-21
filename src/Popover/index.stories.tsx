@@ -38,3 +38,33 @@ export const Primary: StoryObj<typeof Popover> = {
     </div>
   ),
 };
+
+export const Hover: StoryObj<typeof Popover> = {
+  args: {
+    side: 'bottom',
+  },
+  render: args => (
+    <div
+      style={{
+        padding: '100px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Popover
+        {...args}
+        trigger="hover"
+        content={
+          <>
+            落霞与孤鹜齐飞
+            <br />
+            秋水共长天一色
+          </>
+        }
+      >
+        <Button>Hover</Button>
+      </Popover>
+    </div>
+  ),
+};

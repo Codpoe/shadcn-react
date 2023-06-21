@@ -12,6 +12,10 @@
   transform-origin: var(--radix-popover-content-transform-origin);
 }
 
+.sdn-popover-exit-active .sdn-popover-content {
+  pointer-events: none;
+}
+
 .sdn-popover-enter .sdn-popover-content[data-side=top] {
   opacity: 0;
   transform: translateY(4px) scale(0.95);
