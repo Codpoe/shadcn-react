@@ -17,7 +17,7 @@ export const Primary: StoryObj<typeof Popover> = {
   render: args => (
     <div
       style={{
-        padding: '50px',
+        padding: '60px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,7 +46,7 @@ export const Hover: StoryObj<typeof Popover> = {
   render: args => (
     <div
       style={{
-        padding: '50px',
+        padding: '60px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -77,7 +77,7 @@ export const NoArrow: StoryObj<typeof Popover> = {
   render: args => (
     <div
       style={{
-        padding: '50px',
+        padding: '60px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
