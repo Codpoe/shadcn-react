@@ -1,6 +1,6 @@
-.sdn-popover-content {
-  max-width: var(--radix-popover-content-available-width);
-  max-height: var(--radix-popover-content-available-height);
+.sdn-tooltip-content {
+  max-width: var(--radix-tooltip-content-available-width);
+  max-height: var(--radix-tooltip-content-available-height);
   background-color: var(--color-bg-0);
   border: 1px solid var(--color-border-0);
   border-radius: calc(var(--radius) - 2px);
@@ -8,104 +8,104 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.09);
   outline: none;
   padding: 6px 10px;
-  font-size: 16px;
-  transform-origin: var(--radix-popover-content-transform-origin);
+  font-size: 14px;
+  transform-origin: var(--radix-tooltip-content-transform-origin);
   will-change: transform, opacity;
 }
 
-.sdn-popover-exit-active .sdn-popover-content {
+.sdn-tooltip-exit-active .sdn-tooltip-content {
   pointer-events: none;
 }
 
-.sdn-popover-enter .sdn-popover-content[data-side=top] {
+.sdn-tooltip-enter .sdn-tooltip-content[data-side=top] {
   opacity: 0;
   transform: translateY(4px) scale(0.95);
 }
 
-.sdn-popover-enter-active .sdn-popover-content[data-side=top] {
+.sdn-tooltip-enter-active .sdn-tooltip-content[data-side=top] {
   opacity: 1;
   transform: translateY(0) scale(1);
   transition: all 0.2s;
 }
 
-.sdn-popover-exit .sdn-popover-content[data-side=top] {
+.sdn-tooltip-exit .sdn-tooltip-content[data-side=top] {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-.sdn-popover-exit-active .sdn-popover-content[data-side=top] {
+.sdn-tooltip-exit-active .sdn-tooltip-content[data-side=top] {
   opacity: 0;
   transform: translateY(4px) scale(0.95);
   transition: all 0.2s;
 }
 
-.sdn-popover-enter .sdn-popover-content[data-side=bottom] {
+.sdn-tooltip-enter .sdn-tooltip-content[data-side=bottom] {
   opacity: 0;
   transform: translateY(-4px) scale(0.95);
 }
 
-.sdn-popover-enter-active .sdn-popover-content[data-side=bottom] {
+.sdn-tooltip-enter-active .sdn-tooltip-content[data-side=bottom] {
   opacity: 1;
   transform: translateY(0px) scale(1);
   transition: all 0.2s;
 }
 
-.sdn-popover-exit .sdn-popover-content[data-side=bottom] {
+.sdn-tooltip-exit .sdn-tooltip-content[data-side=bottom] {
   opacity: 1;
   transform: translateY(0) scale(1);
 }
 
-.sdn-popover-exit-active .sdn-popover-content[data-side=bottom] {
+.sdn-tooltip-exit-active .sdn-tooltip-content[data-side=bottom] {
   opacity: 0;
   transform: translateY(-4px) scale(0.95);
   transition: all 0.2s;
 }
 
-.sdn-popover-enter .sdn-popover-content[data-side=left] {
+.sdn-tooltip-enter .sdn-tooltip-content[data-side=left] {
   opacity: 0;
   transform: translateX(4px) scale(0.95);
 }
 
-.sdn-popover-enter-active .sdn-popover-content[data-side=left] {
+.sdn-tooltip-enter-active .sdn-tooltip-content[data-side=left] {
   opacity: 1;
   transform: translateX(0) scale(1);
   transition: all 0.2s;
 }
 
-.sdn-popover-exit .sdn-popover-content[data-side=left] {
+.sdn-tooltip-exit .sdn-tooltip-content[data-side=left] {
   opacity: 1;
   transform: translateX(0) scale(1);
 }
 
-.sdn-popover-exit-active .sdn-popover-content[data-side=left] {
+.sdn-tooltip-exit-active .sdn-tooltip-content[data-side=left] {
   opacity: 0;
   transform: translateX(4px) scale(0.95);
   transition: all 0.2s;
 }
 
-.sdn-popover-enter .sdn-popover-content[data-side=right] {
+.sdn-tooltip-enter .sdn-tooltip-content[data-side=right] {
   opacity: 0;
   transform: translateX(-4px) scale(0.95);
 }
 
-.sdn-popover-enter-active .sdn-popover-content[data-side=right] {
+.sdn-tooltip-enter-active .sdn-tooltip-content[data-side=right] {
   opacity: 1;
   transform: translateX(0) scale(1);
   transition: all 0.2s;
 }
 
-.sdn-popover-exit .sdn-popover-content[data-side=right] {
+.sdn-tooltip-exit .sdn-tooltip-content[data-side=right] {
   opacity: 1;
   transform: translateX(0) scale(1);
 }
 
-.sdn-popover-exit-active .sdn-popover-content[data-side=right] {
+.sdn-tooltip-exit-active .sdn-tooltip-content[data-side=right] {
   opacity: 0;
   transform: translateX(-4px) scale(0.95);
   transition: all 0.2s;
 }
 
-.sdn-popover-arrow {
+.sdn-tooltip-arrow {
   box-sizing: border-box;
   width: 8px;
   height: 8px;

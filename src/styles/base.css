@@ -9,8 +9,9 @@
   --color-text-1: hsl(var(--slate-700));
   --color-text-2: hsl(var(--slate-500));
   --color-primary-foreground: hsl(var(--slate-100));
-  --color-border-0: hsl(var(--slate-300));
-  --color-border-1: hsl(var(--slate-400));
+  --color-border-0: hsl(var(--slate-200));
+  --color-border-1: hsl(var(--slate-300));
+  --color-border-2: hsl(var(--slate-400));
   --color-primary-0: hsl(var(--slate-900));
   --color-primary-1: hsl(var(--slate-700));
   --color-primary-2: hsl(var(--slate-950));
@@ -69,8 +70,9 @@
   --color-text-1: hsl(var(--slate-400));
   --color-text-2: hsl(var(--slate-500));
   --color-primary-foreground: hsl(var(--slate-900));
-  --color-border-0: hsl(var(--slate-700));
-  --color-border-1: hsl(var(--slate-600));
+  --color-border-0: hsl(var(--slate-800));
+  --color-border-1: hsl(var(--slate-700));
+  --color-border-2: hsl(var(--slate-600));
   --color-primary-0: hsl(var(--slate-200));
   --color-primary-1: hsl(var(--slate-300));
   --color-primary-2: hsl(var(--slate-400));

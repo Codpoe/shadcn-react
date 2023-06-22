@@ -25,7 +25,7 @@ export interface PopoverProps {
   align?: 'start' | 'center' | 'end';
   /**
    * The distance in pixels from the anchor.
-   * @default 6
+   * @default 4
    */
   sideOffset?: number;
   /**
@@ -80,7 +80,7 @@ export function Popover(props: PopoverProps) {
     children,
     content,
     portalContainer,
-    side = 'bottom',
+    side = 'top',
     align,
     sideOffset = 4,
     alignOffset,
@@ -162,7 +162,6 @@ export function Popover(props: PopoverProps) {
               <RadixPopover.Content
                 className={cx('sdn-popover-content', className)}
                 style={style}
-                // forceMount
                 side={side}
                 align={align}
                 sideOffset={sideOffset}

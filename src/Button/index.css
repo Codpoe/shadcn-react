@@ -100,7 +100,7 @@ variant
 .sdn-button--outline {
   background-color: transparent;
   color: var(--color-text-0);
-  border: 1px solid var(--color-border-0);
+  border: 1px solid var(--color-border-1);
 
   &:not([disabled]):hover {
     background-color: var(--color-bg-1);

@@ -38,6 +38,7 @@
 
 .sdn-accordion-content {
   overflow: hidden;
+  will-change: height;
 
   &[data-state=open] {
     animation: sdn-accordion-down .2s;

@@ -9,7 +9,7 @@
   cursor: pointer;
 
   &:hover .sdn-radio-indicator:not([data-disabled]) {
-    border-color: var(--color-border-1);
+    border-color: var(--color-border-2);
   }
 
   &[data-disabled] {
@@ -21,7 +21,7 @@
 .sdn-radio-indicator {
   width: 16px;
   height: 16px;
-  border: 1px solid var(--color-border-0);
+  border: 1px solid var(--color-border-1);
   border-radius: 9999px;
   display: flex;
   justify-content: center;
