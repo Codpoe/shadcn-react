@@ -60,6 +60,11 @@ export interface PopoverProps {
    * @default false
    */
   hideWhenDetached?: boolean;
+  /**
+   * Whether to show the arrow
+   * @default true
+   */
+  showArrow?: boolean;
   onChange?: (open: boolean) => void;
   content?: React.ReactNode;
   children?: React.ReactNode;
@@ -77,13 +82,14 @@ export function Popover(props: PopoverProps) {
     portalContainer,
     side = 'bottom',
     align,
-    sideOffset = 6,
+    sideOffset = 4,
     alignOffset,
     avoidCollisions,
     collisionBoundary,
     collisionPadding,
     sticky,
     hideWhenDetached,
+    showArrow = true,
     onChange,
     className,
     style,
@@ -156,7 +162,7 @@ export function Popover(props: PopoverProps) {
               <RadixPopover.Content
                 className={cx('sdn-popover-content', className)}
                 style={style}
-                forceMount
+                // forceMount
                 side={side}
                 align={align}
                 sideOffset={sideOffset}
@@ -170,6 +176,11 @@ export function Popover(props: PopoverProps) {
                 onMouseLeave={handleMouseLeave}
               >
                 {content}
+                {showArrow && (
+                  <RadixPopover.Arrow asChild>
+                    <div className="sdn-popover-arrow"></div>
+                  </RadixPopover.Arrow>
+                )}
               </RadixPopover.Content>
             </div>
           </CSSTransition>

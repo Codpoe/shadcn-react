@@ -17,7 +17,7 @@ export const Primary: StoryObj<typeof Popover> = {
   render: args => (
     <div
       style={{
-        padding: '100px',
+        padding: '50px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -46,7 +46,7 @@ export const Hover: StoryObj<typeof Popover> = {
   render: args => (
     <div
       style={{
-        padding: '100px',
+        padding: '50px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -64,6 +64,36 @@ export const Hover: StoryObj<typeof Popover> = {
         }
       >
         <Button>Hover</Button>
+      </Popover>
+    </div>
+  ),
+};
+
+export const NoArrow: StoryObj<typeof Popover> = {
+  args: {
+    side: 'bottom',
+    showArrow: false,
+  },
+  render: args => (
+    <div
+      style={{
+        padding: '50px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Popover
+        {...args}
+        content={
+          <>
+            落霞与孤鹜齐飞
+            <br />
+            秋水共长天一色
+          </>
+        }
+      >
+        <Button>点击</Button>
       </Popover>
     </div>
   ),
