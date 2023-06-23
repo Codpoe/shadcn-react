@@ -1,0 +1,57 @@
+.sdn-tabs {
+
+}
+
+.sdn-tabs-list {
+  display: inline-flex;
+  align-items: stretch;
+  padding: 4px;
+  border-radius: calc(var(--radius) - 2px);
+  background-color: var(--color-bg-1);
+}
+
+.sdn-tabs-trigger {
+  appearance: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: calc(var(--radius) - 4px);
+  background: transparent;
+  color: var(--color-text-1);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &[data-state=active] {
+    background: var(--color-bg-0);
+    color: var(--color-text-0);
+  }
+
+  &:not([data-disabled]):hover {
+    color: var(--color-text-0);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.sdn-tabs-content {
+  margin-top: 8px;
+}
+
+.sdn-tabs--stretch .sdn-tabs-list {
+  display: flex;
+}
+
+.sdn-tabs--stretch .sdn-tabs-trigger {
+  flex: 1;
+}
