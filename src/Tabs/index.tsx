@@ -5,6 +5,10 @@ import './index.css';
 
 export interface TabsProps {
   /**
+   * @default 'capsule'
+   */
+  type?: 'capsule' | 'line';
+  /**
    * The value of the tab that should be active when initially rendered.
    * Use when you do not need to control the state of the tabs.
    */
@@ -59,6 +63,7 @@ const tabsContext = createContext<TabsContextValue>({ setItems: () => null });
 
 export function Tabs(props: TabsProps) {
   const {
+    type = 'capsule',
     stretch,
     activationMode = 'automatic',
     children,
@@ -83,7 +88,12 @@ export function Tabs(props: TabsProps) {
     <tabsContext.Provider value={contextValue}>
       {children}
       <RadixTabs.Root
-        className={cx('sdn-tabs', { 'sdn-tabs--stretch': stretch }, className)}
+        className={cx(
+          'sdn-tabs',
+          `sdn-tabs--${type}`,
+          { 'sdn-tabs--stretch': stretch },
+          className
+        )}
         defaultValue={finalItems[0]?.value}
         activationMode={activationMode}
         onValueChange={onChange}

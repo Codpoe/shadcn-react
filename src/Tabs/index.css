@@ -1,21 +1,26 @@
-.sdn-tabs {
-
+.sdn-tabs[data-orientation=vertical] {
+  display: flex;
+  align-items: flex-start;
 }
 
-.sdn-tabs-list {
+.sdn-tabs--capsule .sdn-tabs-list {
   display: inline-flex;
   align-items: stretch;
   padding: 4px;
   border-radius: calc(var(--radius) - 2px);
   background-color: var(--color-bg-1);
+
+  &[data-orientation=vertical] {
+    flex-shrink: 0;
+    flex-direction: column;
+  }
 }
 
-.sdn-tabs-trigger {
+.sdn-tabs--capsule .sdn-tabs-trigger {
   appearance: none;
   outline: none;
   border: none;
   box-sizing: border-box;
-  position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -44,8 +49,77 @@
   }
 }
 
+.sdn-tabs--line .sdn-tabs-list {
+  display: flex;
+  align-items: stretch;
+
+  &[data-orientation=horizontal] {
+    border-bottom: 1px solid var(--color-border-0);
+  }
+
+  &[data-orientation=vertical] {
+    flex-shrink: 0;
+    flex-direction: column;
+    border-right: 1px solid var(--color-border-0);
+  }
+}
+
+.sdn-tabs--line .sdn-tabs-trigger {
+  appearance: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  padding: 9px 0;
+  margin-bottom: -1px;
+  background: transparent;
+  color: var(--color-text-1);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &[data-orientation=horizontal] {
+    justify-content: center;
+    border-bottom: 2px solid transparent;
+
+    &:not(:first-child) {
+      margin-left: 32px;
+    }
+  }
+
+  &[data-orientation=vertical] {
+    justify-content: flex-start;
+    padding-right: 12px;
+    border-right: 2px solid transparent;
+  }
+
+  &[data-state=active] {
+    border-color: var(--color-primary-0);
+    color: var(--color-text-0);
+  }
+
+  &:not([data-disabled]):hover {
+    color: var(--color-text-0);
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
 .sdn-tabs-content {
-  margin-top: 8px;
+  &[data-orientation=horizontal] {
+    margin-top: 8px;
+  }
+
+  &[data-orientation=vertical] {
+    flex: 1;
+    margin-left: 16px;
+  }
 }
 
 .sdn-tabs--stretch .sdn-tabs-list {
