@@ -8,7 +8,7 @@
   font-size: 14px;
   line-height: 20px;
   color: var(--color-text-0);
-  cursor: pointer;
+  cursor: text;
   transition: all 0.2s;
 
   &:not([data-disabled]):hover {
@@ -36,6 +36,13 @@
   &::placeholder {
     color: var(--color-text-2);
   }
+}
+
+/* internal actions */
+.sdn-input-internal-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 3px;
 }
 
 /* close */
@@ -83,9 +90,4 @@
 
 .sdn-input-suffix {
   padding-right: 12px;
-}
-
-.sdn-input-close-icon + .sdn-input-suffix,
-.sdn-input-password-icon + .sdn-input-suffix {
-  padding-left: 3px;
 }

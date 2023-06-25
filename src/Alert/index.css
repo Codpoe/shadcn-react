@@ -1,7 +1,7 @@
 .sdn-alert {
   position: relative;
   border-radius: var(--radius);
-  border: 1px solid var(--color-border-0);
+  border: 1px solid var(--color-border-1);
   padding: 16px;
   color: var(--color-text-0);
 }
@@ -37,15 +37,15 @@ variant
 */
 .sdn-alert--success {
   border-color: var(--color-success-0);
-  color: var(--color-success-0);
+  color: var(--color-success-1);
 }
 
 .sdn-alert--warning {
   border-color: var(--color-warning-0);
-  color: var(--color-warning-0);
+  color: var(--color-warning-1);
 }
 
 .sdn-alert--error {
   border-color: var(--color-error-0);
-  color: var(--color-error-0);
+  color: var(--color-error-1);
 }
