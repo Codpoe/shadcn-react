@@ -62,8 +62,8 @@ export function Checkbox<T extends string | number>(props: CheckboxProps<T>) {
       onCheckedChange={handleCheckedChange}
     >
       <CheckboxIndicator className="sdn-checkbox-indicator" forceMount>
-        <MinusIcon className="sdn-checkbox-minus-icon" size={14} />
-        <CheckIcon className="sdn-checkbox-check-icon" size={14} />
+        <MinusIcon className="sdn-checkbox-minus-icon" />
+        <CheckIcon className="sdn-checkbox-check-icon" />
       </CheckboxIndicator>
       {children && <label className="sdn-checkbox-label">{children}</label>}
     </RadixCheckbox>

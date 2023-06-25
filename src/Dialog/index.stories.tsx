@@ -48,7 +48,7 @@ export const Async: StoryObj<typeof Dialog> = {
           open={open}
           onChange={setOpen}
           onOk={async () => {
-            await new Promise(resolve => setTimeout(resolve, 15000000));
+            await new Promise(resolve => setTimeout(resolve, 1500));
           }}
           title="将模块拆分成多个文件"
           description="当模块变得更大时，你可能想要将它们的定义移动到单独的文件中，从而使代码更容易阅读。"

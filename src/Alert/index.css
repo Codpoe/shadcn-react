@@ -12,11 +12,6 @@
   left: 16px;
   width: 16px;
   font-size: 16px;
-
-  & svg {
-    width: 100%;
-    height: auto;
-  }
 }
 
 .sdn-alert-title {

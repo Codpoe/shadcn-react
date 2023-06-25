@@ -20,6 +20,7 @@
   }
 
   &[data-disabled] {
+    opacity: 0.5;
     cursor: not-allowed;
   }
 }
@@ -37,11 +38,16 @@
   }
 }
 
+/* close */
 .sdn-input-close-icon {
-  margin-right: 3px;
   visibility: hidden;
   opacity: 0;
   transition: all 0.2s;
+}
+
+.sdn-input-close-icon .sdn-button-icon {
+  font-size: 16px;
+  color: var(--color-text-2);
 }
 
 .sdn-input:not([data-disabled]):hover .sdn-input-close-icon {
@@ -52,4 +58,34 @@
 .sdn-input:not([data-disabled]):focus-within .sdn-input-close-icon {
   visibility: visible;
   opacity: 1;
+}
+
+/* password */
+.sdn-input-password-icon .sdn-button-icon {
+  font-size: 16px;
+  color: var(--color-text-2);
+}
+
+/* prefix & suffix */
+.sdn-input-prefix,
+.sdn-input-suffix {
+  flex-shrink: 0;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-2);
+  font-size: 16px;
+}
+
+.sdn-input-prefix {
+  padding-left: 12px;
+}
+
+.sdn-input-suffix {
+  padding-right: 12px;
+}
+
+.sdn-input-close-icon + .sdn-input-suffix,
+.sdn-input-password-icon + .sdn-input-suffix {
+  padding-left: 3px;
 }

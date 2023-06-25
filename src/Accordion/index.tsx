@@ -76,9 +76,7 @@ export interface AccordionItemProps {
 function AccordionItem(props: AccordionItemProps) {
   const {
     header,
-    expandIcon = (
-      <ChevronDownIcon className={cx('sdn-accordion-expand-icon')} size={16} />
-    ),
+    expandIcon = <ChevronDownIcon className="sdn-accordion-expand-icon" />,
     children,
     className,
     ...restProps

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import cx from 'clsx';
 import { Button } from '../Button';
-import { XIcon } from '../icons';
+import { XIcon, EyeIcon, EyeOffIcon } from '../icons';
 import './index.css';
 
 export interface InputProps {
+  type?: React.HTMLInputTypeAttribute;
   defaultValue?: string;
   value?: string;
   placeholder?: string;
@@ -20,6 +21,7 @@ export interface InputProps {
 
 export function Input(props: InputProps) {
   const {
+    type,
     defaultValue,
     value,
     placeholder,
@@ -39,6 +41,8 @@ export function Input(props: InputProps) {
   const finalValue = value ?? innerValue ?? '';
   const [displayValue, setDisplayValue] = useState<string>('');
   const compositionRef = useRef(false);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClick = (ev: React.MouseEvent<HTMLSpanElement>) => {
     const inputEl = ev.currentTarget.querySelector('input');
@@ -93,11 +97,11 @@ export function Input(props: InputProps) {
       data-disabled={disabled}
       onClick={handleClick}
     >
-      {prefix}
+      {prefix && <span className="sdn-input-prefix">{prefix}</span>}
       <input
         className="sdn-input-inner"
-        name="a"
         style={style}
+        type={showPassword ? 'text' : type}
         value={displayValue}
         placeholder={placeholder}
         disabled={disabled}
@@ -110,12 +114,21 @@ export function Input(props: InputProps) {
         <Button
           className="sdn-input-close-icon"
           variant="ghost"
-          size="xs"
-          icon={<XIcon size={10} />}
+          size="s"
+          icon={<XIcon />}
           onClick={handleClear}
         />
       )}
-      {suffix}
+      {type === 'password' && (
+        <Button
+          className="sdn-input-password-icon"
+          variant="ghost"
+          size="s"
+          icon={showPassword ? <EyeIcon /> : <EyeOffIcon />}
+          onClick={() => setShowPassword(prev => !prev)}
+        />
+      )}
+      {suffix && <span className="sdn-input-suffix">{suffix}</span>}
     </span>
   );
 }

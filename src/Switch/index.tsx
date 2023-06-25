@@ -59,7 +59,7 @@ export function Switch(props: SwitchProps) {
             mountOnEnter
             unmountOnExit
           >
-            <Loader2Icon className="sdn-switch-loader" size={14} />
+            <Loader2Icon className="sdn-switch-loader" />
           </CSSTransition>
         </SwitchThumb>
       </div>

@@ -29,6 +29,7 @@
   border: 1px solid var(--color-border-1);
   border-radius: calc(var(--radius) - 4px);
   color: var(--color-primary-foreground);
+  font-size: 14px;
   transition: all 0.2s;
   cursor: inherit;
 

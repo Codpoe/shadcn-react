@@ -189,25 +189,15 @@ icon-only
 .sdn-button-icon {
   display: inline-flex;
   margin-right: 8px;
-
-  & > svg {
-    width: 16px;
-    height: 16px;
-  }
+  font-size: 16px;
 }
 
 .sdn-button--s .sdn-button-icon {
-  & > svg {
-    width: 14px;
-    height: 14px;
-  }
+  font-size: 14px;
 }
 
 .sdn-button--xs .sdn-button-icon {
-  & > svg {
-    width: 14px;
-    height: 14px;
-  }
+  font-size: 14px;
 }
 
 .sdn-button--icon-only .sdn-button-icon {
@@ -225,6 +215,9 @@ loading
   position: absolute;
   top: calc(50% - 8px);
   left: calc(50% - 8px);
+  width: 1em;
+  height: 1em;
+  font-size: 16px;
   animation: sdn-button-loading-spin 1s linear infinite;
 }
 

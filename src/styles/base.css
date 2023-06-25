@@ -7,7 +7,7 @@
   --color-bg-3: rgb(var(--gray-300));
   --color-text-0: rgb(var(--gray-800));
   --color-text-1: rgb(var(--gray-600));
-  --color-text-2: rgb(var(--gray-400));
+  --color-text-2: rgb(var(--gray-500));
   --color-primary-foreground: rgb(var(--gray-100));
   --color-border-0: rgb(var(--gray-200));
   --color-border-1: rgb(var(--gray-300));
@@ -124,4 +124,9 @@ body {
   font-feature-settings: "rlig" 1, "calt" 1;
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: transparent;
+}
+
+.lucide {
+  width: 1em;
+  height: 1em;
 }

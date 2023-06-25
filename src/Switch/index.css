@@ -65,6 +65,7 @@
 }
 
 .sdn-switch-loader {
+  font-size: 14px;
   animation: sdn-switch-loader-spin 1s linear infinite;
 }
 

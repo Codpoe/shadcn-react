@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import cx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
-import { XIcon } from 'lucide-react';
+import { XIcon } from '../icons';
 import {
   Dialog as RadixDialog,
   DialogPortal,

@@ -99,7 +99,7 @@ export const Button = forwardRef(function Button(
         mountOnEnter
         unmountOnExit
       >
-        <Loader2Icon className="sdn-button-loading" size={16} />
+        <Loader2Icon className="sdn-button-loading" />
       </CSSTransition>
     </button>
   );
