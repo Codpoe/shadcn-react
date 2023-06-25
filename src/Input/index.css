@@ -1,0 +1,55 @@
+.sdn-input {
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 36px;
+  border: 1px solid var(--color-border-1);
+  border-radius: calc(var(--radius) - 2px);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--color-text-0);
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:not([data-disabled]):hover {
+    border-color: var(--color-border-2);
+  }
+
+  &:not([data-disabled]):focus-within {
+    border-color: var(--color-primary-0);
+  }
+
+  &[data-disabled] {
+    cursor: not-allowed;
+  }
+}
+
+.sdn-input-inner {
+  flex: 1;
+  height: 100%;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: var(--color-text-2);
+  }
+}
+
+.sdn-input-close-icon {
+  margin-right: 3px;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
+}
+
+.sdn-input:not([data-disabled]):hover .sdn-input-close-icon {
+  visibility: visible;
+  opacity: 1;
+}
+
+.sdn-input:not([data-disabled]):focus-within .sdn-input-close-icon {
+  visibility: visible;
+  opacity: 1;
+}

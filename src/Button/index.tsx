@@ -20,7 +20,7 @@ export interface ButtonProps
   /**
    * @default 'm'
    */
-  size?: 's' | 'm' | 'l';
+  size?: 'xs' | 's' | 'm' | 'l';
   icon?: React.ReactNode;
   round?: boolean;
   loading?: boolean;

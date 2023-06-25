@@ -7,7 +7,7 @@
   display: inline-flex;
   align-items: stretch;
   padding: 4px;
-  border-radius: calc(var(--radius) - 2px);
+  border-radius: var(--radius);
   background-color: var(--color-bg-1);
 
   &[data-orientation=vertical] {
@@ -24,19 +24,27 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 6px 12px;
-  border-radius: calc(var(--radius) - 4px);
+  border-radius: calc(var(--radius) - 2px);
   background: transparent;
-  color: var(--color-text-2);
+  color: var(--color-text-1);
   font-size: 14px;
   line-height: 20px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s;
 
+  &[data-orientation=horizontal] {
+    padding: 4px 16px;
+  }
+
+  &[data-orientation=vertical] {
+    padding: 8px 16px;
+  }
+
   &[data-state=active] {
     background: var(--color-bg-0);
     color: var(--color-primary-0);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);
   }
 
   &:not([data-disabled]):hover {
@@ -82,13 +90,13 @@
 
   &[data-orientation=horizontal] {
     justify-content: center;
-    padding: 9px 16px;
+    padding: 7px 16px;
     border-bottom: 2px solid transparent;
   }
 
   &[data-orientation=vertical] {
     justify-content: flex-start;
-    padding: 9px 16px 9px 0;
+    padding: 8px 16px 8px 0;
     border-right: 2px solid transparent;
   }
 

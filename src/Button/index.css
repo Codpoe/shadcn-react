@@ -142,6 +142,13 @@ size
   line-height: 20px;
 }
 
+.sdn-button--xs {
+  height: 24px;
+  padding: 0 10px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
 .sdn-button--l {
   height: 40px;
   padding: 4px 16px;
@@ -171,6 +178,10 @@ icon-only
   width: 28px;
 }
 
+.sdn-button--xs.sdn-button--icon-only {
+  width: 24px;
+}
+
 .sdn-button--l.sdn-button--icon-only {
   width: 40px;
 }
@@ -182,6 +193,20 @@ icon-only
   & > svg {
     width: 16px;
     height: 16px;
+  }
+}
+
+.sdn-button--s .sdn-button-icon {
+  & > svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+.sdn-button--xs .sdn-button-icon {
+  & > svg {
+    width: 14px;
+    height: 14px;
   }
 }
 
