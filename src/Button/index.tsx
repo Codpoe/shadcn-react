@@ -25,7 +25,7 @@ export interface ButtonProps
   round?: boolean;
   loading?: boolean;
   disabled?: boolean;
-  onClick?: (ev: React.MouseEvent<HTMLButtonElement>) => void | Promise<void>;
+  onClick?: (ev: React.MouseEvent<HTMLButtonElement>) => any | Promise<any>;
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
 import cx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
 import * as RadixToast from '../primitives/Toast';
@@ -9,9 +10,17 @@ import {
   AlertCircleIcon,
   XCircleIcon,
   Loader2Icon,
+  XIcon,
 } from '../icons';
+import './index.css';
 
-export type ToastType = 'default' | 'success' | 'warning' | 'error' | 'loading';
+const indexToTextMap: Record<number, string> = {
+  0: 'first',
+  1: 'second',
+  2: 'third',
+};
+
+export type ToastType = 'normal' | 'success' | 'warning' | 'error' | 'loading';
 
 export interface ToastProps {
   type?: ToastType;
@@ -42,6 +51,7 @@ export interface ToasterProps {
 
 interface InternalToastProps extends ToastProps {
   id: string | number;
+  timestamp: number;
   open: boolean;
 }
 
@@ -51,7 +61,7 @@ interface ToastPromiseProps<T = any> extends ToastProps {
   error?: React.ReactNode | ((error: any) => React.ReactNode);
 }
 
-type Subscriber = (t: InternalToastProps) => void;
+type Subscriber = (props: InternalToastProps) => void;
 
 let toastCount = 0;
 let toasts: InternalToastProps[] = [];
@@ -66,8 +76,8 @@ const subscribe = (subscriber: Subscriber) => {
   };
 };
 
-const publish = (t: InternalToastProps) => {
-  subscribers.forEach(subscriber => subscriber(t));
+const publish = (toast: InternalToastProps) => {
+  subscribers.forEach(subscriber => subscriber(toast));
 };
 
 const close = (id?: string | number) => {
@@ -95,13 +105,26 @@ export function toast(props: ToastProps): string | number {
   const index = toasts.findIndex(t => t.id === id);
 
   if (index >= 0) {
-    const newToast = { ...toasts[index], ...props, id };
-    publish(newToast);
+    const newToast: InternalToastProps = {
+      ...toasts[index],
+      ...props,
+      id,
+      timestamp: Date.now(),
+    };
+
     toasts.splice(index, 1, newToast);
-  } else {
-    const newToast = { icon: <InfoIcon />, ...props, id, open: true };
     publish(newToast);
+  } else {
+    const newToast: InternalToastProps = {
+      icon: <InfoIcon />,
+      ...props,
+      id,
+      timestamp: Date.now(),
+      open: true,
+    };
+
     toasts.unshift(newToast);
+    publish(newToast);
   }
 
   return id;
@@ -129,7 +152,7 @@ toast.loading = (props: ToastProps) => {
 
 toast.promise = function <T = any>(
   task: Promise<T> | (() => Promise<T>),
-  props: ToastPromiseProps
+  props: ToastPromiseProps<T>
 ) {
   const id = toast.loading({ ...props, title: props.loading ?? props.title });
 
@@ -158,34 +181,69 @@ toast.promise = function <T = any>(
   return id;
 };
 
-function Toast(props: InternalToastProps) {
-  const { id, open, duration, title, description, icon, className, style } =
-    props;
+function Toast(props: InternalToastProps & { index: number }) {
+  const {
+    id,
+    index,
+    timestamp,
+    open,
+    type = 'normal',
+    duration = 3000,
+    title,
+    description,
+    icon,
+    className,
+    style,
+  } = props;
+
+  const [finalOpen, setFinalOpen] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      close(id);
+    }, duration);
+  }, [id, duration]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setFinalOpen(open);
+    }, 0);
+  }, [open]);
 
   return (
     <CSSTransition
       classNames="sdn-toast"
-      in={open}
-      timeout={200}
+      in={finalOpen}
+      timeout={400}
       mountOnEnter
       unmountOnExit
     >
       <RadixToast.Root
         className={cx('sdn-toast', className)}
         style={style}
-        duration={duration}
+        data-type={type}
+        data-index={indexToTextMap[index] || 'other'}
+        open={true}
         forceMount
       >
-        <RadixToast.Title>
-          {icon && <div className="sdn-toast-icon">{icon}</div>}
-          <div className="sdn-toast-title-text">{title}</div>
-        </RadixToast.Title>
-        {description && (
-          <RadixToast.Description className="sdn-toast-description">
-            {description}
-          </RadixToast.Description>
+        {icon && (
+          <div className="sdn-toast-icon" data-type={type}>
+            {icon}
+          </div>
         )}
-        <RadixToast.Close className="sdn-toast-close">x</RadixToast.Close>
+        <div className="sdn-toast-content">
+          <RadixToast.Title className="sdn-toast-title">
+            {title}
+          </RadixToast.Title>
+          {description && (
+            <RadixToast.Description className="sdn-toast-description">
+              {description}
+            </RadixToast.Description>
+          )}
+        </div>
+        <RadixToast.Close className="sdn-toast-close" onClick={() => close(id)}>
+          <XIcon />
+        </RadixToast.Close>
       </RadixToast.Root>
     </CSSTransition>
   );
@@ -195,20 +253,61 @@ export function Toaster(props: ToasterProps) {
   const { duration, hotkey, portalContainer } = props;
   const [toasts, setToasts] = useState<InternalToastProps[]>([]);
 
+  const handleMouseEnter = () => {
+    // eslint-disable-next-line no-console
+    console.log('>>> enter');
+  };
+
+  const handleMouseLeave = () => {
+    // eslint-disable-next-line no-console
+    console.log('>>> leave');
+  };
+
   useEffect(() => {
-    return subscribe(newToasts => {
-      // TODO
-      setToasts([]);
+    return subscribe(newToast => {
+      if (!newToast.open) {
+        setToasts(toasts =>
+          toasts.map(t => (t.id === newToast.id ? newToast : t))
+        );
+        return;
+      }
+
+      // https://github.com/emilkowalski/sonner/blob/6c0a3f990653863f083dd8636f9e274dec527977/src/index.tsx#L401
+      // Prevent batching, temp solution.
+      setTimeout(() => {
+        ReactDOM.flushSync(() => {
+          setToasts(toasts => {
+            const index = toasts.findIndex(t => t.id === newToast.id);
+
+            // Update the toast if it already exists
+            if (index >= 0) {
+              return [
+                ...toasts.slice(0, index),
+                { ...toasts[index], ...newToast },
+                ...toasts.slice(index + 1),
+              ];
+            }
+
+            return [newToast, ...toasts];
+          });
+        });
+      });
     });
   }, []);
 
   return (
     <RadixToast.Provider duration={duration} swipeDirection="right">
       <RadixPortal.Root container={portalContainer}>
-        <RadixToast.Viewport className="sdn-toast-viewport" hotkey={hotkey} />
+        <RadixToast.Viewport
+          className="sdn-toast-viewport"
+          hotkey={hotkey}
+          onMouseEnter={handleMouseEnter}
+          onMouseMove={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
       </RadixPortal.Root>
-      {toasts.map(t => (
-        <Toast key={t.id} {...t} />
+      {toasts.map((t, index) => (
+        <Toast key={t.id} index={index} {...t} />
       ))}
     </RadixToast.Provider>
   );

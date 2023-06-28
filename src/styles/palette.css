@@ -34,4 +34,8 @@
   --red-600: 220 38 38;
   --red-700: 185 28 28;
   --red-800: 153 27 27;
+
+  --success: var(--emerald-500);
+  --warning: var(--amber-500);
+  --error: var(--red-500);
 }

@@ -1,0 +1,194 @@
+.sdn-toast-viewport {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  width: 356px;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  list-style: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  z-index: 99;
+}
+
+.sdn-toast {
+  --sdn-toast-color-bg: var(--color-bg-0);
+  --sdn-toast-color-bg-hover: var(--color-bg-1);
+  --sdn-toast-color-border: var(--color-border-0);
+  --sdn-toast-color-text: var(--color-text-0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: var(--color-bg-0);
+  border-radius: calc(var(--radius) - 2px);
+  will-change: transform, opacity;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+  &[data-type=success] {
+    --sdn-toast-color-bg: rgba(var(--success) / 0.1);
+    --sdn-toast-color-bg-hover: rgba(var(--success) / 0.2);
+    --sdn-toast-color-border: rgba(var(--success) / 0.1);
+    --sdn-toast-color-text: var(--color-success-0);
+  }
+
+  &[data-type=warning] {
+    --sdn-toast-color-bg: rgba(var(--warning) / 0.1);
+    --sdn-toast-color-bg-hover: rgba(var(--warning) / 0.2);
+    --sdn-toast-color-border: rgba(var(--warning) / 0.1);
+    --sdn-toast-color-text: var(--color-warning-0);
+  }
+
+  &[data-type=error] {
+    --sdn-toast-color-bg: rgba(var(--error) / 0.1);
+    --sdn-toast-color-bg-hover: rgba(var(--error) / 0.2);
+    --sdn-toast-color-border: rgba(var(--error) / 0.1);
+    --sdn-toast-color-text: var(--color-error-0);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: var(--sdn-toast-color-bg);
+    border-radius: calc(var(--radius) - 2px);
+    border: 1px solid var(--sdn-toast-color-border);
+    pointer-events: none;
+  }
+}
+
+.sdn-toast[data-index=second][data-state=open] {
+  transform: translateY(15px) scale(0.94);
+  transition: all 0.4s;
+}
+
+.sdn-toast[data-index=third] {
+  transform: translateY(30px) scale(0.88);
+  transition: all 0.4s;
+}
+
+.sdn-toast[data-index=other] {
+  transform: translateY(45px) scale(0.82);
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.sdn-toast-enter {
+  transform: translateY(calc(-100% - 30px));
+  opacity: 0;
+}
+
+.sdn-toast-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.sdn-toast-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.sdn-toast-exit-active {
+  transform: translateY(calc(-100% - 30px));
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.sdn-toast-icon {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  margin-right: 8px;
+  padding-top: 2px;
+  font-size: 16px;
+  color: var(--sdn-toast-color-text);
+}
+
+.sdn-toast-content {
+  position: relative;
+  flex: 1;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--sdn-toast-color-text);
+}
+
+.sdn-toast-title {
+  font-weight: 500;
+}
+
+.sdn-toast-description {
+  margin-top: 8px;
+}
+
+.sdn-toast-close {
+  appearance: none;
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background: var(--color-bg-0);
+  border-radius: 9999px;
+  font-size: 12px;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.1s;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--sdn-toast-color-bg);
+    border: 1px solid var(--sdn-toast-color-border);
+    border-radius: 9999px;
+    pointer-events: none;
+    transition: all 0.2s;
+  }
+
+  &:hover::before {
+    background-color: var(--sdn-toast-color-bg-hover);
+  }
+
+  & > svg {
+    position: relative;
+  }
+}
+
+.sdn-toast:hover .sdn-toast-close {
+  opacity: 1;
+}
+
+.sdn-toast-loader-icon {
+  animation: sdn-toast-anim-spin 1s linear infinite;
+}
+
+@keyframes sdn-toast-anim-spin {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
