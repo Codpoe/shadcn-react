@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import cx from 'clsx';
 import { CSSTransition } from 'react-transition-group';
@@ -20,6 +20,9 @@ const indexToTextMap: Record<number, string> = {
   2: 'third',
 };
 
+const DEFAULT_DURATION = 3000;
+const TIME_BEFORE_UNMOUNT = 200;
+
 export type ToastType = 'normal' | 'success' | 'warning' | 'error' | 'loading';
 
 export interface ToastProps {
@@ -36,7 +39,7 @@ export interface ToastProps {
 export interface ToasterProps {
   /**
    * The time in milliseconds that should elapse before automatically closing each toast.
-   * @default 5000
+   * @default 3000
    */
   duration?: number;
   /**
@@ -59,6 +62,11 @@ interface ToastPromiseProps<T = any> extends ToastProps {
   loading?: React.ReactNode;
   success?: React.ReactNode | ((data: T) => React.ReactNode);
   error?: React.ReactNode | ((error: any) => React.ReactNode);
+}
+
+interface ToastHeight {
+  id: string | number;
+  height: number;
 }
 
 type Subscriber = (props: InternalToastProps) => void;
@@ -123,7 +131,7 @@ export function toast(props: ToastProps): string | number {
       open: true,
     };
 
-    toasts.unshift(newToast);
+    toasts.push(newToast);
     publish(newToast);
   }
 
@@ -181,28 +189,57 @@ toast.promise = function <T = any>(
   return id;
 };
 
-function Toast(props: InternalToastProps & { index: number }) {
+toast.close = close;
+
+function Toast(
+  props: InternalToastProps & {
+    index: number;
+    offsetHeight: number;
+    setHeights: React.Dispatch<React.SetStateAction<ToastHeight[]>>;
+    mouseEntering: boolean;
+    setMouseEntering: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+) {
   const {
     id,
     index,
     timestamp,
     open,
     type = 'normal',
-    duration = 3000,
+    duration = DEFAULT_DURATION,
     title,
     description,
     icon,
     className,
     style,
+    offsetHeight,
+    setHeights,
+    mouseEntering,
+    setMouseEntering,
   } = props;
 
   const [finalOpen, setFinalOpen] = useState(false);
+  const toastRef = useRef<HTMLLIElement>(null);
+
+  const handleMouseEnter = () => {
+    setMouseEntering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setMouseEntering(false);
+  };
 
   useEffect(() => {
-    setTimeout(() => {
+    if (mouseEntering || type === 'loading') {
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
       close(id);
     }, duration);
-  }, [id, duration]);
+
+    return () => clearTimeout(timeoutId);
+  }, [id, type, duration, mouseEntering]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -210,21 +247,47 @@ function Toast(props: InternalToastProps & { index: number }) {
     }, 0);
   }, [open]);
 
+  useEffect(() => {
+    if (finalOpen) {
+      setHeights(heights => {
+        const newHeight = toastRef.current?.getBoundingClientRect().height || 0;
+        const alreadyExists = heights.find(h => h.id === id);
+
+        if (alreadyExists) {
+          return heights.map(h =>
+            h.id === id ? { ...h, height: newHeight } : h
+          );
+        } else {
+          return heights.concat({ id, height: newHeight });
+        }
+      });
+    }
+  }, [timestamp, finalOpen, id, setHeights]);
+
   return (
     <CSSTransition
       classNames="sdn-toast"
       in={finalOpen}
-      timeout={400}
+      timeout={TIME_BEFORE_UNMOUNT}
       mountOnEnter
       unmountOnExit
     >
       <RadixToast.Root
+        ref={toastRef}
         className={cx('sdn-toast', className)}
-        style={style}
+        style={
+          {
+            ...style,
+            '--index': index,
+            '--offset-height': `${offsetHeight}px`,
+          } as React.CSSProperties
+        }
         data-type={type}
         data-index={indexToTextMap[index] || 'other'}
         open={true}
         forceMount
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         {icon && (
           <div className="sdn-toast-icon" data-type={type}>
@@ -252,16 +315,8 @@ function Toast(props: InternalToastProps & { index: number }) {
 export function Toaster(props: ToasterProps) {
   const { duration, hotkey, portalContainer } = props;
   const [toasts, setToasts] = useState<InternalToastProps[]>([]);
-
-  const handleMouseEnter = () => {
-    // eslint-disable-next-line no-console
-    console.log('>>> enter');
-  };
-
-  const handleMouseLeave = () => {
-    // eslint-disable-next-line no-console
-    console.log('>>> leave');
-  };
+  const [heights, setHeights] = useState<ToastHeight[]>([]);
+  const [mouseEntering, setMouseEntering] = useState(false);
 
   useEffect(() => {
     return subscribe(newToast => {
@@ -269,6 +324,11 @@ export function Toaster(props: ToasterProps) {
         setToasts(toasts =>
           toasts.map(t => (t.id === newToast.id ? newToast : t))
         );
+        setHeights(heights => heights.filter(h => h.id !== newToast.id));
+
+        setTimeout(() => {
+          setToasts(toasts => toasts.filter(t => t.id !== newToast.id));
+        }, TIME_BEFORE_UNMOUNT);
         return;
       }
 
@@ -288,7 +348,7 @@ export function Toaster(props: ToasterProps) {
               ];
             }
 
-            return [newToast, ...toasts];
+            return toasts.concat(newToast);
           });
         });
       });
@@ -298,17 +358,23 @@ export function Toaster(props: ToasterProps) {
   return (
     <RadixToast.Provider duration={duration} swipeDirection="right">
       <RadixPortal.Root container={portalContainer}>
-        <RadixToast.Viewport
-          className="sdn-toast-viewport"
-          hotkey={hotkey}
-          onMouseEnter={handleMouseEnter}
-          onMouseMove={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-        />
+        <RadixToast.Viewport className="sdn-toast-viewport" hotkey={hotkey} />
       </RadixPortal.Root>
       {toasts.map((t, index) => (
-        <Toast key={t.id} index={index} {...t} />
+        <Toast
+          key={t.id}
+          {...t}
+          index={index}
+          offsetHeight={getOffsetHeight(heights, index)}
+          setHeights={setHeights}
+          mouseEntering={mouseEntering}
+          setMouseEntering={setMouseEntering}
+        />
       ))}
     </RadixToast.Provider>
   );
+}
+
+function getOffsetHeight(heights: ToastHeight[], index: number): number {
+  return heights.slice(0, index).reduce((acc, cur) => acc + cur.height, 0);
 }
