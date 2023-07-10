@@ -7,11 +7,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import {
-  CSSTransition,
-  Transition,
-  TransitionStatus,
-} from 'react-transition-group';
+import { Transition, TransitionStatus } from 'react-transition-group';
 import cx from 'clsx';
 import * as RadixSelect from '../primitives/Select';
 import { ChevronDownIcon, CheckIcon } from '../icons';
@@ -174,6 +170,8 @@ const transitionStateToClassName: Partial<Record<TransitionStatus, string>> = {
   exited: 'sdn-select-content-exited',
 };
 
+const ghostValue = '__SDN_GHOST_VALUE__';
+
 export function Select(props: SingleSelectProps | MultipleSelectProps) {
   const {
     multiple,
@@ -221,6 +219,14 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
 
   const selectedItems = useMemo(
     () =>
+      ((typeof finalValue === 'string' ? [finalValue] : finalValue) || [])
+        .map(x => leafItems.find(item => item.value === x))
+        .filter((x): x is SelectItemProps => !!x),
+    [leafItems, finalValue]
+  );
+
+  const sortedSelectedItems = useMemo(
+    () =>
       leafItems.filter(x =>
         multiple
           ? (finalValue as string[] | undefined)?.includes(x.value)
@@ -238,7 +244,6 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
 
   const handleChange = useCallback(
     (itemValue?: string) => {
-      console.log('>>> handleChange', itemValue);
       if (multiple) {
         if (!isControlled) {
           let newValue: string[] = [];
@@ -265,10 +270,18 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
   );
 
   const handleOpenChange = (newOpen: boolean) => {
+    // Avoid close when it's multiple select
+    if (multiple && !newOpen) {
+      return;
+    }
     setTransitionOpen(newOpen);
     if (newOpen) {
       setOpen(true);
     }
+  };
+
+  const handleClose = () => {
+    setTransitionOpen(false);
   };
 
   const handleTransitionExited = () => {
@@ -277,13 +290,11 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     }
   };
 
-  console.log('>>> selectedItems', selectedItems);
-
   return (
     <selectContext.Provider value={contextValue}>
       {children}
       <RadixSelect.Root
-        value={selectedItems[0]?.value}
+        value={ghostValue}
         open={open}
         disabled={disabled}
         onOpenChange={handleOpenChange}
@@ -293,14 +304,17 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
           className="sdn-select-trigger"
           {...(transitionOpen && { 'data-open': true })}
         >
-          <RadixSelect.Value
-            placeholder={
+          <RadixSelect.Value asChild>
+            {selectedItems.length ? (
+              <div className="sdn-select-value">
+                {/* TODO: default renderSelectedItem / multiple */}
+                {selectedItems.map(
+                  (x, index) =>
+                    renderSelectedItem?.(x, index) ?? x.label ?? x.children
+                )}
+              </div>
+            ) : (
               <div className="sdn-select-placeholder">{placeholder}</div>
-            }
-          >
-            {selectedItems.map(
-              (x, index) =>
-                renderSelectedItem?.(x, index) ?? x.label ?? x.children
             )}
           </RadixSelect.Value>
           <ChevronDownIcon
@@ -335,6 +349,8 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
                 sticky={sticky}
                 hideWhenDetached={hideWhenDetached}
                 onCloseAutoFocus={ev => ev.preventDefault()}
+                onPointerDownOutside={handleClose}
+                onEscapeKeyDown={handleClose}
               >
                 <RadixSelect.Viewport className="sdn-select-viewport">
                   {finalItems.map((x, index) => {
@@ -356,7 +372,7 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
                               key={item.value}
                               open={transitionOpen}
                               item={item}
-                              selectedItems={selectedItems}
+                              selectedItems={sortedSelectedItems}
                             />
                           ))}
                         </RadixSelect.Group>
@@ -368,7 +384,7 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
                         key={x.value}
                         open={transitionOpen}
                         item={x}
-                        selectedItems={selectedItems}
+                        selectedItems={sortedSelectedItems}
                       />
                     );
                   })}
@@ -403,14 +419,21 @@ function SelectItemRenderer(props: {
   );
 
   useEffect(() => {
-    setShowFocus(true);
+    setShowFocus(open);
+  }, [open]);
 
-    if (itemRef.current && open && item.value === selectedItems[0]?.value) {
+  useEffect(() => {
+    if (
+      !showFocus &&
+      itemRef.current &&
+      open &&
+      item.value === selectedItems[0]?.value
+    ) {
       setTimeout(() => {
         itemRef.current?.focus();
       }, 0);
     }
-  }, [open, item, selectedItems]);
+  }, [showFocus, open, item, selectedItems]);
 
   return (
     <RadixSelect.Item
@@ -421,7 +444,6 @@ function SelectItemRenderer(props: {
       value={item.value}
       disabled={item.disabled}
       {...(showFocus && { 'data-show-focus': showFocus })}
-      onFocus={() => console.log('>>> onFocus', item.value)}
     >
       <RadixSelect.ItemText>{item.label ?? item.children}</RadixSelect.ItemText>
       {selected && (
