@@ -1,0 +1,164 @@
+.sdn-tag {
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid transparent;
+  padding: 2px 8px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+
+  &[data-variant=primary] {
+    background-color: var(--color-primary-0);
+    border-color: var(--color-primary-0);
+    color: var(--color-primary-foreground);
+  }
+
+  &[data-variant=secondary] {
+    background-color: var(--color-secondary-0);
+    border-color: var(--color-secondary-0);
+    color: var(--color-text-0);
+  }
+
+  &[data-variant=success] {
+    background-color: var(--color-success-0);
+    border-color: var(--color-success-0);
+    color: #fff;
+  }
+
+  &[data-variant=warning] {
+    background-color: var(--color-warning-0);
+    border-color: var(--color-warning-0);
+    color: #fff;
+  }
+
+  &[data-variant=error] {
+    background-color: var(--color-error-0);
+    border-color: var(--color-error-0);
+    color: #fff;
+  }
+
+  &[data-variant=outline] {
+    background-color: transparent;
+    color: var(--color-text-0);
+    border: 1px solid var(--color-border-1);
+  }
+
+  &[data-custom-color] {
+    background-color: transparent;
+    border-color: transparent;
+    color: var(--custom-color);
+  }
+
+  &[data-custom-color]::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: calc(var(--radius) - 2px);
+    background-color: currentColor;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+}
+
+.sdn-tag-content {
+  position: relative;
+}
+
+.sdn-tag-close {
+  appearance: none;
+  outline: none;
+  box-sizing: border-box;
+  border: none;
+  background: none;
+  padding: 0;
+  position: relative;
+  width: 16px;
+  height: 16px;
+  margin-right: -4px;
+  margin-left: 2px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9999px;
+  font-size: 12px;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 9999px;
+    background-color: transparent;
+    opacity: 0.2;
+    pointer-events: none;
+    transition: all 0.2s;
+  }
+
+  &:hover::before {
+    background-color: currentColor;
+  }
+
+  &:active::before {
+    background-color: currentColor;
+    opacity: 0.3;
+  }
+
+  &[data-variant=primary] {
+    color: var(--color-primary-foreground);
+  }
+
+  &[data-variant=secondary] {
+    color: var(--color-text-0);
+
+    &::before {
+      opacity: 0.1;
+    }
+
+    &:active::before {
+      opacity: 0.2;
+    }
+  }
+
+  &[data-variant=success] {
+    color: #fff;
+  }
+
+  &[data-variant=warning] {
+    color: #fff;
+  }
+
+  &[data-variant=error] {
+    color: #fff;
+  }
+
+  &[data-variant=outline] {
+    color: var(--color-text-0);
+
+    &::before {
+      opacity: 0.1;
+    }
+
+    &:active::before {
+      opacity: 0.2;
+    }
+  }
+
+  &[data-custom-color] {
+    color: var(--custom-color);
+  }
+}
+
+.sdn-tag-close-icon {
+  position: relative;
+  width: 1em;
+  height: 1em;
+}
