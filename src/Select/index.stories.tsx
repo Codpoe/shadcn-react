@@ -33,6 +33,7 @@ export const Primary: StoryObj<typeof Select> = {
 
 export const Multiple: StoryObj<typeof Select> = {
   args: {
+    style: { width: '250px' },
     multiple: true,
     placeholder: '请选择',
     items: [

@@ -1,4 +1,5 @@
 import {
+  Fragment,
   createContext,
   useCallback,
   useContext,
@@ -10,8 +11,10 @@ import {
 import { Transition, TransitionStatus } from 'react-transition-group';
 import cx from 'clsx';
 import * as RadixSelect from '../primitives/Select';
+import { Tag } from '../Tag';
 import { ChevronDownIcon, CheckIcon } from '../icons';
 import './index.css';
+import { findParentElement } from '../utils';
 
 export type SelectSide = 'top' | 'right' | 'bottom' | 'left';
 export type SelectAlign = 'start' | 'center' | 'end';
@@ -85,8 +88,10 @@ export interface CommonSelectProps {
     index: number
   ) => React.ReactNode;
   children?: React.ReactNode;
-  style?: React.CSSProperties;
   className?: string;
+  style?: React.CSSProperties;
+  contentClassName?: string;
+  contentStyle?: React.CSSProperties;
 }
 
 export interface SingleSelectProps extends CommonSelectProps {
@@ -192,8 +197,10 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     items,
     renderSelectedItem,
     children,
-    style,
     className,
+    style,
+    contentClassName,
+    contentStyle,
     onChange,
   } = props;
 
@@ -280,7 +287,17 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     }
   };
 
-  const handleClose = () => {
+  const handleClose = (ev: Event) => {
+    if (
+      ev.target &&
+      findParentElement(ev.target as HTMLElement, parent =>
+        parent.classList.contains('sdn-tag-close')
+      )
+    ) {
+      ev.preventDefault();
+      return;
+    }
+
     setTransitionOpen(false);
   };
 
@@ -301,17 +318,27 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
         onValueChange={handleChange}
       >
         <RadixSelect.Trigger
-          className="sdn-select-trigger"
+          className={cx('sdn-select-trigger', className)}
+          style={style}
           {...(transitionOpen && { 'data-open': true })}
         >
           <RadixSelect.Value asChild>
             {selectedItems.length ? (
-              <div className="sdn-select-value">
-                {/* TODO: default renderSelectedItem / multiple */}
-                {selectedItems.map(
-                  (x, index) =>
-                    renderSelectedItem?.(x, index) ?? x.label ?? x.children
-                )}
+              <div
+                className="sdn-select-value"
+                {...(multiple && { 'data-multiple': true })}
+              >
+                {selectedItems.map((x, index) => (
+                  <Fragment key={x.value}>
+                    {renderSelectedItem?.(x, index) ?? (
+                      <SelectedItemRenderer
+                        item={x}
+                        multiple={multiple}
+                        onClose={() => handleChange(x.value)}
+                      />
+                    )}
+                  </Fragment>
+                ))}
               </div>
             ) : (
               <div className="sdn-select-placeholder">{placeholder}</div>
@@ -335,9 +362,9 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
                 className={cx(
                   'sdn-select-content',
                   transitionStateToClassName[state],
-                  className
+                  contentClassName
                 )}
-                style={style}
+                style={contentStyle}
                 position="popper"
                 side={side}
                 sideOffset={sideOffset}
@@ -402,6 +429,36 @@ function checkIsGroup(
   item: SelectItemProps | SelectGroupProps
 ): item is SelectGroupProps {
   return Boolean((item as SelectGroupProps).items);
+}
+
+function SelectedItemRenderer(props: {
+  item: SelectItemProps;
+  multiple?: boolean;
+  onClose: () => any;
+}) {
+  const { item, multiple, onClose } = props;
+
+  if (multiple) {
+    return (
+      <Tag
+        className="sdn-select-value-tag"
+        variant="secondary"
+        closable
+        onClose={ev => {
+          ev.stopPropagation();
+          ev.nativeEvent.stopPropagation();
+          ev.preventDefault();
+          onClose();
+        }}
+      >
+        {item.label ?? item.children}
+      </Tag>
+    );
+  }
+
+  return (
+    <span className="sdn-select-value-text">{item.label ?? item.children}</span>
+  );
 }
 
 function SelectItemRenderer(props: {

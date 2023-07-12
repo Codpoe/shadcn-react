@@ -35,10 +35,31 @@
 
 .sdn-select-value {
   flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  overflow: hidden;
+  pointer-events: initial !important;
+
+  &[data-multiple] {
+    margin-bottom: -4px;
+    margin-left: -6px;
+  }
+}
+
+.sdn-select-value-text {
+  flex: 1;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.sdn-select-value-tag {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
 }
 
 .sdn-select-placeholder {
