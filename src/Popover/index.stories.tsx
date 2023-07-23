@@ -98,3 +98,33 @@ export const NoArrow: StoryObj<typeof Popover> = {
     </div>
   ),
 };
+
+export const NoScale: StoryObj<typeof Popover> = {
+  args: {
+    side: 'bottom',
+  },
+  render: args => (
+    <div
+      style={{
+        padding: '60px',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Popover
+        {...args}
+        contentScalable={false}
+        content={
+          <>
+            落霞与孤鹜齐飞
+            <br />
+            秋水共长天一色
+          </>
+        }
+      >
+        <Button>点击</Button>
+      </Popover>
+    </div>
+  ),
+};

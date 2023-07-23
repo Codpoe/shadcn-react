@@ -67,6 +67,10 @@ export interface PopoverProps {
   showArrow?: boolean;
   onChange?: (open: boolean) => void;
   content?: React.ReactNode;
+  /**
+   * @default true
+   */
+  contentScalable?: boolean;
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
@@ -79,6 +83,7 @@ export function Popover(props: PopoverProps) {
     trigger = 'click',
     children,
     content,
+    contentScalable = true,
     portalContainer,
     side = 'top',
     align,
@@ -173,6 +178,7 @@ export function Popover(props: PopoverProps) {
                 hideWhenDetached={hideWhenDetached}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                {...(contentScalable && { 'data-scalable': true })}
               >
                 {content}
                 {showArrow && (

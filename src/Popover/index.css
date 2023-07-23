@@ -11,6 +11,11 @@
   font-size: 16px;
   transform-origin: var(--radix-popover-content-transform-origin);
   will-change: transform, opacity;
+  --scale: 1;
+
+  &[data-scalable] {
+    --scale: 0.95;
+  }
 }
 
 .sdn-popover-exit-active .sdn-popover-content {
@@ -19,7 +24,7 @@
 
 .sdn-popover-enter .sdn-popover-content[data-side=top] {
   opacity: 0;
-  transform: translateY(4px) scale(0.95);
+  transform: translateY(4px) scale(var(--scale));
 }
 
 .sdn-popover-enter-active .sdn-popover-content[data-side=top] {
@@ -35,13 +40,13 @@
 
 .sdn-popover-exit-active .sdn-popover-content[data-side=top] {
   opacity: 0;
-  transform: translateY(4px) scale(0.95);
+  transform: translateY(4px) scale(var(--scale));
   transition: all 0.2s;
 }
 
 .sdn-popover-enter .sdn-popover-content[data-side=bottom] {
   opacity: 0;
-  transform: translateY(-4px) scale(0.95);
+  transform: translateY(-4px) scale(var(--scale));
 }
 
 .sdn-popover-enter-active .sdn-popover-content[data-side=bottom] {
@@ -57,13 +62,13 @@
 
 .sdn-popover-exit-active .sdn-popover-content[data-side=bottom] {
   opacity: 0;
-  transform: translateY(-4px) scale(0.95);
+  transform: translateY(-4px) scale(var(--scale));
   transition: all 0.2s;
 }
 
 .sdn-popover-enter .sdn-popover-content[data-side=left] {
   opacity: 0;
-  transform: translateX(4px) scale(0.95);
+  transform: translateX(4px) scale(var(--scale));
 }
 
 .sdn-popover-enter-active .sdn-popover-content[data-side=left] {
@@ -79,13 +84,13 @@
 
 .sdn-popover-exit-active .sdn-popover-content[data-side=left] {
   opacity: 0;
-  transform: translateX(4px) scale(0.95);
+  transform: translateX(4px) scale(var(--scale));
   transition: all 0.2s;
 }
 
 .sdn-popover-enter .sdn-popover-content[data-side=right] {
   opacity: 0;
-  transform: translateX(-4px) scale(0.95);
+  transform: translateX(-4px) scale(var(--scale));
 }
 
 .sdn-popover-enter-active .sdn-popover-content[data-side=right] {
@@ -101,7 +106,7 @@
 
 .sdn-popover-exit-active .sdn-popover-content[data-side=right] {
   opacity: 0;
-  transform: translateX(-4px) scale(0.95);
+  transform: translateX(-4px) scale(var(--scale));
   transition: all 0.2s;
 }
 
