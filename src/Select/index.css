@@ -25,6 +25,7 @@
   &:not([data-disabled]):focus,
   &[data-open] {
     border-color: var(--color-primary-0);
+    pointer-events: initial;
   }
 
   &[data-disabled] {
@@ -72,16 +73,48 @@
   white-space: nowrap;
 }
 
-.sdn-select-chevron-down-icon {
+.sdn-select-actions {
   flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: -9px;
+  font-size: 16px;
+}
+
+.sdn-select-chevron-down-icon {
+  position: absolute;
+  top: 6px;
+  left: 6px;
   width: 1em;
   height: 1em;
   color: var(--color-text-2);
-  margin-left: 12px;
-  transition: all .2s;
+  transition: all 0.2s;
 
   &[data-open] {
     transform: rotate(180deg);
+  }
+}
+
+.sdn-select-clear-icon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.sdn-select-trigger[data-show-clear-btn]:not([data-disabled]):hover {
+  .sdn-select-chevron-down-icon {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  .sdn-select-clear-icon {
+    visibility: visible;
+    opacity: 1;
   }
 }
 

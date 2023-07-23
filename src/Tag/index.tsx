@@ -36,12 +36,6 @@ export const Tag = forwardRef(function Tag(
     style,
   } = props;
 
-  const handleClose = (ev: React.SyntheticEvent) => {
-    ev.stopPropagation();
-    ev.nativeEvent.stopPropagation();
-    onClose?.(ev);
-  };
-
   return (
     <span
       ref={ref}
@@ -56,7 +50,10 @@ export const Tag = forwardRef(function Tag(
           className="sdn-tag-close"
           {...(color && { 'data-custom-color': color })}
           data-variant={variant}
-          onClick={handleClose}
+          onClick={onClose}
+          onPointerDownCapture={ev => {
+            ev.stopPropagation();
+          }}
         >
           <XIcon className="sdn-tag-close-icon" />
         </button>

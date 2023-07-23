@@ -12,9 +12,10 @@ import { Transition, TransitionStatus } from 'react-transition-group';
 import cx from 'clsx';
 import * as RadixSelect from '../primitives/Select';
 import { Tag } from '../Tag';
-import { ChevronDownIcon, CheckIcon } from '../icons';
-import './index.css';
+import { Button } from '../Button';
+import { ChevronDownIcon, CheckIcon, XIcon } from '../icons';
 import { findParentElement } from '../utils';
+import './index.css';
 
 export type SelectSide = 'top' | 'right' | 'bottom' | 'left';
 export type SelectAlign = 'start' | 'center' | 'end';
@@ -82,6 +83,11 @@ export interface CommonSelectProps {
    * @default false
    */
   hideWhenDetached?: boolean;
+  /**
+   * Whether to show the clear icon
+   * @default true
+   */
+  clearable?: boolean;
   items?: SelectItemProps[];
   renderSelectedItem?: (
     selectedItem: SelectItemProps,
@@ -194,6 +200,7 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     collisionPadding,
     sticky,
     hideWhenDetached,
+    clearable = true,
     items,
     renderSelectedItem,
     children,
@@ -231,6 +238,8 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
         .filter((x): x is SelectItemProps => !!x),
     [leafItems, finalValue]
   );
+
+  const showClearBtn = clearable && selectedItems.length > 0;
 
   const sortedSelectedItems = useMemo(
     () =>
@@ -275,6 +284,11 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     },
     [multiple, isControlled, value, onChange]
   );
+
+  const handleClear = (ev: React.MouseEvent) => {
+    ev.stopPropagation();
+    handleChange(undefined);
+  };
 
   const handleOpenChange = (newOpen: boolean) => {
     // Avoid close when it's multiple select
@@ -321,6 +335,7 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
           className={cx('sdn-select-trigger', className)}
           style={style}
           {...(transitionOpen && { 'data-open': true })}
+          {...(showClearBtn && { 'data-show-clear-btn': true })}
         >
           <RadixSelect.Value asChild>
             {selectedItems.length ? (
@@ -344,10 +359,24 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
               <div className="sdn-select-placeholder">{placeholder}</div>
             )}
           </RadixSelect.Value>
-          <ChevronDownIcon
-            className="sdn-select-chevron-down-icon"
-            {...(transitionOpen && { 'data-open': true })}
-          />
+          <div className="sdn-select-actions">
+            {clearable && (
+              <Button
+                className="sdn-select-clear-icon"
+                variant="ghost"
+                size="s"
+                icon={<XIcon />}
+                onClick={handleClear}
+                onPointerDownCapture={ev => {
+                  ev.stopPropagation();
+                }}
+              />
+            )}
+            <ChevronDownIcon
+              className="sdn-select-chevron-down-icon"
+              {...(transitionOpen && { 'data-open': true })}
+            />
+          </div>
         </RadixSelect.Trigger>
         <RadixSelect.Portal container={portalContainer}>
           <Transition
@@ -444,12 +473,7 @@ function SelectedItemRenderer(props: {
         className="sdn-select-value-tag"
         variant="secondary"
         closable
-        onClose={ev => {
-          ev.stopPropagation();
-          ev.nativeEvent.stopPropagation();
-          ev.preventDefault();
-          onClose();
-        }}
+        onClose={onClose}
       >
         {item.label ?? item.children}
       </Tag>
@@ -565,6 +589,10 @@ function SelectGroup(props: SelectGroupProps) {
 }
 
 function toggleItemValue(value: any[], itemValue: any): any[] {
+  if (typeof itemValue === 'undefined') {
+    return [];
+  }
+
   const index = value.indexOf(itemValue);
 
   if (index >= 0) {
