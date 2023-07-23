@@ -14,7 +14,6 @@ import * as RadixSelect from '../primitives/Select';
 import { Tag } from '../Tag';
 import { Button } from '../Button';
 import { ChevronDownIcon, CheckIcon, XIcon } from '../icons';
-import { findParentElement } from '../utils';
 import './index.css';
 
 export type SelectSide = 'top' | 'right' | 'bottom' | 'left';
@@ -301,17 +300,7 @@ export function Select(props: SingleSelectProps | MultipleSelectProps) {
     }
   };
 
-  const handleClose = (ev: Event) => {
-    if (
-      ev.target &&
-      findParentElement(ev.target as HTMLElement, parent =>
-        parent.classList.contains('sdn-tag-close')
-      )
-    ) {
-      ev.preventDefault();
-      return;
-    }
-
+  const handleClose = () => {
     setTransitionOpen(false);
   };
 
