@@ -8,7 +8,7 @@ import {
   AccordionContent as UiAccordionContent,
   AccordionItem as UiAccordionItem,
   AccordionTrigger as UiAccordionTrigger,
-} from '@/ui/accordion';
+} from '../ui/accordion';
 
 export type { AccordionSingleProps, AccordionMultipleProps };
 

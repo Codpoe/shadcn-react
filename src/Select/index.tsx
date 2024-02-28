@@ -8,8 +8,8 @@ import {
   SelectLabel,
   SelectItem as UiSelectItem,
   SelectSeparator,
-} from '@/ui/select';
-import { cn } from '@/utils';
+} from '../ui/select';
+import { cn } from '../utils';
 
 export interface SelectProps extends ComponentPropsWithoutRef<typeof UiSelect> {
   placeholder?: React.ReactNode;

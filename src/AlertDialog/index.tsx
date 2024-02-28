@@ -12,7 +12,7 @@ import {
   AlertDialogHeader as UiAlertDialogHeader,
   AlertDialogTitle as UiAlertDialogTitle,
   AlertDialogTrigger as UiAlertDialogTrigger,
-} from '@/ui/alert-dialog';
+} from '../ui/alert-dialog';
 
 export interface AlertDialogProps {
   title?: React.ReactNode;

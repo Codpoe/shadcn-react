@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Card } from '../Card';
+import { Label } from '../Label';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import { Tabs } from '.';
-import { Card } from '@/Card';
-import { Label } from '@/Label';
-import { Input } from '@/Input';
-import { Button } from '@/Button';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

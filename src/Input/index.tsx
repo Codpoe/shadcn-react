@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { InputProps as UiInputProps, Input as UiInput } from '@/ui/input';
+import { InputProps as UiInputProps, Input as UiInput } from '../ui/input';
 
 export interface InputProps extends UiInputProps {}
 

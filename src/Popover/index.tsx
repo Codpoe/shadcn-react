@@ -6,7 +6,7 @@ import {
   Popover as UiPopover,
   PopoverContent,
   PopoverTrigger,
-} from '@/ui/popover';
+} from '../ui/popover';
 
 export interface PopoverProps
   extends UiPopoverProps,

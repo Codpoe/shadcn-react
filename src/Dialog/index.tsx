@@ -3,7 +3,7 @@ import {
   DialogProps as UiDialogProps,
 } from '@radix-ui/react-dialog';
 import { MouseEvent, forwardRef, useRef, useState } from 'react';
-import { Button, ButtonProps } from '@/Button';
+import { Button, ButtonProps } from '../Button';
 import {
   Dialog as UiDialog,
   DialogContent,
@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
   DialogClose as UiDialogClose,
-} from '@/ui/dialog';
+} from '../ui/dialog';
 
 export interface DialogProps extends UiDialogProps {
   title?: React.ReactNode;

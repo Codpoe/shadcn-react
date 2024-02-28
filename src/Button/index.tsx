@@ -4,7 +4,7 @@ import {
   Button as UiButton,
   buttonVariants,
   ButtonProps as UiButtonProps,
-} from '@/ui/button';
+} from '../ui/button';
 
 export { buttonVariants };
 

@@ -10,7 +10,7 @@ import {
   CommandItem as UiCommandItem,
   CommandSeparator,
   CommandShortcut,
-} from '@/ui/command';
+} from '../ui/command';
 
 export interface CommandDialogProps extends DialogProps {}
 

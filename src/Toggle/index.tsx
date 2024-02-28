@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { Toggle } from '@/ui/toggle';
+import { Toggle } from '../ui/toggle';
 
 export interface ToggleProps extends ComponentPropsWithoutRef<typeof Toggle> {}
 

@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, forwardRef } from 'react';
-import { Slider as UiSlider } from '@/ui/slider';
+import { Slider as UiSlider } from '../ui/slider';
 
 export interface SliderProps
   extends ComponentPropsWithoutRef<typeof UiSlider> {}

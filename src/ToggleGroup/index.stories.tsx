@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '../icons';
 import { ToggleGroup } from '.';
-import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '@/icons';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

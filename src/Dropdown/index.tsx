@@ -19,8 +19,8 @@ import {
   DropdownMenuCheckboxItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
-} from '@/ui/dropdown-menu';
-import { cn } from '@/utils';
+} from '../ui/dropdown-menu';
+import { cn } from '../utils';
 
 export interface DropdownLabelProps
   extends ComponentProps<typeof DropdownMenuLabel> {}

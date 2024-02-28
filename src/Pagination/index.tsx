@@ -5,8 +5,8 @@ import {
   PaginationContent,
   PaginationItem,
   PaginationEllipsis,
-} from '@/ui/pagination';
-import { Button } from '@/Button';
+} from '../ui/pagination';
+import { Button } from '../Button';
 
 export interface PaginationProps {
   total?: number;

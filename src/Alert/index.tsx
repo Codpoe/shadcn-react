@@ -6,7 +6,7 @@ import {
   Alert as UiAlert,
   AlertDescription as UiAlertDescription,
   AlertTitle as UiAlertTitle,
-} from '@/ui/alert';
+} from '../ui/alert';
 
 export type AlertVariant = 'default' | 'destructive';
 

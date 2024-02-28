@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../Button';
+import { Input, Label } from '../ui';
 import { Dialog } from '.';
-import { Button } from '@/Button';
-import { Input, Label } from '@/ui';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

@@ -30,12 +30,12 @@ import './styles/globals.css';`;
               fs.statSync(path.resolve('src', name)).isDirectory() &&
               /^[A-Z]/.test(name),
           )
-          .map(name => `export * from '${path.resolve('src', name)}';\n`)
+          .map(name => `export * from './${name}';\n`)
           .join('')}`;
 
         const uiEntryCode = `${commonCode}\n${fs
           .readdirSync('./src/ui', 'utf-8')
-          .map(name => `export * from '${path.resolve('src/ui', name)}';\n`)
+          .map(name => `export * from './ui/${name}';\n`)
           .join('')}`;
 
         fs.writeFileSync(pkgEntry, pkgEntryCode, 'utf-8');

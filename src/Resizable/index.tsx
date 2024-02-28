@@ -3,7 +3,7 @@ import {
   ResizablePanelGroup,
   ResizablePanel,
   ResizableHandle,
-} from '@/ui/resizable';
+} from '../ui/resizable';
 
 export interface ResizableProps
   extends ComponentProps<typeof ResizablePanelGroup> {}

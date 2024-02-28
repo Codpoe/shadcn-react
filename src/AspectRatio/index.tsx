@@ -1,5 +1,5 @@
 import React from 'react';
-import { AspectRatio as UiAspectRatio } from '@/ui/aspect-ratio';
+import { AspectRatio as UiAspectRatio } from '../ui/aspect-ratio';
 
 export interface AspectRatioProps
   extends React.ComponentPropsWithoutRef<typeof UiAspectRatio> {

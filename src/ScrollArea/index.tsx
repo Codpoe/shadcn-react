@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { ScrollBar, ScrollArea as UiScrollArea } from '@/ui/scroll-area';
+import { ScrollBar, ScrollArea as UiScrollArea } from '../ui/scroll-area';
 
 export interface ScrollAreaProps
   extends ComponentPropsWithoutRef<typeof UiScrollArea> {

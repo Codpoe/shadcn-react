@@ -2,7 +2,7 @@ import {
   Collapsible as UiCollapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/ui/collapsible';
+} from '../ui/collapsible';
 
 export type {
   CollapsibleProps,

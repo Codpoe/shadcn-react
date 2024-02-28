@@ -7,10 +7,10 @@ import {
   DayPickerRangeProps,
   DayPickerSingleProps,
 } from 'react-day-picker';
-import { cn } from '@/utils';
-import { Button, ButtonProps } from '@/Button';
-import { Calendar } from '@/Calendar';
-import { Popover } from '@/Popover';
+import { cn } from '../utils';
+import { Button, ButtonProps } from '../Button';
+import { Calendar } from '../Calendar';
+import { Popover } from '../Popover';
 
 export interface DatePickerProps extends ButtonProps {
   calendarProps?:

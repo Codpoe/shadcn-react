@@ -15,8 +15,8 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@/ui/drawer';
-import { Button, ButtonProps } from '@/Button';
+} from '../ui/drawer';
+import { Button, ButtonProps } from '../Button';
 
 export type DrawerProp = ComponentProps<typeof UiDrawer> & {
   title?: React.ReactNode;

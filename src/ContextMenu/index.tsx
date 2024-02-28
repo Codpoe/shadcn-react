@@ -16,7 +16,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
   ContextMenuRadioGroup,
-} from '@/ui/context-menu';
+} from '../ui/context-menu';
 
 export interface ContextMenuProps extends ComponentProps<typeof ContextMenu> {}
 

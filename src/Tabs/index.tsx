@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from 'react';
-import { Tabs as UiTabs, TabsContent, TabsList, TabsTrigger } from '@/ui/tabs';
+import { Tabs as UiTabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 
 export interface TabsProps extends ComponentPropsWithoutRef<typeof UiTabs> {
   items?: {

@@ -3,7 +3,7 @@ import {
   Avatar as UiAvatar,
   AvatarFallback as UiAvatarFallback,
   AvatarImage as UiAvatarImage,
-} from '@/ui/avatar';
+} from '../ui/avatar';
 
 export interface AvatarProps extends AvatarImageProps {
   fallback?: React.ReactNode;

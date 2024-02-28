@@ -1,1 +1,1 @@
-export { Textarea, type TextareaProps } from '@/ui/textarea';
+export { Textarea, type TextareaProps } from '../ui/textarea';

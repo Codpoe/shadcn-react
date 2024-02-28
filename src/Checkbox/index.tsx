@@ -1,7 +1,7 @@
 import { CheckboxProps as UiCheckboxProps } from '@radix-ui/react-checkbox';
 import { useMemo } from 'react';
-import { Checkbox as UiCheckbox } from '@/ui/checkbox';
-import { cn } from '@/utils';
+import { Checkbox as UiCheckbox } from '../ui/checkbox';
+import { cn } from '../utils';
 
 export interface CheckboxProps extends UiCheckboxProps {}
 

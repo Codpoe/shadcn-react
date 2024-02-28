@@ -31,8 +31,8 @@ import {
   MenubarSub as UiMenubarSub,
   MenubarSubTrigger,
   MenubarSubContent,
-} from '@/ui/menubar';
-import { cn } from '@/utils';
+} from '../ui/menubar';
+import { cn } from '../utils';
 
 export type {
   MenubarProps,

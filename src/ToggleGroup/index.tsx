@@ -2,7 +2,7 @@ import { ComponentProps } from 'react';
 import {
   ToggleGroup as UiToggleGroup,
   ToggleGroupItem,
-} from '@/ui/toggle-group';
+} from '../ui/toggle-group';
 
 export type ToggleGroupProps = ComponentProps<typeof UiToggleGroup>;
 

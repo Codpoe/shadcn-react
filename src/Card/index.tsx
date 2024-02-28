@@ -5,7 +5,7 @@ import {
   CardDescription as UiCardDescription,
   CardContent as UiCardContent,
   CardFooter as UiCardFooter,
-} from '@/ui/card';
+} from '../ui/card';
 
 export interface CardProps {
   title?: React.ReactNode;

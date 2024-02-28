@@ -6,9 +6,9 @@ import { useMemo } from 'react';
 import {
   RadioGroup as UiRadioGroup,
   RadioGroupItem as UiRadioGroupItem,
-} from '@/ui/radio-group';
-import { cn } from '@/utils';
-import { Label } from '@/Label';
+} from '../ui/radio-group';
+import { cn } from '../utils';
+import { Label } from '../Label';
 
 export interface RadioGroupProps extends UiRadioGroupProps {}
 export interface RadioProps extends UiRadioGroupItemProps {}

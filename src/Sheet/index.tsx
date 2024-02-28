@@ -5,7 +5,7 @@ import {
   useRef,
   useState,
 } from 'react';
-import { Button, ButtonProps } from '@/Button';
+import { Button, ButtonProps } from '../Button';
 import {
   Sheet as UiSheet,
   SheetClose,
@@ -15,7 +15,7 @@ import {
   SheetDescription,
   SheetContent,
   SheetFooter,
-} from '@/ui/sheet';
+} from '../ui/sheet';
 
 export interface SheetProps extends ComponentPropsWithoutRef<typeof UiSheet> {
   side?: ComponentProps<typeof SheetContent>['side'];

@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../Button';
+import { Label } from '../ui/label';
+import { Input } from '../ui/input';
 import { Popover } from '.';
-import { Button } from '@/Button';
-import { Label } from '@/ui/label';
-import { Input } from '@/ui/input';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {

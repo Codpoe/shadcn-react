@@ -6,7 +6,7 @@ import {
   HoverCard as UiHoverCard,
   HoverCardContent,
   HoverCardTrigger,
-} from '@/ui/hover-card';
+} from '../ui/hover-card';
 
 export interface HoverCardProps
   extends UiHoverCardProps,

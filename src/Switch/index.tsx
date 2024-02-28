@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useMemo } from 'react';
 import { Label } from '../Label';
-import { Switch as UiSwitch } from '@/ui/switch';
-import { cn } from '@/utils';
+import { Switch as UiSwitch } from '../ui/switch';
+import { cn } from '../utils';
 
 export interface SwitchProps
   extends ComponentPropsWithoutRef<typeof UiSwitch> {}
