@@ -15,9 +15,9 @@ export function Checkbox(props: CheckboxProps) {
     return (
       <UiCheckbox
         id={finalId}
-        className={cn(className, disabled && 'disabled:sr-opacity-50')}
+        className={cn(className, 'disabled:sr-opacity-50')}
         style={style}
-        disabled
+        disabled={disabled}
         {...restProps}
       />
     );

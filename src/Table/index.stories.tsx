@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { useMemo, useState } from 'react';
+import { Button } from '..';
 import { Table, ColumnDef } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -163,5 +165,30 @@ export const SingleRowSelection: Story = {
         rowSelectionMode="single"
       />
     );
+  },
+};
+
+function LoadingDemo() {
+  const [loading, setLoading] = useState(false);
+  const data = useMemo(() => getData(7), []);
+
+  return (
+    <div className="sr-w-[634px]">
+      <Button
+        variant="outline"
+        className="sr-mb-4"
+        onClick={() => setLoading(!loading)}
+      >
+        loading: {String(loading)}
+      </Button>
+      <Table columns={columns} data={data} bordered loading={loading} />
+    </div>
+  );
+}
+
+export const Loading: Story = {
+  args: {} as any,
+  render() {
+    return <LoadingDemo />;
   },
 };

@@ -30,6 +30,7 @@ import {
 } from '../ui/table';
 import { Checkbox, Pagination } from '..';
 import { cn } from '../utils';
+import { Spin } from '../Spin';
 import { HeaderRenderer } from './HeaderRenderer';
 
 const ROW_SELECTION_COLUMN_ID = '__sr_row_selection__';
@@ -71,8 +72,7 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
   const {
     columns: propColumns,
     data,
-    // TODO
-    // loading,
+    loading,
     bordered,
     defaultPagination,
     pagination: propPagination,
@@ -220,7 +220,10 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
 
   return (
     <div className={className} style={style}>
-      <div className={cn(bordered && 'sr-rounded-md sr-border')}>
+      <Spin
+        className={cn(bordered && 'sr-rounded-md sr-border')}
+        loading={loading}
+      >
         <UiTable>
           <TableHeader>
             {table.getHeaderGroups().map(headerGroup => (
@@ -264,7 +267,7 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
             )}
           </TableBody>
         </UiTable>
-      </div>
+      </Spin>
       {showPagination && (
         <div className="sr-flex sr-items-center sr-mt-4">
           {showPagination && (
