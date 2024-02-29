@@ -8,15 +8,16 @@ export interface CheckboxProps extends UiCheckboxProps {}
 let _checkboxId = 0;
 
 export function Checkbox(props: CheckboxProps) {
-  const { id, children, className, style, ...restProps } = props;
+  const { id, children, className, style, disabled, ...restProps } = props;
   const finalId = useMemo(() => id || `sr-checkbox-${++_checkboxId}`, [id]);
 
   if (children == null) {
     return (
       <UiCheckbox
         id={finalId}
-        className={className}
+        className={cn(className, disabled && 'disabled:sr-opacity-50')}
         style={style}
+        disabled
         {...restProps}
       />
     );

@@ -139,7 +139,9 @@ export const RowSelection: Story = {
         data={getData(7)}
         bordered
         pagination={false}
-        enableRowSelection
+        enableRowSelection={row =>
+          Number(row.original.totalAmount.slice(1)) > 500
+        }
       />
     );
   },
@@ -155,7 +157,9 @@ export const SingleRowSelection: Story = {
         data={getData(7)}
         bordered
         pagination={false}
-        enableRowSelection
+        enableRowSelection={row =>
+          Number(row.original.totalAmount.slice(1)) > 500
+        }
         rowSelectionMode="single"
       />
     );
