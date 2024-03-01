@@ -21,14 +21,14 @@ export function Card(props: CardProps) {
   return (
     <UiCard {...restProps}>
       {(title != null || description != null) && (
-        <UiCardHeader>
+        <UiCardHeader className="!sr-pb-0">
           {title != null && <UiCardTitle>{title}</UiCardTitle>}
           {description != null && (
             <UiCardDescription>{description}</UiCardDescription>
           )}
         </UiCardHeader>
       )}
-      <UiCardContent>{children}</UiCardContent>
+      <UiCardContent className="!sr-pt-6">{children}</UiCardContent>
       {footer != null && <UiCardFooter>{footer}</UiCardFooter>}
     </UiCard>
   );
