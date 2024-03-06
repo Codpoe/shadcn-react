@@ -5,7 +5,12 @@ export function useControl<T>(
   propState?: T,
   propSetState?: (value: T) => any,
 ): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const isUnderControlRef = useRef(typeof propState !== 'undefined');
+  const isUnderControlRef = useRef(false);
+
+  if (!isUnderControlRef.current) {
+    isUnderControlRef.current = typeof propState !== 'undefined';
+  }
+
   const propSetStateRef = useRef(propSetState);
 
   const [_state, _setState] = useState<T>(() => defaultState);

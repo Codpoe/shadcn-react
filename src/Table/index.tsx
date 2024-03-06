@@ -1,11 +1,4 @@
-import {
-  ComponentPropsWithoutRef,
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import { ComponentPropsWithoutRef, useMemo } from 'react';
 import {
   useReactTable,
   ColumnDef,
@@ -31,6 +24,7 @@ import {
 import { Checkbox, Pagination } from '..';
 import { cn } from '../utils';
 import { Spin } from '../Spin';
+import { useControl } from '../hooks/use-control';
 import { HeaderRenderer } from './HeaderRenderer';
 
 const ROW_SELECTION_COLUMN_ID = '__sr_row_selection__';
@@ -285,36 +279,4 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
       )}
     </div>
   );
-}
-
-function useControl<T>(
-  defaultState: T,
-  propState?: T,
-  propSetState?: (value: T) => any,
-): [T, React.Dispatch<React.SetStateAction<T>>] {
-  const isUnderControlRef = useRef(typeof propState !== 'undefined');
-  const propSetStateRef = useRef(propSetState);
-
-  const [_state, _setState] = useState<T>(() => defaultState);
-  const state = isUnderControlRef.current ? propState! : _state;
-  const stateRef = useRef(state);
-  stateRef.current = state;
-
-  const setState: React.Dispatch<React.SetStateAction<T>> = useCallback(
-    value => {
-      const newValue =
-        typeof value === 'function' ? (value as any)(stateRef.current) : value;
-      _setState(newValue);
-      propSetStateRef.current?.(newValue);
-    },
-    [],
-  );
-
-  useLayoutEffect(() => {
-    if (isUnderControlRef.current) {
-      _setState(propState!);
-    }
-  }, [propState]);
-
-  return [state, setState];
 }
