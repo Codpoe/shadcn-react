@@ -31,10 +31,13 @@ export function Radio(props: RadioProps) {
   }
 
   return (
-    <div className={cn('sr-flex sr-items-center', className)} style={style}>
+    <div className={cn('sr-flex sr-items-center ', className)} style={style}>
       <UiRadioGroupItem id={finalId} disabled={disabled} {...restProps} />
       <Label
-        className={cn('sr-pl-2 sr-cursor-pointer', disabled && 'sr-opacity-50')}
+        className={cn(
+          'sr-pl-2 sr-cursor-pointer',
+          disabled && 'sr-cursor-not-allowed sr-opacity-50',
+        )}
         htmlFor={finalId}
       >
         {children}

@@ -2,6 +2,7 @@ import { CheckboxProps as UiCheckboxProps } from '@radix-ui/react-checkbox';
 import { useMemo } from 'react';
 import { Checkbox as UiCheckbox } from '../ui/checkbox';
 import { cn } from '../utils';
+import { Label } from '../Label';
 
 export interface CheckboxProps extends UiCheckboxProps {}
 
@@ -25,13 +26,18 @@ export function Checkbox(props: CheckboxProps) {
 
   return (
     <div className={cn('sr-flex sr-items-center', className)} style={style}>
-      <UiCheckbox id={finalId} {...restProps} />
-      <label
+      <UiCheckbox
+        id={finalId}
+        className={cn(disabled && 'sr-opacity-50')}
+        disabled={disabled}
+        {...restProps}
+      />
+      <Label
         htmlFor={finalId}
-        className="sr-pl-2 sr-text-sm sr-font-medium sr-leading-none sr-cursor-pointer peer-disabled:sr-cursor-not-allowed peer-disabled:sr-opacity-50"
+        className="sr-pl-2 sr-cursor-pointer peer-disabled:sr-cursor-not-allowed peer-disabled:!sr-opacity-50"
       >
         {children}
-      </label>
+      </Label>
     </div>
   );
 }
