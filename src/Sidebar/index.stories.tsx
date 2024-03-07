@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
-  DashboardIcon,
-  FaceIcon,
-  ListBulletIcon,
-  PersonIcon,
-  PlayIcon,
-  RadiobuttonIcon,
-  ReaderIcon,
-  SpeakerLoudIcon,
-} from '@radix-ui/react-icons';
+  PlayCircleIcon,
+  LayoutGridIcon,
+  RadioIcon,
+  ListMusicIcon,
+  Music2Icon,
+  Mic2Icon,
+  UserIcon,
+  LibraryIcon,
+} from 'lucide-react';
 import { Sidebar } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -33,17 +33,17 @@ export const Primary: Story = {
           {
             value: 'listen-now',
             title: 'Listen Now',
-            icon: <PlayIcon />,
+            icon: <PlayCircleIcon />,
           },
           {
             value: 'browse',
             title: 'Browse',
-            icon: <DashboardIcon />,
+            icon: <LayoutGridIcon />,
           },
           {
             value: 'radio',
             title: 'Radio',
-            icon: <RadiobuttonIcon />,
+            icon: <RadioIcon />,
           },
         ],
       },
@@ -53,27 +53,27 @@ export const Primary: Story = {
           {
             value: 'playlists',
             title: 'Playlists',
-            icon: <ListBulletIcon />,
+            icon: <ListMusicIcon />,
           },
           {
             value: 'songs',
             title: 'Songs',
-            icon: <SpeakerLoudIcon />,
+            icon: <Music2Icon />,
           },
           {
             value: 'made-for-you',
             title: 'Made for you',
-            icon: <PersonIcon />,
+            icon: <UserIcon />,
           },
           {
             value: 'artists',
             title: 'Artists',
-            icon: <FaceIcon />,
+            icon: <Mic2Icon />,
           },
           {
             value: 'albums',
             title: 'Albums',
-            icon: <ReaderIcon />,
+            icon: <LibraryIcon />,
           },
         ],
       },

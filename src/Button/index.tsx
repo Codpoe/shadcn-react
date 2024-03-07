@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { Loader2Icon } from 'lucide-react';
 import {
   Button as UiButton,
   buttonVariants,
@@ -24,7 +24,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...restProps}
       >
         {loading && (
-          <ReloadIcon className="sr-mr-2 sr-h-4 sr-w-4 sr-animate-spin" />
+          <Loader2Icon className="sr-mr-2 sr-h-4 sr-w-4 sr-animate-spin" />
         )}
         {icon && (
           <span

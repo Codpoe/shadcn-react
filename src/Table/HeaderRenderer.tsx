@@ -1,9 +1,5 @@
 import { Header, flexRender } from '@tanstack/react-table';
-import {
-  ArrowDownIcon,
-  ArrowUpIcon,
-  CaretSortIcon,
-} from '@radix-ui/react-icons';
+import { ArrowDownIcon, ArrowUpIcon, ChevronsUpDownIcon } from 'lucide-react';
 import { Button } from '..';
 
 export interface HeaderRendererProps<TData, TValue> {
@@ -23,12 +19,12 @@ export function HeaderRenderer<TData, TValue>(
 
   if (header.column.getCanSort()) {
     const isSorted = header.column.getIsSorted();
-    let sortIcon = <CaretSortIcon className="sr-w-4 sr-h-4 sr-ml-2" />;
+    let sortIcon = <ChevronsUpDownIcon className="sr-w-3.5 sr-h-3.5 sr-ml-2" />;
 
     if (isSorted === 'asc') {
-      sortIcon = <ArrowUpIcon className="sr-w-4 sr-h-4 sr-ml-2" />;
+      sortIcon = <ArrowUpIcon className="sr-w-3.5 sr-h-3.5 sr-ml-2" />;
     } else if (isSorted === 'desc') {
-      sortIcon = <ArrowDownIcon className="sr-w-4 sr-h-4 sr-ml-2" />;
+      sortIcon = <ArrowDownIcon className="sr-w-3.5 sr-h-3.5 sr-ml-2" />;
     }
 
     ret = (

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { CaretSortIcon } from '@radix-ui/react-icons';
+import { ChevronsUpDownIcon } from 'lucide-react';
 import { Button } from '../Button';
 import { Collapsible } from '.';
 
@@ -25,7 +25,7 @@ export const Primary: Story = {
             @peduarte starred 3 repositories
           </h4>
           <Collapsible.Trigger asChild>
-            <Button variant="ghost" size="icon" icon={<CaretSortIcon />} />
+            <Button variant="ghost" size="icon" icon={<ChevronsUpDownIcon />} />
           </Collapsible.Trigger>
         </div>
         <div className="sr-rounded-md sr-border sr-px-4 sr-py-2 sr-font-mono sr-text-sm sr-shadow-sm">

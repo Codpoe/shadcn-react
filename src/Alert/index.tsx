@@ -1,12 +1,10 @@
-import {
-  InfoCircledIcon,
-  ExclamationTriangleIcon,
-} from '@radix-ui/react-icons';
+import { InfoIcon, AlertTriangleIcon } from 'lucide-react';
 import {
   Alert as UiAlert,
   AlertDescription as UiAlertDescription,
   AlertTitle as UiAlertTitle,
 } from '../ui/alert';
+import { cn } from '../utils';
 
 export type AlertVariant = 'default' | 'destructive';
 
@@ -23,9 +21,9 @@ export function Alert(props: AlertProps) {
   const {
     variant = 'default',
     icon = variant === 'default' ? (
-      <InfoCircledIcon className="sr-w-4 sr-h-4" />
+      <InfoIcon className="sr-w-4 sr-h-4" />
     ) : (
-      <ExclamationTriangleIcon className="sr-w-4 sr-h-4" />
+      <AlertTriangleIcon className="sr-w-4 sr-h-4" />
     ),
     title,
     children,
@@ -34,9 +32,19 @@ export function Alert(props: AlertProps) {
 
   return (
     <UiAlert variant={variant} {...restProps}>
-      {icon}
-      <UiAlertTitle>{title}</UiAlertTitle>
-      <UiAlertDescription>{children}</UiAlertDescription>
+      <div className="sr-flex">
+        {icon}
+        <div className="sr-ml-3">
+          {title != null && (
+            <UiAlertTitle className="!sr-leading-4">{title}</UiAlertTitle>
+          )}
+          {children != null && (
+            <UiAlertDescription className={cn(title == null && '-sr-mt-0.5')}>
+              {children}
+            </UiAlertDescription>
+          )}
+        </div>
+      </div>
     </UiAlert>
   );
 }

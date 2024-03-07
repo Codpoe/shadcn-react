@@ -1,9 +1,5 @@
 import * as React from 'react';
-import {
-  CheckIcon,
-  ChevronRightIcon,
-  DotFilledIcon,
-} from '@radix-ui/react-icons';
+import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 import * as MenubarPrimitive from '@radix-ui/react-menubar';
 
 import { cn } from '../utils';
@@ -142,7 +138,7 @@ const MenubarCheckboxItem = React.forwardRef<
   >
     <span className="sr-absolute sr-left-2 sr-flex sr-h-3.5 sr-w-3.5 sr-items-center sr-justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <CheckIcon className="sr-h-4 sr-w-4" />
+        <CheckIcon className="sr-h-3.5 sr-w-3.5" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}
@@ -164,7 +160,7 @@ const MenubarRadioItem = React.forwardRef<
   >
     <span className="sr-absolute sr-left-2 sr-flex sr-h-3.5 sr-w-3.5 sr-items-center sr-justify-center">
       <MenubarPrimitive.ItemIndicator>
-        <DotFilledIcon className="sr-h-4 sr-w-4 sr-fill-current" />
+        <CircleIcon className="sr-h-1.5 sr-w-1.5 sr-fill-current" />
       </MenubarPrimitive.ItemIndicator>
     </span>
     {children}

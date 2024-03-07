@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import {
   Pagination as UiPagination,
   PaginationContent,

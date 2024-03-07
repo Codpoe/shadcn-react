@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { RocketIcon } from '@radix-ui/react-icons';
+import { RocketIcon } from 'lucide-react';
 import { Alert } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -56,7 +56,7 @@ export const CustomIcon: Story = {
       <Alert
         {...args}
         icon={<RocketIcon className="sr-w-4 sr-h-4" />}
-        title="Heads up!"
+        // title="Heads up!"
       >
         You can add components to your app using the cli.
       </Alert>

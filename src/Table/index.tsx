@@ -11,7 +11,7 @@ import {
   RowSelectionState,
   RowSelectionOptions,
 } from '@tanstack/react-table';
-import { CheckIcon } from '@radix-ui/react-icons';
+import { CircleIcon } from 'lucide-react';
 import {
   TableBody,
   TableCell,
@@ -132,13 +132,13 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
         id: ROW_SELECTION_COLUMN_ID,
         cell: ({ row }) => (
           <button
-            className="sr-aspect-square sr-flex sr-h-4 sr-w-4 sr-rounded-full sr-border sr-border-primary sr-text-primary sr-shadow focus:sr-outline-none focus-visible:sr-ring-1 focus-visible:sr-ring-ring disabled:sr-cursor-not-allowed disabled:sr-opacity-50"
+            className="sr-aspect-square sr-flex sr-justify-center sr-items-center sr-h-4 sr-w-4 sr-rounded-full sr-border sr-border-primary sr-text-primary sr-shadow focus:sr-outline-none focus-visible:sr-ring-1 focus-visible:sr-ring-ring disabled:sr-cursor-not-allowed disabled:sr-opacity-50"
             disabled={!row.getCanSelect()}
             aria-label="Select row"
             onClick={() => row.toggleSelected(true)}
           >
             {row.getIsSelected() && (
-              <CheckIcon className="sr-h-3.5 sr-w-3.5 sr-fill-primary" />
+              <CircleIcon className="sr-h-2.5 sr-w-2.5 sr-fill-current" />
             )}
           </button>
         ),

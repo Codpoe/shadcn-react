@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { PersonIcon } from '@radix-ui/react-icons';
+import { UserIcon } from 'lucide-react';
 import { Menubar } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -22,7 +22,7 @@ export const Primary: Story = {
         <Menubar.Menu
           content={
             <>
-              <Menubar.Item icon={<PersonIcon />} shortcut="⌘T">
+              <Menubar.Item icon={<UserIcon />} shortcut="⌘T">
                 New Tab
               </Menubar.Item>
               <Menubar.Item shortcut="⌘N">New Window</Menubar.Item>

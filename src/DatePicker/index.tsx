@@ -1,5 +1,5 @@
 import React, { MouseEvent, useMemo, useRef } from 'react';
-import { CalendarIcon, Cross2Icon } from '@radix-ui/react-icons';
+import { CalendarIcon, XIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import {
   DateRange,
@@ -97,7 +97,7 @@ export function DatePicker(props: DatePickerProps) {
             className="sr-ml-2 -sr-mr-2.5 sr-shrink-0 sr-h-6 sr-w-6 sr-flex sr-justify-center sr-items-center sr-opacity-0 group-hover:sr-opacity-50 hover:!sr-opacity-100"
             onClick={handleClear}
           >
-            <Cross2Icon className="sr-h-4 sr-w-4" />
+            <XIcon className="sr-h-4 sr-w-4" />
           </span>
         )}
       </Button>

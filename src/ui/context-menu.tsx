@@ -1,10 +1,6 @@
 import * as React from 'react';
 import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
-import {
-  CheckIcon,
-  ChevronRightIcon,
-  DotFilledIcon,
-} from '@radix-ui/react-icons';
+import { CheckIcon, ChevronRightIcon, CircleIcon } from 'lucide-react';
 
 import { cn } from '../utils';
 
@@ -106,7 +102,7 @@ const ContextMenuCheckboxItem = React.forwardRef<
   >
     <span className="sr-absolute sr-left-2 sr-flex sr-h-3.5 sr-w-3.5 sr-items-center sr-justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <CheckIcon className="sr-h-4 sr-w-4" />
+        <CheckIcon className="sr-h-3.5 sr-w-3.5" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}
@@ -129,7 +125,7 @@ const ContextMenuRadioItem = React.forwardRef<
   >
     <span className="sr-absolute sr-left-2 sr-flex sr-h-3.5 sr-w-3.5 sr-items-center sr-justify-center">
       <ContextMenuPrimitive.ItemIndicator>
-        <DotFilledIcon className="sr-h-4 sr-w-4 sr-fill-current" />
+        <CircleIcon className="sr-h-1.5 sr-w-1.5 sr-fill-current" />
       </ContextMenuPrimitive.ItemIndicator>
     </span>
     {children}

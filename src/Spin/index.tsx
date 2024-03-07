@@ -1,4 +1,4 @@
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { Loader2Icon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { cn } from '../utils';
 
@@ -39,7 +39,7 @@ export function Spin(props: SpinProps) {
 
   if (children == null) {
     return (
-      <ReloadIcon
+      <Loader2Icon
         className={cn(
           className,
           'sr-w-5 sr-h-5 sr-text-primary sr-animate-spin',
@@ -60,7 +60,7 @@ export function Spin(props: SpinProps) {
       </div>
       {finalLoading && (
         <div className="sr-absolute sr-inset-0 sr-z-10 sr-flex sr-flex-col sr-justify-center sr-items-center sr-bg-white/60">
-          <ReloadIcon
+          <Loader2Icon
             className="sr-w-5 sr-h-5 sr-text-primary sr-animate-spin"
             style={{ width: `${size}px`, height: `${size}px` }}
           />

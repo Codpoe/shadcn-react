@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { ChevronRightIcon, EnvelopeOpenIcon } from '@radix-ui/react-icons';
+import { ChevronRightIcon, MailIcon } from 'lucide-react';
 import { Button } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -67,7 +67,7 @@ export const Icon: Story = {
 
 export const WithIcon: Story = {
   args: {
-    icon: <EnvelopeOpenIcon />,
+    icon: <MailIcon />,
     children: 'Login with Email',
   },
 };

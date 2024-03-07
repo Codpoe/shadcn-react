@@ -2,8 +2,8 @@ import * as React from 'react';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  DotsHorizontalIcon,
-} from '@radix-ui/react-icons';
+  MoreHorizontalIcon
+} from 'lucide-react';
 
 import { cn } from '../utils';
 import { ButtonProps, buttonVariants } from '../ui/button';
@@ -107,7 +107,7 @@ const PaginationEllipsis = ({
     )}
     {...props}
   >
-    <DotsHorizontalIcon className="sr-h-4 sr-w-4" />
+    <MoreHorizontalIcon className="sr-h-4 sr-w-4" />
     <span className="sr-sr-only">More pages</span>
   </span>
 );

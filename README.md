@@ -36,7 +36,7 @@ export default function MyComponent() {
 }
 ```
 
-Use [radix icons](https://www.radix-ui.com/icons):
+Use [lucide icons](https://lucide.dev/icons/):
 
 ```tsx
 

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { PersonIcon } from '@radix-ui/react-icons';
+import { UserIcon } from 'lucide-react';
 import { Button } from '../Button';
 import { Dropdown } from '.';
 
@@ -26,7 +26,7 @@ export const Primary: Story = {
             <Dropdown.Label>My Account</Dropdown.Label>
             <Dropdown.Separator />
             <Dropdown.Group>
-              <Dropdown.Item icon={<PersonIcon />} shortcut="⇧⌘P">
+              <Dropdown.Item icon={<UserIcon />} shortcut="⇧⌘P">
                 Profile
               </Dropdown.Item>
               <Dropdown.Item shortcut="⌘B">Billing</Dropdown.Item>

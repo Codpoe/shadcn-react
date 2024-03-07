@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import {
   CalendarIcon,
-  EnvelopeClosedIcon,
-  FaceIcon,
-  GearIcon,
-  PersonIcon,
+  MailIcon,
+  SmileIcon,
+  SettingsIcon,
+  UserIcon,
   RocketIcon,
-} from '@radix-ui/react-icons';
+} from 'lucide-react';
 import { Command } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -31,18 +31,18 @@ export const Primary: Story = {
           <Command.List empty="No results found.">
             <Command.Group heading="Suggestions">
               <Command.Item icon={<CalendarIcon />}>Calendar</Command.Item>
-              <Command.Item icon={<FaceIcon />}>Search Emoji</Command.Item>
+              <Command.Item icon={<SmileIcon />}>Search Emoji</Command.Item>
               <Command.Item icon={<RocketIcon />}>Launch</Command.Item>
             </Command.Group>
             <Command.Separator />
             <Command.Group heading="Settings">
-              <Command.Item icon={<PersonIcon />} shortcut="⌘P">
+              <Command.Item icon={<UserIcon />} shortcut="⌘P">
                 Profile
               </Command.Item>
-              <Command.Item icon={<EnvelopeClosedIcon />} shortcut="⌘B">
+              <Command.Item icon={<MailIcon />} shortcut="⌘B">
                 Mail
               </Command.Item>
-              <Command.Item icon={<GearIcon />} shortcut="⌘S">
+              <Command.Item icon={<SettingsIcon />} shortcut="⌘S">
                 Settings
               </Command.Item>
             </Command.Group>
