@@ -131,6 +131,7 @@
     "cmdk": "^0.2.0",
     "date-fns": "^3.2.0",
     "embla-carousel-react": "^8.0.0",
+    "input-otp": "^1.1.0",
     "lucide-react": "^0.349.0",
     "next-themes": "^0.2.1",
     "react-day-picker": "^8.10.0",
