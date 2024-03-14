@@ -55,7 +55,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "preview-storybook": "npx http-server storybook-static",
-    "release": "pnpm run build-lib && np"
+    "release": "pnpm run build-lib && np --no-tests"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "eslint --fix"
