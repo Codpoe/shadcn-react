@@ -25,3 +25,4 @@ dist-ssr
 
 src/index.ts
 src/ui.ts
+storybook-static

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '../icons';
+import { BoldIcon, ItalicIcon, UnderlineIcon } from '../icons';
 import { Toggle } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -19,7 +19,7 @@ export const Primary: Story = {
   render() {
     return (
       <Toggle aria-label="Toggle italic">
-        <FontBoldIcon className="sr-h-4 sr-w-4" />
+        <BoldIcon className="sr-h-4 sr-w-4" />
       </Toggle>
     );
   },
@@ -29,7 +29,7 @@ export const Outline: Story = {
   render() {
     return (
       <Toggle variant="outline" aria-label="Toggle italic">
-        <FontItalicIcon className="sr-h-4 sr-w-4" />
+        <ItalicIcon className="sr-h-4 sr-w-4" />
       </Toggle>
     );
   },

@@ -2,5 +2,5 @@ const rootTailwindConfig = require('../tailwind.config.cjs');
 
 module.exports = {
   ...rootTailwindConfig,
-  content: ["./src/**/*.stories.{js,jsx,ts,tsx}"],
+  content: ["./.storybook/preview.{js,jsx,ts,tsx}", "./src/**/*.stories.{js,jsx,ts,tsx}"],
 }

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { FontBoldIcon, FontItalicIcon, UnderlineIcon } from '../icons';
+import { BoldIcon, ItalicIcon, UnderlineIcon } from '../icons';
 import { ToggleGroup } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -23,10 +23,10 @@ export const Primary: Story = {
     return (
       <ToggleGroup {...args}>
         <ToggleGroup.Item value="bold" aria-label="Toggle bold">
-          <FontBoldIcon className="sr-h-4 sr-w-4" />
+          <BoldIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item value="italic" aria-label="Toggle italic">
-          <FontItalicIcon className="sr-h-4 sr-w-4" />
+          <ItalicIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item
           value="strikethrough"
@@ -48,10 +48,10 @@ export const Disabled: Story = {
     return (
       <ToggleGroup {...args}>
         <ToggleGroup.Item value="bold" aria-label="Toggle bold">
-          <FontBoldIcon className="sr-h-4 sr-w-4" />
+          <BoldIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item value="italic" aria-label="Toggle italic">
-          <FontItalicIcon className="sr-h-4 sr-w-4" />
+          <ItalicIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item
           value="strikethrough"
@@ -72,10 +72,10 @@ export const PartialDisabled: Story = {
     return (
       <ToggleGroup {...args}>
         <ToggleGroup.Item value="bold" aria-label="Toggle bold">
-          <FontBoldIcon className="sr-h-4 sr-w-4" />
+          <BoldIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item value="italic" aria-label="Toggle italic">
-          <FontItalicIcon className="sr-h-4 sr-w-4" />
+          <ItalicIcon className="sr-h-4 sr-w-4" />
         </ToggleGroup.Item>
         <ToggleGroup.Item
           value="strikethrough"

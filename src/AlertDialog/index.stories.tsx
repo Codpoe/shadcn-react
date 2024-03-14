@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Button } from '../Button';
 import { AlertDialog } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -16,7 +17,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    children: <button>Show Dialog</button>,
+    children: <Button variant="outline">Show Dialog</Button>,
   },
   render(args) {
     return (
@@ -32,7 +33,7 @@ export const Primary: Story = {
 
 export const NoCancel: Story = {
   args: {
-    children: <button>Show Dialog</button>,
+    children: <Button variant="outline">Show Dialog</Button>,
     cancelText: null,
   },
   render(args) {
