@@ -1,0 +1,17 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Using with Tailwind" />
+
+# Using with Tailwind
+
+As `shadcn-react` uses Tailwind CSS to style components,
+if your project also uses tailwind css, the [preflight styles](https://tailwindcss.com/docs/preflight) may be repeatedly injected.
+To avoid duplicate styles, you can disable `preflight` in `tailwind.config.js`:
+
+```js
+module.exports = {
+  corePlugins: {
+    preflight: false,
+  }
+}
+```

@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="Themes" />
+
+# Themes
+
+The way of customizing themes in shadcn-react is the same as in shadcn/ui.
+
+You can go to [shadcn/ui themes](https://ui.shadcn.com/themes) to pick your theme,
+then paste the theme code into your project's style file (usually the global style file of the project).
+
+The theme code look like this:
+
+```css
+/* your project style file */
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    /* ... */
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    /* ... */
+  }
+}
+```
