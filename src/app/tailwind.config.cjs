@@ -4,4 +4,7 @@ const rootTailwindConfig = require('../../tailwind.config.cjs');
 module.exports = {
   ...rootTailwindConfig,
   content: ['./src/app/**/*.{js,jsx,ts,tsx}'],
+  corePlugins: {
+    preflight: false,
+  },
 };
