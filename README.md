@@ -2,6 +2,9 @@
 
 A simple wrapper for [shadcn/ui](https://github.com/shadcn-ui/ui), just for my own convenience.
 
+- style: New York
+- icons: [Lucide](https://lucide.dev/icons/)
+
 ## Install
 
 ```sh
@@ -12,11 +15,12 @@ pnpm add shadcn-react
 
 Import `style.css` in the App root:
 
-```
+```tsx
 import 'shadcn-react/style.css'
 ```
 
 Then use the components:
+
 ```tsx
 import { Button } from 'shadcn-react'
 
