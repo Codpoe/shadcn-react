@@ -1,0 +1,229 @@
+import {
+  Form as HookForm,
+  FieldValues,
+  FormProviderProps,
+  FormProps as HookFormProps,
+  ControllerProps,
+  FieldPath,
+  useFormContext,
+  useForm as useHookForm,
+  useFormState,
+  useWatch,
+  useFieldArray,
+  UseFormProps as UseHookFormProps,
+  UseFormReturn,
+} from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z, type ZodSchema } from 'zod';
+import React, { ReactElement } from 'react';
+import {
+  Form as FormProvider,
+  FormField as UiFormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormDescription,
+  FormMessage,
+  useFormField,
+} from '../ui/form';
+import { cn } from '../utils';
+
+export { useFormContext, useFormState, useWatch, useFieldArray, useFormField };
+
+export type UseFormProps<
+  TFieldValues extends TSchema extends ZodSchema
+    ? z.infer<TSchema>
+    : FieldValues,
+  TContext = any,
+  TSchema extends ZodSchema | undefined = undefined,
+> = UseHookFormProps<TFieldValues, TContext> & {
+  schema?: TSchema;
+};
+
+export function useForm<
+  TFieldValues extends TSchema extends ZodSchema
+    ? z.infer<TSchema>
+    : FieldValues,
+  TContext = any,
+  TTransformedValues extends FieldValues | undefined = undefined,
+  TSchema extends ZodSchema | undefined = undefined,
+>(
+  props?: UseFormProps<TFieldValues, TContext, TSchema>,
+): UseFormReturn<TFieldValues, TContext, TTransformedValues> {
+  const schema = props?.schema;
+
+  return useHookForm({
+    resolver: schema ? zodResolver(schema) : undefined,
+    ...props,
+  });
+}
+
+export interface FormProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any,
+  TTransformedValues extends FieldValues | undefined = undefined,
+> extends Omit<
+      FormProviderProps<TFieldValues, TContext, TTransformedValues>,
+      'children'
+    >,
+    Omit<HookFormProps<TFieldValues, TTransformedValues>, 'control'> {
+  /**
+   * @default 'top'
+   */
+  labelPosition?: 'top' | 'left';
+  labelClassName?: string;
+  labelStyle?: React.CSSProperties;
+}
+
+export function Form<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any,
+  TTransformedValues extends FieldValues | undefined = undefined,
+>(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
+  const { labelPosition = 'top', className, ...restProps } = props;
+
+  return (
+    <FormProvider {...props} {...{ labelPosition }}>
+      <HookForm {...restProps} className={cn(className, 'sr-space-y-7')} />
+    </FormProvider>
+  );
+}
+
+export interface FormFieldProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+> extends Omit<ControllerProps<TFieldValues, TName>, 'control' | 'render'> {
+  label?: React.ReactNode;
+  desc?: React.ReactNode;
+  children?: ReactElement | ControllerProps<TFieldValues, TName>['render'];
+}
+
+function FormField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+>(props: FormFieldProps<TFieldValues, TName>) {
+  const { labelPosition, labelClassName, labelStyle, control } =
+    useFormContext<TFieldValues>() as FormProps<TFieldValues>;
+
+  const { label, desc, children, ...restProps } = props;
+
+  return (
+    <UiFormField
+      {...restProps}
+      control={control}
+      render={renderProps => {
+        if (!children) {
+          return <></>;
+        }
+
+        // custom render function
+        if (typeof children === 'function') {
+          return children(renderProps);
+        }
+
+        const controlEl = (
+          <div className="sr-flex-auto sr-min-h-9 sr-space-y-1.5 sr-relative">
+            <FormControl>
+              {React.cloneElement(children, {
+                ...children.props,
+                ...renderProps.field,
+              })}
+            </FormControl>
+            {desc != null && <FormDescription>{desc}</FormDescription>}
+            <FormMessage />
+          </div>
+        );
+
+        if (labelPosition === 'left') {
+          return (
+            <FormItem
+              data-label-pos="left"
+              className="sr-flex sr-items-start data-[label-pos=left]:sr-space-y-0 sr-gap-x-4"
+            >
+              <FormLabel
+                className={cn(
+                  labelClassName,
+                  'sr-min-h-9 sr-shrink-0 sr-flex sr-flex-wrap sr-items-center',
+                )}
+                style={labelStyle}
+              >
+                {label}
+              </FormLabel>
+              {controlEl}
+            </FormItem>
+          );
+        }
+
+        return (
+          <FormItem>
+            {label != null && (
+              <FormLabel
+                className={cn(
+                  labelClassName,
+                  'sr-min-h-5 sr-shrink-0 sr-flex sr-items-center',
+                )}
+                style={labelStyle}
+              >
+                {label}
+              </FormLabel>
+            )}
+            {controlEl}
+          </FormItem>
+        );
+      }}
+    />
+  );
+}
+
+export interface FormSlotProps {
+  label?: React.ReactNode;
+  children?: React.ReactNode;
+}
+
+function FormSlot(props: FormSlotProps) {
+  const { labelPosition, labelClassName, labelStyle } =
+    useFormContext() as FormProps;
+  const { label, children } = props;
+
+  if (labelPosition === 'left') {
+    return (
+      <div data-label-pos="left" className="sr-flex sr-gap-x-4">
+        <FormLabel
+          className={cn(
+            labelClassName,
+            'sr-min-h-9 sr-shrink-0 sr-flex sr-flex-wrap sr-items-center',
+          )}
+          style={labelStyle}
+        >
+          {label}
+        </FormLabel>
+        {children}
+      </div>
+    );
+  }
+
+  return (
+    <div className="sr-space-y-1.5">
+      {label != null && (
+        <FormLabel
+          className={cn(
+            labelClassName,
+            'sr-min-h-5 sr-shrink-0 sr-flex sr-items-center',
+          )}
+          style={labelStyle}
+        >
+          {label}
+        </FormLabel>
+      )}
+      {children}
+    </div>
+  );
+}
+
+Form.Field = FormField;
+Form.Item = FormItem;
+Form.Label = FormLabel;
+Form.Control = FormControl;
+Form.Description = FormDescription;
+Form.Message = FormMessage;
+Form.Slot = FormSlot;

@@ -1,0 +1,160 @@
+import type { Meta, StoryObj } from '@storybook/react';
+import { z } from 'zod';
+import { useState } from 'react';
+import { Button } from '../Button';
+import { Input } from '../Input';
+import { Radio } from '../Radio';
+import { Form, useForm } from '.';
+
+// More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
+const meta = {
+  title: 'components/Form',
+  component: Form,
+  parameters: {
+    layout: 'centered',
+  },
+  tags: ['autodocs'],
+} satisfies Meta<typeof Form>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+const formSchema = z.object({
+  username: z.string().min(2, {
+    message: 'Username must be at least 2 characters.',
+  }),
+  email: z.string().email(),
+});
+
+const PrimaryDemo = () => {
+  const form = useForm({
+    schema: formSchema,
+    defaultValues: {
+      username: '',
+    },
+  });
+
+  return (
+    <Form
+      {...form}
+      className="sr-w-96"
+      // eslint-disable-next-line no-console
+      onSubmit={payload => console.log('>>> submit payload', payload)}
+    >
+      <Form.Field
+        name="username"
+        label="Username"
+        desc="This is your public display name."
+      >
+        <Input placeholder="Please input username" />
+      </Form.Field>
+      <Form.Field name="email" label="Email" desc="Your email address.">
+        <Input placeholder="Please input email" />
+      </Form.Field>
+      <Button type="submit">Submit</Button>
+    </Form>
+  );
+};
+
+export const Primary: Story = {
+  args: {} as any,
+  render() {
+    return <PrimaryDemo />;
+  },
+};
+
+const LabelPositionDemo = (args: any) => {
+  const form = useForm({
+    schema: formSchema,
+    defaultValues: {
+      username: '',
+    },
+  });
+
+  return (
+    <Form
+      {...form}
+      {...args}
+      className="sr-w-96"
+      labelClassName={
+        args.labelPosition === 'left' ? 'sr-w-[70px] sr-justify-end' : ''
+      }
+      // eslint-disable-next-line no-console
+      onSubmit={payload => console.log('>>> submit payload', payload)}
+    >
+      <Form.Field
+        name="username"
+        label="Username"
+        desc="This is your public display name."
+      >
+        <Input placeholder="Please input username" />
+      </Form.Field>
+      <Form.Field name="email" label="Email" desc="Your email address.">
+        <Input placeholder="Please input email" />
+      </Form.Field>
+      <Form.Slot>
+        <Button type="submit">Submit</Button>
+      </Form.Slot>
+    </Form>
+  );
+};
+
+export const LabelPosition: Story = {
+  args: {
+    labelPosition: 'left',
+  } as any,
+  render(args) {
+    return <LabelPositionDemo {...args} />;
+  },
+};
+
+const LayoutDemo = () => {
+  const form = useForm({
+    schema: formSchema,
+    defaultValues: {
+      username: '',
+    },
+  });
+
+  const [layout, setLayout] = useState<'vertical' | 'horizontal'>('vertical');
+
+  return (
+    <div className="sr-space-y-7">
+      <Radio.Group value={layout} onValueChange={v => setLayout(v as any)}>
+        <Radio value="vertical">Vertical</Radio>
+        <Radio value="horizontal">Horizontal</Radio>
+      </Radio.Group>
+      <Form
+        {...form}
+        className={
+          layout === 'vertical'
+            ? 'sr-w-96 sr-space-y-7'
+            : 'sr-w-[600px] !sr-space-y-0 sr-flex sr-flex-wrap sr-gap-7'
+        }
+        // eslint-disable-next-line no-console
+        onSubmit={payload => console.log('>>> submit payload', payload)}
+      >
+        <Form.Field
+          name="username"
+          label="Username"
+          desc="This is your public display name."
+        >
+          <Input placeholder="Please input username" />
+        </Form.Field>
+        <Form.Field name="email" label="Email" desc="Your email address.">
+          <Input placeholder="Please input email" />
+        </Form.Field>
+        <Form.Slot label={layout === 'horizontal' ? '' : null}>
+          <Button type="submit">Submit</Button>
+        </Form.Slot>
+      </Form>
+    </div>
+  );
+};
+
+export const Layout: Story = {
+  args: {} as any,
+  render() {
+    return <LayoutDemo />;
+  },
+};
