@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Radio } from '../Radio';
+import { Select } from '../Select';
+import { Checkbox } from '../Checkbox';
 import { Form, useForm } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -24,14 +26,22 @@ const formSchema = z.object({
     message: 'Username must be at least 2 characters.',
   }),
   email: z.string().email(),
+  fruit: z.union([
+    z.literal('apple'),
+    z.literal('banana'),
+    z.literal('blueberry'),
+    z.literal('grapes'),
+    z.literal('pineapple'),
+  ]),
+  colors: z
+    .array(z.union([z.literal('red'), z.literal('green'), z.literal('blue')]))
+    .nonempty(),
+  read: z.boolean(),
 });
 
 const PrimaryDemo = () => {
   const form = useForm({
     schema: formSchema,
-    defaultValues: {
-      username: '',
-    },
   });
 
   return (
@@ -50,6 +60,27 @@ const PrimaryDemo = () => {
       </Form.Field>
       <Form.Field name="email" label="Email" desc="Your email address.">
         <Input placeholder="Please input email" />
+      </Form.Field>
+      <Form.Field name="fruit" label="Post">
+        <Select placeholder="Select a fruit">
+          <Select.Item value="apple">Apple</Select.Item>
+          <Select.Item value="banana" disabled>
+            Banana
+          </Select.Item>
+          <Select.Item value="blueberry">Blueberry</Select.Item>
+          <Select.Item value="grapes">Grapes</Select.Item>
+          <Select.Item value="pineapple">Pineapple</Select.Item>
+        </Select>
+      </Form.Field>
+      <Form.Field name="colors" label="Colors">
+        <Checkbox.Group>
+          <Checkbox value="red">Red</Checkbox>
+          <Checkbox value="green">Green</Checkbox>
+          <Checkbox value="blue">Blue</Checkbox>
+        </Checkbox.Group>
+      </Form.Field>
+      <Form.Field name="read">
+        <Checkbox>I have read the manual</Checkbox>
       </Form.Field>
       <Button type="submit">Submit</Button>
     </Form>

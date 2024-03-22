@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import {
   Select as UiSelect,
   SelectGroup as UiSelectGroup,
@@ -9,7 +9,7 @@ import {
   SelectItem as UiSelectItem,
   SelectSeparator,
 } from '../ui/select';
-import { cn } from '../utils';
+import { cn, mapFormProps } from '../utils';
 
 export interface SelectProps extends ComponentPropsWithoutRef<typeof UiSelect> {
   placeholder?: React.ReactNode;
@@ -30,27 +30,38 @@ export interface SelectItemProps
 export interface SelectSeparatorProps
   extends ComponentPropsWithoutRef<typeof SelectSeparator> {}
 
-export function Select(props: SelectProps) {
-  const {
-    placeholder,
-    className,
-    style,
-    children,
-    contentClassName,
-    contentStyle,
-    ...restProps
-  } = props;
-  return (
-    <UiSelect {...restProps}>
-      <SelectTrigger className={className} style={style}>
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent className={contentClassName} style={contentStyle}>
-        {children}
-      </SelectContent>
-    </UiSelect>
-  );
-}
+const _Select = forwardRef<React.ElementRef<typeof SelectTrigger>, SelectProps>(
+  (props, ref) => {
+    const {
+      placeholder,
+      className,
+      style,
+      children,
+      contentClassName,
+      contentStyle,
+      ...restProps
+    } = mapFormProps(props, 'value', 'onValueChange');
+
+    return (
+      <UiSelect {...restProps}>
+        <SelectTrigger ref={ref} className={className} style={style}>
+          <SelectValue placeholder={placeholder} />
+        </SelectTrigger>
+        <SelectContent className={contentClassName} style={contentStyle}>
+          {children}
+        </SelectContent>
+      </UiSelect>
+    );
+  },
+);
+
+_Select.displayName = 'Select';
+
+export const Select: typeof _Select & {
+  Group: typeof SelectGroup;
+  Item: typeof SelectItem;
+  Separator: typeof SelectSeparator;
+} = _Select as any;
 
 function SelectGroup(props: SelectGroupProps) {
   const { label, children, ...restProps } = props;

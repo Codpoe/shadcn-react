@@ -1,10 +1,10 @@
 import { useCallback, useLayoutEffect, useRef, useState } from 'react';
 
-export function useControl<T>(
+export function useControl<T, K = T>(
   defaultState: T,
   propState?: T,
-  propSetState?: (value: T) => any,
-): [T, React.Dispatch<React.SetStateAction<T>>] {
+  propSetState?: (value: K) => any,
+): [T, React.Dispatch<React.SetStateAction<K>>] {
   const isUnderControlRef = useRef(false);
 
   if (!isUnderControlRef.current) {
@@ -18,7 +18,7 @@ export function useControl<T>(
   const stateRef = useRef(state);
   stateRef.current = state;
 
-  const setState: React.Dispatch<React.SetStateAction<T>> = useCallback(
+  const setState: React.Dispatch<React.SetStateAction<K>> = useCallback(
     value => {
       const newValue =
         typeof value === 'function' ? (value as any)(stateRef.current) : value;

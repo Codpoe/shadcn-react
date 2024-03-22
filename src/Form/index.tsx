@@ -80,11 +80,52 @@ export function Form<
   TContext = any,
   TTransformedValues extends FieldValues | undefined = undefined,
 >(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
-  const { labelPosition = 'top', className, ...restProps } = props;
+  const {
+    labelPosition = 'top',
+    labelClassName,
+    labelStyle,
+    watch,
+    getValues,
+    getFieldState,
+    setError,
+    clearErrors,
+    setValue,
+    trigger,
+    formState,
+    resetField,
+    reset,
+    handleSubmit,
+    unregister,
+    control,
+    register,
+    setFocus,
+    className,
+    ...restProps
+  } = props;
 
   return (
-    <FormProvider {...props} {...{ labelPosition }}>
-      <HookForm {...restProps} className={cn(className, 'sr-space-y-7')} />
+    <FormProvider<TFieldValues, TContext, TTransformedValues>
+      watch={watch}
+      getValues={getValues}
+      getFieldState={getFieldState}
+      setError={setError}
+      clearErrors={clearErrors}
+      setValue={setValue}
+      trigger={trigger}
+      formState={formState}
+      resetField={resetField}
+      reset={reset}
+      handleSubmit={handleSubmit}
+      unregister={unregister}
+      control={control}
+      register={register}
+      setFocus={setFocus}
+      {...{ labelPosition, labelClassName, labelStyle }}
+    >
+      <HookForm
+        {...restProps}
+        className={cn(className, 'sr-group sr-form sr-space-y-7')}
+      />
     </FormProvider>
   );
 }
@@ -127,6 +168,7 @@ function FormField<
               {React.cloneElement(children, {
                 ...children.props,
                 ...renderProps.field,
+                __sr_form__: '1',
               })}
             </FormControl>
             {desc != null && <FormDescription>{desc}</FormDescription>}

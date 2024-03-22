@@ -40,3 +40,29 @@ export const Disabled: Story = {
     return <Checkbox disabled>Accept terms and conditions</Checkbox>;
   },
 };
+
+export const Group: Story = {
+  render() {
+    return (
+      <Checkbox.Group defaultValue={['apple']}>
+        <Checkbox value="apple">Apple</Checkbox>
+        <Checkbox value="banana">Banana</Checkbox>
+        <Checkbox value="blueberry">Blueberry</Checkbox>
+        <Checkbox value="grapes">Grapes</Checkbox>
+      </Checkbox.Group>
+    );
+  },
+};
+
+export const VerticalGroup: Story = {
+  render() {
+    return (
+      <Checkbox.Group defaultValue={['apple']} layout="vertical">
+        <Checkbox value="apple">Apple</Checkbox>
+        <Checkbox value="banana">Banana</Checkbox>
+        <Checkbox value="blueberry">Blueberry</Checkbox>
+        <Checkbox value="grapes">Grapes</Checkbox>
+      </Checkbox.Group>
+    );
+  },
+};
