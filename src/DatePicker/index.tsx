@@ -1,4 +1,4 @@
-import React, { MouseEvent, useMemo, useRef } from 'react';
+import React, { MouseEvent, forwardRef, useMemo, useRef } from 'react';
 import { CalendarIcon, XIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import {
@@ -26,7 +26,10 @@ export interface DatePickerProps extends ButtonProps {
   onClear?: () => any;
 }
 
-export function DatePicker(props: DatePickerProps) {
+export const DatePicker = forwardRef<
+  React.ElementRef<typeof Button>,
+  DatePickerProps
+>((props, ref) => {
   const {
     calendarProps: propCalendarProps,
     placeholder,
@@ -95,6 +98,7 @@ export function DatePicker(props: DatePickerProps) {
       content={<Calendar initialFocus {...calendarProps} />}
     >
       <Button
+        ref={ref}
         variant={'outline'}
         className={cn(
           'sr-w-full !sr-justify-start sr-text-left sr-font-normal sr-group',
@@ -118,4 +122,6 @@ export function DatePicker(props: DatePickerProps) {
       </Button>
     </Popover>
   );
-}
+});
+
+DatePicker.displayName = 'DatePicker';

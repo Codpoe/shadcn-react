@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, useMemo } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, useMemo } from 'react';
 import { Label } from '../Label';
 import { Switch as UiSwitch } from '../ui/switch';
 import { cn, mapFormProps } from '../utils';
@@ -8,7 +8,10 @@ export interface SwitchProps
 
 let _switchId = 0;
 
-export function Switch(props: SwitchProps) {
+export const Switch = forwardRef<
+  React.ElementRef<typeof UiSwitch>,
+  SwitchProps
+>((props, ref) => {
   const { id, children, className, style, ...restProps } = mapFormProps(
     props,
     'checked',
@@ -19,6 +22,7 @@ export function Switch(props: SwitchProps) {
   if (children == null) {
     return (
       <UiSwitch
+        ref={ref}
         id={finalId}
         className={cn(
           className,
@@ -38,7 +42,7 @@ export function Switch(props: SwitchProps) {
       )}
       style={style}
     >
-      <UiSwitch id={finalId} {...restProps} />
+      <UiSwitch ref={ref} id={finalId} {...restProps} />
       <Label
         htmlFor={finalId}
         className="sr-pl-2 sr-cursor-pointer peer-disabled:!sr-opacity-50"
@@ -47,4 +51,6 @@ export function Switch(props: SwitchProps) {
       </Label>
     </div>
   );
-}
+});
+
+Switch.displayName = 'Switch';

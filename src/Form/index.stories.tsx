@@ -9,6 +9,7 @@ import { Checkbox } from '../Checkbox';
 import { Switch } from '../Switch';
 import { Slider } from '../Slider';
 import { DatePicker } from '../DatePicker';
+import { Textarea } from '../Textarea';
 import { Form, useForm } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -48,6 +49,7 @@ const formSchema = z.object({
   switch: z.boolean(),
   progress: z.array(z.number()),
   date: z.date(),
+  textarea: z.string().min(1).max(100),
   read: z.boolean(),
 });
 
@@ -55,6 +57,7 @@ const PrimaryDemo = () => {
   const form = useForm({
     schema: formSchema,
     defaultValues: {
+      username: '',
       date: new Date(),
     },
   });
@@ -113,6 +116,9 @@ const PrimaryDemo = () => {
           placeholder="Pick a date"
           calendarProps={{ mode: 'single' }}
         />
+      </Form.Field>
+      <Form.Field name="textarea" label="Feedback">
+        <Textarea placeholder="Input your feedback" />
       </Form.Field>
       <Form.Field name="read">
         <Checkbox>I have read the manual</Checkbox>
