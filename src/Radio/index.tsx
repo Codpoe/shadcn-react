@@ -69,8 +69,8 @@ const RadioGroup = forwardRef<
         className,
         '!sr-flex group-data-[label-pos=top]:sr-pt-1 group-data-[label-pos=left]:sr-py-2.5',
         layout === 'horizontal'
-          ? 'sr-flex-row sr-gap-x-6 sr-gap-y-2.5 sr-items-center sr-flex-wrap'
-          : 'sr-flex-col sr-gap-y-4 sr-justify-stretch',
+          ? 'sr-flex-row !sr-gap-x-6 !sr-gap-y-2.5 sr-items-center sr-flex-wrap'
+          : 'sr-flex-col !sr-gap-y-4 sr-justify-stretch',
       )}
       {...restProps}
     />
