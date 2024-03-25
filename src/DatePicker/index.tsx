@@ -7,7 +7,7 @@ import {
   DayPickerRangeProps,
   DayPickerSingleProps,
 } from 'react-day-picker';
-import { cn } from '../utils';
+import { cn, mapFormProps } from '../utils';
 import { Button, ButtonProps } from '../Button';
 import { Calendar } from '../Calendar';
 import { Popover } from '../Popover';
@@ -28,15 +28,30 @@ export interface DatePickerProps extends ButtonProps {
 
 export function DatePicker(props: DatePickerProps) {
   const {
-    calendarProps,
+    calendarProps: propCalendarProps,
     placeholder,
     formatStr = 'yyyy-MM-dd',
     format: propFormat,
     className,
     onClear,
+    value,
+    onChange,
     ...restProps
   } = props;
-  const { selected } = calendarProps || {};
+
+  const calendarProps = mapFormProps(
+    {
+      ...propCalendarProps,
+      __sr_form__: (props as any).__sr_form__,
+      value,
+      onChange,
+    } as any as NonNullable<DatePickerProps['calendarProps']>,
+    'selected',
+    'onSelect',
+  );
+
+  const { selected } = calendarProps;
+
   const propFormatRef = useRef(propFormat);
   propFormatRef.current = propFormat;
 
@@ -82,7 +97,7 @@ export function DatePicker(props: DatePickerProps) {
       <Button
         variant={'outline'}
         className={cn(
-          '!sr-justify-start sr-text-left sr-font-normal sr-group',
+          'sr-w-full !sr-justify-start sr-text-left sr-font-normal sr-group',
           !formatted && 'sr-text-muted-foreground',
           className,
         )}
