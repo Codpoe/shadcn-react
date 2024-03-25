@@ -6,6 +6,8 @@ import { Input } from '../Input';
 import { Radio } from '../Radio';
 import { Select } from '../Select';
 import { Checkbox } from '../Checkbox';
+import { Switch } from '../Switch';
+import { Slider } from '../Slider';
 import { Form, useForm } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -42,6 +44,8 @@ const formSchema = z.object({
     z.literal('guangzhou'),
     z.literal('shenzhen'),
   ]),
+  switch: z.boolean(),
+  progress: z.array(z.number()),
   read: z.boolean(),
 });
 
@@ -85,13 +89,19 @@ const PrimaryDemo = () => {
           <Checkbox value="blue">Blue</Checkbox>
         </Checkbox.Group>
       </Form.Field>
-      <Form.Field name="city" label="City">
+      <Form.Field name="city" label="City" desc="Pick your city">
         <Radio.Group>
           <Radio value="beijing">Beijing</Radio>
           <Radio value="shanghai">Shanghai</Radio>
           <Radio value="guangzhou">Guangzhou</Radio>
           <Radio value="shenzhen">Shenzhen</Radio>
         </Radio.Group>
+      </Form.Field>
+      <Form.Field name="switch" label="Switch" desc="Switch it!">
+        <Switch />
+      </Form.Field>
+      <Form.Field name="progress" label="Progress" desc="Slide">
+        <Slider />
       </Form.Field>
       <Form.Field name="read">
         <Checkbox>I have read the manual</Checkbox>

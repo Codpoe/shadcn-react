@@ -1,7 +1,7 @@
 import { ComponentPropsWithoutRef, useMemo } from 'react';
 import { Label } from '../Label';
 import { Switch as UiSwitch } from '../ui/switch';
-import { cn } from '../utils';
+import { cn, mapFormProps } from '../utils';
 
 export interface SwitchProps
   extends ComponentPropsWithoutRef<typeof UiSwitch> {}
@@ -9,14 +9,21 @@ export interface SwitchProps
 let _switchId = 0;
 
 export function Switch(props: SwitchProps) {
-  const { id, children, className, style, ...restProps } = props;
+  const { id, children, className, style, ...restProps } = mapFormProps(
+    props,
+    'checked',
+    'onCheckedChange',
+  );
   const finalId = useMemo(() => id || `sr-switch-${++_switchId}`, [id]);
 
   if (children == null) {
     return (
       <UiSwitch
         id={finalId}
-        className={className}
+        className={cn(
+          className,
+          'group-data-[label-pos=top]:sr-mt-0.5 group-data-[label-pos=left]:sr-py-2',
+        )}
         style={style}
         {...restProps}
       />
@@ -24,7 +31,13 @@ export function Switch(props: SwitchProps) {
   }
 
   return (
-    <div className={cn('sr-flex sr-items-center', className)} style={style}>
+    <div
+      className={cn(
+        'sr-flex sr-items-center group-data-[label-pos=top]:sr-pt-0.5 group-data-[label-pos=left]:sr-py-2',
+        className,
+      )}
+      style={style}
+    >
       <UiSwitch id={finalId} {...restProps} />
       <Label
         htmlFor={finalId}
