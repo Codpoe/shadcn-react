@@ -5,13 +5,13 @@ import {
   FormProps as HookFormProps,
   ControllerProps,
   FieldPath,
-  useFormContext,
+  useFormContext as useHookFormContext,
   useForm as useHookForm,
   useFormState,
   useWatch,
   useFieldArray,
   UseFormProps as UseHookFormProps,
-  UseFormReturn,
+  UseFormReturn as UseHookFormReturn,
 } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z, type ZodSchema } from 'zod';
@@ -28,7 +28,7 @@ import {
 } from '../ui/form';
 import { cn } from '../utils';
 
-export { useFormContext, useFormState, useWatch, useFieldArray, useFormField };
+export { useFormState, useWatch, useFieldArray, useFormField };
 
 export type UseFormProps<
   TFieldValues extends TSchema extends ZodSchema
@@ -39,6 +39,16 @@ export type UseFormProps<
 > = UseHookFormProps<TFieldValues, TContext> & {
   schema?: TSchema;
 };
+
+export interface UseFormReturn<
+  TFieldValues extends FieldValues = FieldValues,
+  TContext = any,
+  TTransformedValues extends FieldValues | undefined = undefined,
+> extends UseHookFormReturn<TFieldValues, TContext, TTransformedValues> {
+  Field: React.FunctionComponent<
+    FormFieldProps<TFieldValues, FieldPath<TFieldValues>>
+  >;
+}
 
 export function useForm<
   TFieldValues extends TSchema extends ZodSchema
@@ -52,11 +62,23 @@ export function useForm<
 ): UseFormReturn<TFieldValues, TContext, TTransformedValues> {
   const schema = props?.schema;
 
-  return useHookForm({
-    resolver: schema ? zodResolver(schema) : undefined,
-    ...props,
-  });
+  return Object.assign(
+    useHookForm({
+      resolver: schema ? zodResolver(schema) : undefined,
+      ...props,
+    }),
+    {
+      Field: FormField,
+    },
+  );
 }
+
+export const useFormContext: <
+  TFieldValues extends FieldValues,
+  TContext = any,
+  TransformedValues extends FieldValues | undefined = undefined,
+>() => UseFormReturn<TFieldValues, TContext, TransformedValues> =
+  useHookFormContext as any;
 
 export interface FormProps<
   TFieldValues extends FieldValues = FieldValues,
@@ -100,6 +122,8 @@ export function Form<
     register,
     setFocus,
     className,
+    // @ts-ignore
+    Field,
     ...restProps
   } = props;
 
@@ -120,7 +144,7 @@ export function Form<
       control={control}
       register={register}
       setFocus={setFocus}
-      {...{ labelPosition, labelClassName, labelStyle }}
+      {...{ labelPosition, labelClassName, labelStyle, Field }}
     >
       <HookForm
         {...restProps}

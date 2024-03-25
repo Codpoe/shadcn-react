@@ -69,17 +69,17 @@ const PrimaryDemo = () => {
       // eslint-disable-next-line no-console
       onSubmit={payload => console.log('>>> submit payload', payload)}
     >
-      <Form.Field
+      <form.Field
         name="username"
         label="Username"
         desc="This is your public display name."
       >
         <Input placeholder="Please input username" />
-      </Form.Field>
-      <Form.Field name="email" label="Email" desc="Your email address.">
+      </form.Field>
+      <form.Field name="email" label="Email" desc="Your email address.">
         <Input placeholder="Please input email" />
-      </Form.Field>
-      <Form.Field name="fruit" label="Post">
+      </form.Field>
+      <form.Field name="fruit" label="Post">
         <Select placeholder="Select a fruit">
           <Select.Item value="apple">Apple</Select.Item>
           <Select.Item value="banana" disabled>
@@ -89,40 +89,40 @@ const PrimaryDemo = () => {
           <Select.Item value="grapes">Grapes</Select.Item>
           <Select.Item value="pineapple">Pineapple</Select.Item>
         </Select>
-      </Form.Field>
-      <Form.Field name="colors" label="Colors" desc="Pick your colors">
+      </form.Field>
+      <form.Field name="colors" label="Colors" desc="Pick your colors">
         <Checkbox.Group>
           <Checkbox value="red">Red</Checkbox>
           <Checkbox value="green">Green</Checkbox>
           <Checkbox value="blue">Blue</Checkbox>
         </Checkbox.Group>
-      </Form.Field>
-      <Form.Field name="city" label="City" desc="Pick your city">
+      </form.Field>
+      <form.Field name="city" label="City" desc="Pick your city">
         <Radio.Group>
           <Radio value="beijing">Beijing</Radio>
           <Radio value="shanghai">Shanghai</Radio>
           <Radio value="guangzhou">Guangzhou</Radio>
           <Radio value="shenzhen">Shenzhen</Radio>
         </Radio.Group>
-      </Form.Field>
-      <Form.Field name="switch" label="Switch" desc="Switch it!">
+      </form.Field>
+      <form.Field name="switch" label="Switch" desc="Switch it!">
         <Switch />
-      </Form.Field>
-      <Form.Field name="progress" label="Progress" desc="Slide">
+      </form.Field>
+      <form.Field name="progress" label="Progress" desc="Slide">
         <Slider />
-      </Form.Field>
-      <Form.Field name="date" label="Date">
+      </form.Field>
+      <form.Field name="date" label="Date">
         <DatePicker
           placeholder="Pick a date"
           calendarProps={{ mode: 'single' }}
         />
-      </Form.Field>
-      <Form.Field name="textarea" label="Feedback">
+      </form.Field>
+      <form.Field name="textarea" label="Feedback">
         <Textarea placeholder="Input your feedback" />
-      </Form.Field>
-      <Form.Field name="read">
+      </form.Field>
+      <form.Field name="read">
         <Checkbox>I have read the manual</Checkbox>
-      </Form.Field>
+      </form.Field>
       <Button type="submit">Submit</Button>
     </Form>
   );
@@ -154,16 +154,16 @@ const LabelPositionDemo = (args: any) => {
       // eslint-disable-next-line no-console
       onSubmit={payload => console.log('>>> submit payload', payload)}
     >
-      <Form.Field
+      <form.Field
         name="username"
         label="Username"
         desc="This is your public display name."
       >
         <Input placeholder="Please input username" />
-      </Form.Field>
-      <Form.Field name="email" label="Email" desc="Your email address.">
+      </form.Field>
+      <form.Field name="email" label="Email" desc="Your email address.">
         <Input placeholder="Please input email" />
-      </Form.Field>
+      </form.Field>
       <Form.Slot>
         <Button type="submit">Submit</Button>
       </Form.Slot>
@@ -206,16 +206,16 @@ const LayoutDemo = () => {
         // eslint-disable-next-line no-console
         onSubmit={payload => console.log('>>> submit payload', payload)}
       >
-        <Form.Field
+        <form.Field
           name="username"
           label="Username"
           desc="This is your public display name."
         >
           <Input placeholder="Please input username" />
-        </Form.Field>
-        <Form.Field name="email" label="Email" desc="Your email address.">
+        </form.Field>
+        <form.Field name="email" label="Email" desc="Your email address.">
           <Input placeholder="Please input email" />
-        </Form.Field>
+        </form.Field>
         <Form.Slot label={layout === 'horizontal' ? '' : null}>
           <Button type="submit">Submit</Button>
         </Form.Slot>
