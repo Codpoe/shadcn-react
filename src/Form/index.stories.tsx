@@ -36,6 +36,12 @@ const formSchema = z.object({
   colors: z
     .array(z.union([z.literal('red'), z.literal('green'), z.literal('blue')]))
     .nonempty(),
+  city: z.union([
+    z.literal('beijing'),
+    z.literal('shanghai'),
+    z.literal('guangzhou'),
+    z.literal('shenzhen'),
+  ]),
   read: z.boolean(),
 });
 
@@ -72,12 +78,20 @@ const PrimaryDemo = () => {
           <Select.Item value="pineapple">Pineapple</Select.Item>
         </Select>
       </Form.Field>
-      <Form.Field name="colors" label="Colors">
+      <Form.Field name="colors" label="Colors" desc="Pick your colors">
         <Checkbox.Group>
           <Checkbox value="red">Red</Checkbox>
           <Checkbox value="green">Green</Checkbox>
           <Checkbox value="blue">Blue</Checkbox>
         </Checkbox.Group>
+      </Form.Field>
+      <Form.Field name="city" label="City">
+        <Radio.Group>
+          <Radio value="beijing">Beijing</Radio>
+          <Radio value="shanghai">Shanghai</Radio>
+          <Radio value="guangzhou">Guangzhou</Radio>
+          <Radio value="shenzhen">Shenzhen</Radio>
+        </Radio.Group>
       </Form.Field>
       <Form.Field name="read">
         <Checkbox>I have read the manual</Checkbox>

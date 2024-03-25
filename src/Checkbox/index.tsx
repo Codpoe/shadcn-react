@@ -88,7 +88,7 @@ const _Checkbox = forwardRef<
       className={cn(
         className,
         'sr-flex sr-items-center',
-        !groupContext && 'group-[.sr-form]:sr-min-h-9',
+        !groupContext && 'group-data-[label-pos=left]:sr-pt-2.5',
       )}
       style={style}
     >
@@ -152,10 +152,10 @@ const CheckboxGroup = forwardRef<HTMLDivElement, CheckboxGroupProps>(
           ref={ref}
           className={cn(
             className,
-            'sr-flex group-[.sr-form]:sr-min-h-9',
+            'sr-flex group-data-[label-pos=top]:sr-pt-1 group-data-[label-pos=left]:sr-pt-2.5',
             layout === 'horizontal'
-              ? 'sr-flex-row sr-gap-6 sr-items-center sr-flex-wrap'
-              : 'sr-flex-col sr-gap-4 sr-justify-stretch',
+              ? 'sr-flex-row sr-gap-x-6 sr-gap-y-2.5 sr-items-center sr-flex-wrap'
+              : 'sr-flex-col sr-gap-y-4 sr-justify-stretch',
           )}
           style={style}
         >

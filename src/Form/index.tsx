@@ -124,7 +124,8 @@ export function Form<
     >
       <HookForm
         {...restProps}
-        className={cn(className, 'sr-group sr-form sr-space-y-7')}
+        className={cn(className, 'sr-group sr-form sr-space-y-6')}
+        data-label-pos={labelPosition}
       />
     </FormProvider>
   );
@@ -163,7 +164,7 @@ function FormField<
         }
 
         const controlEl = (
-          <div className="sr-flex-auto sr-min-h-9 sr-space-y-1.5 sr-relative">
+          <div className="sr-flex-auto sr-space-y-2 sr-relative">
             <FormControl>
               {React.cloneElement(children, {
                 ...children.props,
@@ -245,7 +246,7 @@ function FormSlot(props: FormSlotProps) {
   }
 
   return (
-    <div className="sr-space-y-1.5">
+    <div className="sr-space-y-2">
       {label != null && (
         <FormLabel
           className={cn(
