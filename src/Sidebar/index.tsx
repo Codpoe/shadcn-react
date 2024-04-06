@@ -169,7 +169,7 @@ export function Sidebar(props: SidebarProps) {
     defaultValue = findDefaultValue(items)!,
     width = 256,
     collapsed,
-    selectedVariant = 'secondary',
+    selectedVariant = 'default',
     onChange,
     className,
     style,

@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 export function useControl<T, K = T>(
   defaultState: T,
@@ -28,7 +28,7 @@ export function useControl<T, K = T>(
     [],
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (isUnderControlRef.current) {
       _setState(propState!);
     }
