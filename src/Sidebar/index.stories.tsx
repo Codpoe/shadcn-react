@@ -79,6 +79,7 @@ export const Primary: Story = {
       },
     ],
     collapsed: false,
+    selectedVariant: 'default',
   },
   render(args) {
     return <Sidebar {...args} />;

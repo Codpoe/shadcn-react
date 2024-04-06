@@ -1,6 +1,6 @@
 import { cn } from '../utils';
 import { Tooltip } from '../Tooltip';
-import { Button } from '../Button';
+import { Button, ButtonProps } from '../Button';
 import { useControl } from '../hooks/use-control';
 
 interface SidebarGroupProps {
@@ -39,13 +39,22 @@ function findDefaultValue(
 function SidebarItem(
   props: (SidebarGroupProps | SidebarItemProps) & {
     selected?: string;
+    selectedVariant: ButtonProps['variant'];
     collapsed?: boolean;
     className?: string;
     onClick?: (value: string) => any;
   },
 ) {
   if (isSidebarGroup(props)) {
-    const { title, children, selected, collapsed, className, onClick } = props;
+    const {
+      title,
+      children,
+      selected,
+      selectedVariant,
+      collapsed,
+      className,
+      onClick,
+    } = props;
 
     if (collapsed) {
       return (
@@ -55,6 +64,7 @@ function SidebarItem(
               {...item}
               key={item.value}
               selected={selected}
+              selectedVariant={selectedVariant}
               collapsed
               onClick={onClick}
             />
@@ -74,6 +84,7 @@ function SidebarItem(
               {...item}
               key={item.value}
               selected={selected}
+              selectedVariant={selectedVariant}
               onClick={onClick}
             />
           ))}
@@ -82,8 +93,17 @@ function SidebarItem(
     );
   }
 
-  const { value, title, icon, badge, selected, collapsed, className, onClick } =
-    props;
+  const {
+    value,
+    title,
+    icon,
+    badge,
+    selected,
+    selectedVariant,
+    collapsed,
+    className,
+    onClick,
+  } = props;
 
   if (collapsed) {
     return (
@@ -102,7 +122,7 @@ function SidebarItem(
       >
         <Button
           className={className}
-          variant={value === selected ? 'secondary' : 'ghost'}
+          variant={value === selected ? selectedVariant : 'ghost'}
           size="icon"
           icon={icon}
           onClick={() => onClick?.(value)}
@@ -117,7 +137,7 @@ function SidebarItem(
     <Button
       key={value}
       className={cn(className, 'sr-w-full !sr-justify-start')}
-      variant={value === selected ? 'secondary' : 'ghost'}
+      variant={value === selected ? selectedVariant : 'ghost'}
       icon={icon}
       onClick={() => onClick?.(value)}
     >
@@ -133,6 +153,10 @@ export interface SidebarProps {
   items: (SidebarGroupProps | SidebarItemProps)[];
   width?: number | string;
   collapsed?: boolean;
+  /**
+   * @default 'default'
+   */
+  selectedVariant?: ButtonProps['variant'];
   onChange?: (value: string) => any;
   className?: string;
   style?: React.CSSProperties;
@@ -145,6 +169,7 @@ export function Sidebar(props: SidebarProps) {
     defaultValue = findDefaultValue(items)!,
     width = 256,
     collapsed,
+    selectedVariant = 'secondary',
     onChange,
     className,
     style,
@@ -173,6 +198,7 @@ export function Sidebar(props: SidebarProps) {
               {...item}
               key={index}
               selected={value}
+              selectedVariant={selectedVariant}
               collapsed={collapsed}
               className={cn(
                 index > 0 &&
