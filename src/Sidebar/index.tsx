@@ -3,19 +3,19 @@ import { Tooltip } from '../Tooltip';
 import { Button, ButtonProps } from '../Button';
 import { useControl } from '../hooks/use-control';
 
-interface SidebarGroupProps {
+export interface SidebarGroupProps {
   title: React.ReactNode;
   children: SidebarItemProps[];
 }
 
-interface SidebarItemProps {
+export interface SidebarItemProps {
   value: string;
   title: React.ReactNode;
   icon?: React.ReactNode;
   badge?: React.ReactNode;
 }
 
-function isSidebarGroup(
+export function isSidebarGroup(
   props: SidebarGroupProps | SidebarItemProps,
 ): props is SidebarGroupProps {
   return Boolean((props as any).children);
