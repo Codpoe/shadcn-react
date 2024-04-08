@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { UserIcon } from 'lucide-react';
+import { UserIcon, UserPlus } from 'lucide-react';
 import { Button } from '../Button';
 import { Dropdown } from '.';
 
@@ -37,6 +37,7 @@ export const Primary: Story = {
             <Dropdown.Group>
               <Dropdown.Item>Team</Dropdown.Item>
               <Dropdown.Sub
+                icon={<UserPlus />}
                 content={
                   <>
                     <Dropdown.Item>Email</Dropdown.Item>

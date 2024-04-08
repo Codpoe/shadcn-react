@@ -40,6 +40,7 @@ export interface DropdownShortcutProps
 export interface DropdownSubProps
   extends ComponentProps<typeof DropdownMenuSub>,
     Omit<DropdownSubContentProps, 'content'> {
+  icon?: React.ReactNode;
   content?: React.ReactNode;
 }
 
@@ -125,11 +126,14 @@ const DropdownItem = forwardRef<
 DropdownItem.displayName = DropdownMenuItem.displayName;
 
 function DropdownSub(props: DropdownSubProps) {
-  const { children, content, ...restProps } = props;
+  const { children, icon, content, ...restProps } = props;
 
   return (
     <DropdownMenuSub>
       <DropdownMenuSubTrigger className="sr-cursor-pointer">
+        {icon != null && (
+          <span className="sr-mr-2 [&>svg]:sr-w-4 [&>svg]:sr-h-4">{icon}</span>
+        )}
         {children}
       </DropdownMenuSubTrigger>
       {content != null && (
