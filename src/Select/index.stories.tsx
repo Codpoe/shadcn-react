@@ -17,7 +17,13 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   render() {
     return (
-      <Select className="!sr-w-[180px]" placeholder="Select a fruit">
+      <Select
+        className="!sr-w-[180px]"
+        placeholder="Select a fruit"
+        contentStyle={{
+          maxHeight: '100px',
+        }}
+      >
         <Select.Group label="Fruits">
           <Select.Item value="apple">Apple</Select.Item>
           <Select.Item value="banana" disabled>

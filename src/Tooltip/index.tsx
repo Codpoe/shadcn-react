@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef } from 'react';
+import { ComponentPropsWithoutRef, forwardRef } from 'react';
 import {
   Tooltip as UiTooltip,
   TooltipContent,
@@ -17,31 +17,37 @@ export interface TooltipProps
   style?: React.CSSProperties;
 }
 
-export function Tooltip(props: TooltipProps) {
-  const {
-    content,
-    children,
-    open,
-    defaultOpen,
-    onOpenChange,
-    delayDuration = 400,
-    disableHoverableContent,
-    ...restProps
-  } = props;
-  return (
-    <TooltipProvider>
-      <UiTooltip
-        open={open}
-        defaultOpen={defaultOpen}
-        onOpenChange={onOpenChange}
-        delayDuration={delayDuration}
-        disableHoverableContent={disableHoverableContent}
-      >
-        <TooltipTrigger asChild>{children}</TooltipTrigger>
-        {content != null && (
-          <TooltipContent {...restProps}>{content}</TooltipContent>
-        )}
-      </UiTooltip>
-    </TooltipProvider>
-  );
-}
+export const Tooltip = forwardRef<HTMLButtonElement, TooltipProps>(
+  function Tooltip(props, ref) {
+    const {
+      content,
+      children,
+      open,
+      defaultOpen,
+      onOpenChange,
+      delayDuration = 400,
+      disableHoverableContent,
+      ...restProps
+    } = props;
+    return (
+      <TooltipProvider>
+        <UiTooltip
+          open={open}
+          defaultOpen={defaultOpen}
+          onOpenChange={onOpenChange}
+          delayDuration={delayDuration}
+          disableHoverableContent={disableHoverableContent}
+        >
+          <TooltipTrigger asChild ref={ref}>
+            {children}
+          </TooltipTrigger>
+          {content != null && (
+            <TooltipContent {...restProps}>{content}</TooltipContent>
+          )}
+        </UiTooltip>
+      </TooltipProvider>
+    );
+  },
+);
+
+Tooltip.displayName = 'Tooltip';
