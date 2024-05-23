@@ -90,11 +90,11 @@ export function Drawer(props: DrawerProp) {
       <DrawerContent
         className={cn(
           direction === 'top' &&
-            'sr-bottom-auto sr-top-0 sr-mt-0 sr-mb-24 sr-rounded-t-none sr-rounded-b-[10px]',
-          direction === 'right' &&
-            'sr-inset-x-auto sr-inset-y-0 sr-right-0 sr-mt-0 sr-ml-24 sr-rounded-t-none',
-          direction === 'left' &&
-            'sr-inset-x-auto sr-inset-y-0 sr-left-0 sr-mt-0 sr-mr-24 sr-rounded-t-none',
+            'sr-inset-x-0 sr-top-0 sr-mb-24 sr-rounded-b-[10px]',
+          direction === 'right' && 'sr-inset-y-0 sr-right-0 sr-ml-24',
+          direction === 'bottom' &&
+            'sr-inset-x-0 sr-bottom-0 sr-mt-24 sr-rounded-t-[10px]',
+          direction === 'left' && 'sr-inset-y-0 sr-left-0 sr-mr-24',
           className,
         )}
         showHandle={direction === 'bottom'}
