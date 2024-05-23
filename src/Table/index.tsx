@@ -11,6 +11,7 @@ import {
   SortingState,
   RowSelectionState,
   RowSelectionOptions,
+  Row,
 } from '@tanstack/react-table';
 import { CircleIcon } from 'lucide-react';
 import {
@@ -62,6 +63,10 @@ export interface TableProps<TData, TValue = unknown>
   onPaginationChange?: (pagination: PaginationState) => any;
   onSortingChange?: (sorting: SortingState) => any;
   onRowSelectionChange?: (rowSelection: RowSelectionState) => any;
+  onRowClick?: (
+    ev: React.MouseEvent<HTMLTableRowElement>,
+    row: Row<TData>,
+  ) => any;
 }
 
 export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
@@ -86,6 +91,7 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
     onPaginationChange,
     onSortingChange,
     onRowSelectionChange,
+    onRowClick,
   } = props;
 
   // pagination
@@ -240,6 +246,7 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && 'selected'}
+                  onClick={ev => onRowClick?.(ev, row)}
                 >
                   {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
