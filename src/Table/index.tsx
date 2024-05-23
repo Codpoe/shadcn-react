@@ -2,6 +2,7 @@ import { ComponentPropsWithoutRef, useMemo } from 'react';
 import {
   useReactTable,
   ColumnDef,
+  createColumnHelper,
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
@@ -36,6 +37,7 @@ interface PaginationState {
 }
 
 export type { ColumnDef };
+export { createColumnHelper };
 
 export interface TableProps<TData, TValue = unknown>
   extends ComponentPropsWithoutRef<typeof UiTable> {

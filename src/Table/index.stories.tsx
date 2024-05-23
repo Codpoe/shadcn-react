@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useMemo, useState } from 'react';
 import { Button } from '..';
-import { Table, ColumnDef } from '.';
+import { Table, createColumnHelper } from '.';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -23,43 +23,37 @@ interface Invoice {
   paymentMethod: string;
 }
 
-const columns: ColumnDef<Invoice>[] = [
-  {
-    accessorKey: 'invoice',
+const columnHelper = createColumnHelper<Invoice>();
+
+const columns = [
+  columnHelper.accessor('invoice', {
     header: 'Invoice',
-  },
-  {
-    accessorKey: 'paymentStatus',
+  }),
+  columnHelper.accessor('paymentStatus', {
     header: 'Status',
-  },
-  {
-    accessorKey: 'paymentMethod',
+  }),
+  columnHelper.accessor('paymentMethod', {
     header: 'Method',
-  },
-  {
-    accessorKey: 'totalAmount',
+  }),
+  columnHelper.accessor('totalAmount', {
     header: 'Amount',
-  },
+  }),
 ];
 
-const sortingColumns: ColumnDef<Invoice>[] = [
-  {
-    accessorKey: 'invoice',
+const sortingColumns = [
+  columnHelper.accessor('invoice', {
     header: 'Invoice',
-  },
-  {
-    accessorKey: 'paymentStatus',
+  }),
+  columnHelper.accessor('paymentStatus', {
     header: 'Status',
-  },
-  {
-    accessorKey: 'paymentMethod',
+  }),
+  columnHelper.accessor('paymentMethod', {
     header: 'Method',
-  },
-  {
-    accessorKey: 'totalAmount',
+  }),
+  columnHelper.accessor('totalAmount', {
     header: 'Amount',
     enableSorting: true,
-  },
+  }),
 ];
 
 const getData = (length: number): Invoice[] => {
