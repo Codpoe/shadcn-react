@@ -17,6 +17,7 @@ import {
   DrawerTrigger,
 } from '../ui/drawer';
 import { Button, ButtonProps } from '../Button';
+import { cn } from '../utils';
 
 export type DrawerProp = ComponentProps<typeof UiDrawer> & {
   title?: React.ReactNode;
@@ -41,6 +42,7 @@ export function Drawer(props: DrawerProp) {
     content,
     children,
     footer,
+    direction = 'bottom',
     okText = 'Ok',
     okProps,
     cancelText = 'Cancel',
@@ -79,9 +81,25 @@ export function Drawer(props: DrawerProp) {
   };
 
   return (
-    <UiDrawer {...restProps}>
+    <UiDrawer
+      handleOnly={direction !== 'bottom'}
+      direction={direction}
+      {...restProps}
+    >
       <DrawerTrigger asChild>{children}</DrawerTrigger>
-      <DrawerContent className={className} style={style}>
+      <DrawerContent
+        className={cn(
+          direction === 'top' &&
+            'sr-bottom-auto sr-top-0 sr-mt-0 sr-mb-24 sr-rounded-t-none sr-rounded-b-[10px]',
+          direction === 'right' &&
+            'sr-inset-x-auto sr-inset-y-0 sr-right-0 sr-mt-0 sr-ml-24 sr-rounded-t-none',
+          direction === 'left' &&
+            'sr-inset-x-auto sr-inset-y-0 sr-left-0 sr-mt-0 sr-mr-24 sr-rounded-t-none',
+          className,
+        )}
+        showHandle={direction === 'bottom'}
+        style={style}
+      >
         <DrawerClose
           ref={closeBtnRef}
           asChild={false}
@@ -124,7 +142,7 @@ const DrawerClose = forwardRef<HTMLButtonElement, DialogCloseProps>(
   },
 );
 
-DrawerClose.displayName = 'DialogClose';
+DrawerClose.displayName = 'DrawerClose';
 
 Drawer.Close = DrawerClose;
 Drawer.Header = DrawerHeader;

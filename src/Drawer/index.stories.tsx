@@ -86,3 +86,41 @@ export const Async: Story = {
     );
   },
 };
+
+export const Direction: Story = {
+  args: {
+    direction: 'right',
+  },
+  render(args) {
+    return (
+      <Drawer
+        {...args}
+        title="Edit profile"
+        description="Make changes to your profile here. Click save when you're done."
+        content={
+          <div className="sr-grid sr-gap-4 sr-py-4">
+            <div className="sr-grid sr-grid-cols-4 sr-items-center sr-gap-4">
+              <Label htmlFor="name" className="sr-text-right">
+                Name
+              </Label>
+              <Input id="name" value="Pedro Duarte" className="sr-col-span-3" />
+            </div>
+            <div className="sr-grid sr-grid-cols-4 sr-items-center sr-gap-4">
+              <Label htmlFor="username" className="sr-text-right">
+                Username
+              </Label>
+              <Input
+                id="username"
+                value="@peduarte"
+                className="sr-col-span-3"
+              />
+            </div>
+          </div>
+        }
+        okText="Save changes"
+      >
+        <Button variant="outline">Edit Profile</Button>
+      </Drawer>
+    );
+  },
+};
