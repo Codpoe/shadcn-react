@@ -60,6 +60,7 @@ export interface TableProps<TData>
   defaultRowSelection?: RowSelectionState;
   rowSelection?: RowSelectionState;
   empty?: React.ReactNode;
+  getRowId?: (originalRow: TData, index: number, parent?: Row<TData>) => string;
   onPaginationChange?: (pagination: PaginationState) => any;
   onSortingChange?: (sorting: SortingState) => any;
   onRowSelectionChange?: (rowSelection: RowSelectionState) => any;
@@ -88,6 +89,7 @@ export function Table<TData>(props: TableProps<TData>) {
     empty,
     className,
     style,
+    getRowId,
     onPaginationChange,
     onSortingChange,
     onRowSelectionChange,
@@ -185,6 +187,7 @@ export function Table<TData>(props: TableProps<TData>) {
   const table = useReactTable<TData>({
     columns,
     data,
+    getRowId,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getSortedRowModel: getSortedRowModel(),
