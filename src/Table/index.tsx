@@ -40,9 +40,9 @@ interface PaginationState {
 export type { ColumnDef };
 export { createColumnHelper };
 
-export interface TableProps<TData, TValue = unknown>
+export interface TableProps<TData>
   extends ComponentPropsWithoutRef<typeof UiTable> {
-  columns: ColumnDef<TData, TValue>[];
+  columns: ColumnDef<TData, any>[];
   data: TData[];
   loading?: boolean;
   bordered?: boolean;
@@ -69,7 +69,7 @@ export interface TableProps<TData, TValue = unknown>
   ) => any;
 }
 
-export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
+export function Table<TData>(props: TableProps<TData>) {
   const {
     columns: propColumns,
     data,
@@ -182,7 +182,7 @@ export function Table<TData, TValue>(props: TableProps<TData, TValue>) {
     return ret;
   }, [propColumns, enableRowSelection, rowSelectionMode]);
 
-  const table = useReactTable({
+  const table = useReactTable<TData>({
     columns,
     data,
     getCoreRowModel: getCoreRowModel(),
