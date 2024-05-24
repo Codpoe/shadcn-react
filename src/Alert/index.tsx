@@ -20,11 +20,7 @@ export interface AlertProps {
 export function Alert(props: AlertProps) {
   const {
     variant = 'default',
-    icon = variant === 'default' ? (
-      <InfoIcon className="sr-w-4 sr-h-4" />
-    ) : (
-      <AlertTriangleIcon className="sr-w-4 sr-h-4" />
-    ),
+    icon = variant === 'default' ? <InfoIcon /> : <AlertTriangleIcon />,
     title,
     children,
     ...restProps
@@ -32,7 +28,7 @@ export function Alert(props: AlertProps) {
 
   return (
     <UiAlert variant={variant} {...restProps}>
-      <div className="sr-flex">
+      <div className="sr-flex [&>svg]:sr-w-4 [&>svg]:sr-h-4">
         {icon}
         <div className="sr-ml-3">
           {title != null && (
