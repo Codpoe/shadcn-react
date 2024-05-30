@@ -66,9 +66,10 @@ export interface DropdownItemProps
 }
 
 export interface DropdownProps
-  extends DropdownMenuProps,
-    Omit<DropdownMenuContentProps, 'content'> {
+  extends Omit<DropdownMenuProps, 'children'>,
+    Omit<DropdownMenuContentProps, 'content' | 'children'> {
   content?: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 }

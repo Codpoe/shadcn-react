@@ -10,8 +10,9 @@ interface TooltipContentProps
   extends ComponentPropsWithoutRef<typeof TooltipContent> {}
 
 export interface TooltipProps
-  extends ComponentPropsWithoutRef<typeof UiTooltip>,
-    Omit<TooltipContentProps, 'content'> {
+  extends Omit<ComponentPropsWithoutRef<typeof UiTooltip>, 'children'>,
+    Omit<TooltipContentProps, 'content' | 'children'> {
+  children?: React.ReactNode;
   content?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;

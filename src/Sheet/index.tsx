@@ -62,10 +62,13 @@ export function Sheet(props: SheetProps) {
       setOkLoading(true);
     }, 50);
 
-    await onOk?.(ev);
-    clearTimeout(timer);
-    setOkLoading(false);
-    closeBtnRef.current?.click();
+    try {
+      await onOk?.(ev);
+      closeBtnRef.current?.click();
+    } finally {
+      clearTimeout(timer);
+      setOkLoading(false);
+    }
   };
 
   const handleCancel = async (ev: MouseEvent) => {
@@ -73,10 +76,13 @@ export function Sheet(props: SheetProps) {
       setCancelLoading(true);
     }, 50);
 
-    await onCancel?.(ev);
-    clearTimeout(timer);
-    setCancelLoading(false);
-    closeBtnRef.current?.click();
+    try {
+      await onCancel?.(ev);
+      closeBtnRef.current?.click();
+    } finally {
+      clearTimeout(timer);
+      setCancelLoading(false);
+    }
   };
 
   return (

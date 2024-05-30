@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/Codpoe/shadcn-react/issues"
   },
-  "homepage": "https://github.com/Codpoe/shadcn-react#readme",
+  "homepage": "https://codpoe.github.io/shadcn-react",
   "author": "Codpoe <codpoe.me@gmail.com> (https://github.com/codpoe)",
   "engines": {
     "node": ">=18.18.0",
