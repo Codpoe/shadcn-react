@@ -25,7 +25,9 @@
   "packageManager": "pnpm@9.1.1",
   "type": "module",
   "files": [
-    "dist"
+    "dist",
+    "ui.d.ts",
+    "icons.d.ts"
   ],
   "sideEffect": [
     "**/*.css"
