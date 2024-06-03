@@ -31,40 +31,32 @@ import { cn } from '../utils';
 export { useFormState, useWatch, useFieldArray, useFormField };
 
 export type UseFormProps<
-  TFieldValues extends TSchema extends ZodSchema
-    ? z.infer<TSchema>
-    : FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TSchema extends ZodSchema | undefined = undefined,
-> = UseHookFormProps<TFieldValues, TContext> & {
-  schema?: TSchema;
+> = UseHookFormProps<z.infer<TSchema>, TContext> & {
+  schema: TSchema;
 };
 
 export interface UseFormReturn<
-  TFieldValues extends FieldValues = FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TTransformedValues extends FieldValues | undefined = undefined,
-> extends UseHookFormReturn<TFieldValues, TContext, TTransformedValues> {
+  TTransformedValues extends FieldValues = z.infer<TSchema>,
+> extends UseHookFormReturn<z.infer<TSchema>, TContext, TTransformedValues> {
   Field: React.FunctionComponent<
-    FormFieldProps<TFieldValues, FieldPath<TFieldValues>>
+    FormFieldProps<z.infer<TSchema>, FieldPath<z.infer<TSchema>>>
   >;
 }
 
 export function useForm<
-  TFieldValues extends TSchema extends ZodSchema
-    ? z.infer<TSchema>
-    : FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TTransformedValues extends FieldValues | undefined = undefined,
-  TSchema extends ZodSchema | undefined = undefined,
+  TTransformedValues extends FieldValues = z.infer<TSchema>,
 >(
-  props?: UseFormProps<TFieldValues, TContext, TSchema>,
-): UseFormReturn<TFieldValues, TContext, TTransformedValues> {
-  const schema = props?.schema;
-
+  props: UseFormProps<TSchema, TContext>,
+): UseFormReturn<TSchema, TContext, TTransformedValues> {
   return Object.assign(
     useHookForm({
-      resolver: schema ? zodResolver(schema) : undefined,
+      resolver: zodResolver(props.schema),
       ...props,
     }),
     {
@@ -74,21 +66,21 @@ export function useForm<
 }
 
 export const useFormContext: <
-  TFieldValues extends FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TransformedValues extends FieldValues | undefined = undefined,
->() => UseFormReturn<TFieldValues, TContext, TransformedValues> =
+  TTransformedValues extends FieldValues = z.infer<TSchema>,
+>() => UseFormReturn<TSchema, TContext, TTransformedValues> =
   useHookFormContext as any;
 
 export interface FormProps<
-  TFieldValues extends FieldValues = FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TTransformedValues extends FieldValues | undefined = undefined,
+  TTransformedValues extends FieldValues = z.infer<TSchema>,
 > extends Omit<
-      FormProviderProps<TFieldValues, TContext, TTransformedValues>,
+      FormProviderProps<z.infer<TSchema>, TContext, TTransformedValues>,
       'children'
     >,
-    Omit<HookFormProps<TFieldValues, TTransformedValues>, 'control'> {
+    Omit<HookFormProps<z.infer<TSchema>, TTransformedValues>, 'control'> {
   /**
    * @default 'top'
    */
@@ -98,10 +90,10 @@ export interface FormProps<
 }
 
 export function Form<
-  TFieldValues extends FieldValues = FieldValues,
+  TSchema extends ZodSchema,
   TContext = any,
-  TTransformedValues extends FieldValues | undefined = undefined,
->(props: FormProps<TFieldValues, TContext, TTransformedValues>) {
+  TTransformedValues extends FieldValues = z.infer<TSchema>,
+>(props: FormProps<TSchema, TContext, TTransformedValues>) {
   const {
     labelPosition = 'top',
     labelClassName,
@@ -128,7 +120,7 @@ export function Form<
   } = props;
 
   return (
-    <FormProvider<TFieldValues, TContext, TTransformedValues>
+    <FormProvider<z.infer<TSchema>, TContext, TTransformedValues>
       watch={watch}
       getValues={getValues}
       getFieldState={getFieldState}
@@ -156,20 +148,20 @@ export function Form<
 }
 
 export interface FormFieldProps<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
-> extends Omit<ControllerProps<TFieldValues, TName>, 'control' | 'render'> {
+  TSchema extends ZodSchema,
+  TName extends FieldPath<z.infer<TSchema>> = FieldPath<z.infer<TSchema>>,
+> extends Omit<ControllerProps<z.infer<TSchema>, TName>, 'control' | 'render'> {
   label?: React.ReactNode;
   desc?: React.ReactNode;
-  children?: ReactElement | ControllerProps<TFieldValues, TName>['render'];
+  children?: ReactElement | ControllerProps<z.infer<TSchema>, TName>['render'];
 }
 
 function FormField<
-  TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
->(props: FormFieldProps<TFieldValues, TName>) {
+  TSchema extends ZodSchema,
+  TName extends FieldPath<z.infer<TSchema>> = FieldPath<z.infer<TSchema>>,
+>(props: FormFieldProps<TSchema, TName>) {
   const { labelPosition, labelClassName, labelStyle, control } =
-    useFormContext<TFieldValues>() as FormProps<TFieldValues>;
+    useFormContext<TSchema>() as FormProps<TSchema>;
 
   const { label, desc, children, ...restProps } = props;
 
@@ -249,7 +241,7 @@ export interface FormSlotProps {
 
 function FormSlot(props: FormSlotProps) {
   const { labelPosition, labelClassName, labelStyle } =
-    useFormContext() as FormProps;
+    useFormContext() as FormProps<any>;
   const { label, children } = props;
 
   if (labelPosition === 'left') {
