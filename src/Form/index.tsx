@@ -43,7 +43,7 @@ export interface UseFormReturn<
   TTransformedValues extends FieldValues = z.infer<TSchema>,
 > extends UseHookFormReturn<z.infer<TSchema>, TContext, TTransformedValues> {
   Field: React.FunctionComponent<
-    FormFieldProps<z.infer<TSchema>, FieldPath<z.infer<TSchema>>>
+    FormFieldProps<TSchema, FieldPath<z.infer<TSchema>>>
   >;
 }
 
