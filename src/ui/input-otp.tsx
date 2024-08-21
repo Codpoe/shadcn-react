@@ -1,16 +1,20 @@
 import * as React from "react"
 import { MinusIcon } from "lucide-react"
-import { OTPInput, SlotProps } from "input-otp"
+import { OTPInput, OTPInputContext } from "input-otp"
 
 import { cn } from "../utils"
 
 const InputOTP = React.forwardRef<
   React.ElementRef<typeof OTPInput>,
   React.ComponentPropsWithoutRef<typeof OTPInput>
->(({ className, ...props }, ref) => (
+>(({ className, containerClassName, ...props }, ref) => (
   <OTPInput
     ref={ref}
-    containerClassName={cn("sr-flex sr-items-center sr-gap-2", className)}
+    containerClassName={cn(
+      "sr-flex sr-items-center sr-gap-2 has-[:disabled]:sr-opacity-50",
+      containerClassName
+    )}
+    className={cn("disabled:sr-cursor-not-allowed", className)}
     {...props}
   />
 ))
@@ -26,8 +30,11 @@ InputOTPGroup.displayName = "InputOTPGroup"
 
 const InputOTPSlot = React.forwardRef<
   React.ElementRef<"div">,
-  SlotProps & React.ComponentPropsWithoutRef<"div">
->(({ char, hasFakeCaret, isActive, className, ...props }, ref) => {
+  React.ComponentPropsWithoutRef<"div"> & { index: number }
+>(({ index, className, ...props }, ref) => {
+  const inputOTPContext = React.useContext(OTPInputContext)
+  const { char, hasFakeCaret, isActive } = inputOTPContext.slots[index]
+
   return (
     <div
       ref={ref}
@@ -41,7 +48,7 @@ const InputOTPSlot = React.forwardRef<
       {char}
       {hasFakeCaret && (
         <div className="sr-pointer-events-none sr-absolute sr-inset-0 sr-flex sr-items-center sr-justify-center">
-          <div className="sr-animate-caret-blink sr-h-4 sr-w-px sr-bg-foreground sr-duration-1000" />
+          <div className="sr-h-4 sr-w-px sr-animate-caret-blink sr-bg-foreground sr-duration-1000" />
         </div>
       )}
     </div>

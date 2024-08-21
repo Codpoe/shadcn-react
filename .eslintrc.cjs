@@ -6,7 +6,7 @@ module.exports = {
   ],
   overrides: [
     {
-      files: ['src/ui/**/*.tsx'],
+      files: ['src/ui/**/*.tsx', 'src/ui/**/*.ts'],
       rules: {
         'react/no-unknown-property': 'off',
         '@typescript-eslint/no-unused-vars': 'off',

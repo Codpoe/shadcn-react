@@ -137,3 +137,30 @@ export const ControlInside: Story = {
     );
   },
 };
+
+export const HideControls: Story = {
+  args: {
+    showControls: false,
+  },
+  render(args) {
+    return (
+      <div className="sr-w-96">
+        <Carousel
+          {...args}
+          // eslint-disable-next-line no-console
+          onIndexChange={index => console.log('Carousel index: ', index)}
+        >
+          {Array.from({ length: 5 }, (_, i) => (
+            <Carousel.Item key={i}>
+              <Card className="sr-bg-gray-200">
+                <div className="sr-flex sr-aspect-square sr-items-center sr-justify-center">
+                  <span className="sr-text-4xl sr-font-semibold">{i + 1}</span>
+                </div>
+              </Card>
+            </Carousel.Item>
+          ))}
+        </Carousel>
+      </div>
+    );
+  },
+};

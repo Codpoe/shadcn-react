@@ -1,68 +1,69 @@
-import * as React from 'react';
+import * as React from "react"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
-  MoreHorizontalIcon
-} from 'lucide-react';
+  MoreHorizontalIcon,
+} from "lucide-react"
 
-import { cn } from '../utils';
-import { ButtonProps, buttonVariants } from '../ui/button';
+import { cn } from "../utils"
+import { ButtonProps, buttonVariants } from "../ui/button"
 
-const Pagination = ({ className, ...props }: React.ComponentProps<'nav'>) => (
+const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
   <nav
     role="navigation"
     aria-label="pagination"
-    className={cn('sr-mx-auto sr-flex sr-w-full sr-justify-center', className)}
+    className={cn("sr-mx-auto sr-flex sr-w-full sr-justify-center", className)}
     {...props}
   />
-);
+)
+Pagination.displayName = "Pagination"
 
 const PaginationContent = React.forwardRef<
   HTMLUListElement,
-  React.ComponentProps<'ul'>
+  React.ComponentProps<"ul">
 >(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn('sr-flex sr-flex-row sr-items-center sr-gap-1', className)}
+    className={cn("sr-flex sr-flex-row sr-items-center sr-gap-1", className)}
     {...props}
   />
-));
-PaginationContent.displayName = 'PaginationContent';
+))
+PaginationContent.displayName = "PaginationContent"
 
 const PaginationItem = React.forwardRef<
   HTMLLIElement,
-  React.ComponentProps<'li'>
+  React.ComponentProps<"li">
 >(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn('sr-', className)} {...props} />
-));
-PaginationItem.displayName = 'PaginationItem';
+  <li ref={ref} className={cn("sr-", className)} {...props} />
+))
+PaginationItem.displayName = "PaginationItem"
 
 type PaginationLinkProps = {
-  isActive?: boolean;
-} & Pick<ButtonProps, 'size'> &
-  React.ComponentProps<'a'>;
+  isActive?: boolean
+} & Pick<ButtonProps, "size"> &
+  React.ComponentProps<"a">
 
 const PaginationLink = ({
   className,
   isActive,
-  size = 'icon',
+  size = "icon",
   ...props
 }: PaginationLinkProps) => (
   <PaginationItem>
     <a
-      aria-current={isActive ? 'page' : undefined}
+      aria-current={isActive ? "page" : undefined}
       className={cn(
         buttonVariants({
-          variant: isActive ? 'outline' : 'ghost',
+          variant: isActive ? "outline" : "ghost",
           size,
         }),
-        className,
+        className
       )}
       {...props}
     />
   </PaginationItem>
-);
-PaginationLink.displayName = 'PaginationLink';
+)
+PaginationLink.displayName = "PaginationLink"
 
 const PaginationPrevious = ({
   className,
@@ -71,14 +72,14 @@ const PaginationPrevious = ({
   <PaginationLink
     aria-label="Go to previous page"
     size="default"
-    className={cn('sr-gap-1 sr-pl-2.5', className)}
+    className={cn("sr-gap-1 sr-pl-2.5", className)}
     {...props}
   >
     <ChevronLeftIcon className="sr-h-4 sr-w-4" />
     <span>Previous</span>
   </PaginationLink>
-);
-PaginationPrevious.displayName = 'PaginationPrevious';
+)
+PaginationPrevious.displayName = "PaginationPrevious"
 
 const PaginationNext = ({
   className,
@@ -87,30 +88,29 @@ const PaginationNext = ({
   <PaginationLink
     aria-label="Go to next page"
     size="default"
-    className={cn('sr-gap-1 sr-pr-2.5', className)}
+    className={cn("sr-gap-1 sr-pr-2.5", className)}
     {...props}
   >
     <span>Next</span>
     <ChevronRightIcon className="sr-h-4 sr-w-4" />
   </PaginationLink>
-);
+)
+PaginationNext.displayName = "PaginationNext"
 
 const PaginationEllipsis = ({
   className,
   ...props
-}: React.ComponentProps<'span'>) => (
+}: React.ComponentProps<"span">) => (
   <span
     aria-hidden
-    className={cn(
-      'sr-flex sr-h-9 sr-w-9 sr-items-center sr-justify-center',
-      className,
-    )}
+    className={cn("sr-flex sr-h-9 sr-w-9 sr-items-center sr-justify-center", className)}
     {...props}
   >
     <MoreHorizontalIcon className="sr-h-4 sr-w-4" />
     <span className="sr-sr-only">More pages</span>
   </span>
-);
+)
+PaginationEllipsis.displayName = "PaginationEllipsis"
 
 export {
   Pagination,
@@ -120,4 +120,4 @@ export {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-};
+}

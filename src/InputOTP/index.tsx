@@ -17,21 +17,14 @@ type UiInputOTPProps = ComponentPropsWithoutRef<typeof UiInputOTP>;
 export interface InputOTPProps
   extends Omit<UiInputOTPProps, 'maxLength' | 'render' | 'children'> {
   length: number;
-  children: UiInputOTPProps['render'];
+  children: React.ReactNode;
 }
 
 const _InputOTP = React.forwardRef<HTMLInputElement, InputOTPProps>(
   (props, ref) => {
-    const { length, children, ...restProps } = props;
+    const { length, ...restProps } = props;
 
-    return (
-      <UiInputOTP
-        ref={ref}
-        maxLength={length}
-        render={children}
-        {...restProps}
-      />
-    );
+    return <UiInputOTP ref={ref} maxLength={length} {...restProps} />;
   },
 );
 

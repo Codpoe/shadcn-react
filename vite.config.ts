@@ -7,6 +7,7 @@ import { tsAlias } from 'vite-plugin-ts-alias';
 const pkgEntry = 'src/index.ts';
 const uiEntry = 'src/ui.ts';
 const iconsEntry = 'src/icons.tsx';
+const rechartsEntry = 'src/recharts.ts';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -48,6 +49,7 @@ import './styles/globals.css';`;
                 index: pkgEntry,
                 ui: uiEntry,
                 icons: iconsEntry,
+                recharts: rechartsEntry,
               },
               formats: ['es'],
             },

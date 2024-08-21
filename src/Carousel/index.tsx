@@ -23,7 +23,7 @@ type UiCarouselProps = ComponentPropsWithoutRef<typeof UiCarousel>;
 export type CarouselProps = UiCarouselProps['opts'] &
   Pick<UiCarouselProps, 'plugins' | 'orientation' | 'setApi'> & {
     /**
-     * @default true
+     * @default false
      */
     showIndicator?: boolean;
     /**
