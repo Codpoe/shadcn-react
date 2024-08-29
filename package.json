@@ -27,7 +27,8 @@
   "files": [
     "dist",
     "ui.d.ts",
-    "icons.d.ts"
+    "icons.d.ts",
+    "recharts.d.ts"
   ],
   "sideEffect": [
     "**/*.css"
