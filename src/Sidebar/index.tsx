@@ -13,6 +13,7 @@ export interface SidebarItemProps {
   title: React.ReactNode;
   icon?: React.ReactNode;
   badge?: React.ReactNode;
+  wrapper?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
 }
 
 export function isSidebarGroup(
@@ -105,11 +106,14 @@ function SidebarItem(
     onClick,
   } = props;
 
+  const Wrapper = props.wrapper || 'div';
+
   if (collapsed) {
     return (
       <Tooltip
         delayDuration={0}
         side="right"
+        align="start"
         className="sr-flex sr-items-center"
         content={
           <>
@@ -120,30 +124,34 @@ function SidebarItem(
           </>
         }
       >
-        <Button
-          className={className}
-          variant={value === selected ? selectedVariant : 'ghost'}
-          size="icon"
-          icon={icon}
-          onClick={() => onClick?.(value)}
-        >
-          <span className="sr-sr-only">{title}</span>
-        </Button>
+        <Wrapper className="sr-block">
+          <Button
+            className={className}
+            variant={value === selected ? selectedVariant : 'ghost'}
+            size="icon"
+            icon={icon}
+            onClick={() => onClick?.(value)}
+          >
+            <span className="sr-sr-only">{title}</span>
+          </Button>
+        </Wrapper>
       </Tooltip>
     );
   }
 
   return (
-    <Button
-      key={value}
-      className={cn(className, 'sr-w-full !sr-justify-start')}
-      variant={value === selected ? selectedVariant : 'ghost'}
-      icon={icon}
-      onClick={() => onClick?.(value)}
-    >
-      {title}
-      {badge && <span className="sr-ml-auto">{badge}</span>}
-    </Button>
+    <Wrapper className="sr-block">
+      <Button
+        key={value}
+        className={cn(className, 'sr-w-full !sr-justify-start')}
+        variant={value === selected ? selectedVariant : 'ghost'}
+        icon={icon}
+        onClick={() => onClick?.(value)}
+      >
+        {title}
+        {badge && <span className="sr-ml-auto">{badge}</span>}
+      </Button>
+    </Wrapper>
   );
 }
 
