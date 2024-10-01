@@ -13,6 +13,9 @@ export interface SidebarItemProps {
   title: React.ReactNode;
   icon?: React.ReactNode;
   badge?: React.ReactNode;
+  /**
+   * @default 'div'
+   */
   wrapper?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
 }
 
@@ -42,6 +45,7 @@ function SidebarItem(
     selected?: string;
     selectedVariant: ButtonProps['variant'];
     collapsed?: boolean;
+    defaultWrapper: NonNullable<SidebarItemProps['wrapper']>;
     className?: string;
     onClick?: (value: string) => any;
   },
@@ -53,6 +57,7 @@ function SidebarItem(
       selected,
       selectedVariant,
       collapsed,
+      defaultWrapper,
       className,
       onClick,
     } = props;
@@ -67,6 +72,7 @@ function SidebarItem(
               selected={selected}
               selectedVariant={selectedVariant}
               collapsed
+              defaultWrapper={defaultWrapper}
               onClick={onClick}
             />
           ))}
@@ -86,6 +92,7 @@ function SidebarItem(
               key={item.value}
               selected={selected}
               selectedVariant={selectedVariant}
+              defaultWrapper={defaultWrapper}
               onClick={onClick}
             />
           ))}
@@ -102,11 +109,11 @@ function SidebarItem(
     selected,
     selectedVariant,
     collapsed,
+    defaultWrapper,
+    wrapper: Wrapper = defaultWrapper,
     className,
     onClick,
   } = props;
-
-  const Wrapper = props.wrapper || 'div';
 
   if (collapsed) {
     return (
@@ -159,6 +166,10 @@ export interface SidebarProps {
   value?: string;
   defaultValue?: string;
   items: (SidebarGroupProps | SidebarItemProps)[];
+  /**
+   * @default 'div'
+   */
+  itemWrapper?: SidebarItemProps['wrapper'];
   width?: number | string;
   collapsed?: boolean;
   /**
@@ -175,6 +186,7 @@ export function Sidebar(props: SidebarProps) {
     items,
     value: propValue,
     defaultValue = findDefaultValue(items)!,
+    itemWrapper = 'div',
     width = 256,
     collapsed,
     selectedVariant = 'default',
@@ -208,6 +220,7 @@ export function Sidebar(props: SidebarProps) {
               selected={value}
               selectedVariant={selectedVariant}
               collapsed={collapsed}
+              defaultWrapper={itemWrapper}
               className={cn(
                 index > 0 &&
                   !collapsed &&
