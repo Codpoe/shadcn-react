@@ -16,7 +16,14 @@ export interface SidebarItemProps {
   /**
    * @default 'div'
    */
-  wrapper?: keyof JSX.IntrinsicElements | React.ComponentType<any>;
+  wrapper?:
+    | keyof JSX.IntrinsicElements
+    | React.ComponentType<SidebarItemWrapperProps>;
+}
+
+export interface SidebarItemWrapperProps {
+  value: string;
+  children: React.ReactNode;
 }
 
 export function isSidebarGroup(
@@ -131,7 +138,7 @@ function SidebarItem(
           </>
         }
       >
-        <Wrapper className="sr-block">
+        <Wrapper className="sr-block" value={value}>
           <Button
             className={className}
             variant={value === selected ? selectedVariant : 'ghost'}
@@ -147,7 +154,7 @@ function SidebarItem(
   }
 
   return (
-    <Wrapper className="sr-block">
+    <Wrapper className="sr-block" value={value}>
       <Button
         key={value}
         className={cn(className, 'sr-w-full !sr-justify-start')}
